@@ -1,0 +1,18 @@
+name: common
+description: A starting point for Dart libraries or applications.
+# version: 1.0.0
+# homepage: https://www.example.com
+# author: teja <email@example.com>
+
+environment:
+  sdk: '>=2.0.0 <3.0.0'
+
+dependencies:
+  jaguar_serializer: ^2.2.6
+  bson_objectid:
+    path: ../bson_objectid
+
+dev_dependencies:
+  test: ^1.0.0
+  build_runner:
+  jaguar_serializer_cli:
