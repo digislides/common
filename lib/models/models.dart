@@ -1,4 +1,6 @@
+import 'program/program.dart';
 
+export 'program/program.dart';
 
 /// Model used to create a new program
 class ProgramCreator {
@@ -18,6 +20,7 @@ class ProgramCreator {
   int height;
 }
 
+/*
 class Program {
   String id;
 
@@ -29,27 +32,21 @@ class Program {
 
   List<String> readers;
 
+  ProgramDesign design;
+
   bool hasReadAccess(String accessorId) =>
       accessorId != null &&
-          (owner == accessorId ||
-              readers.contains(accessorId) ||
-              writers.contains(accessorId));
+      (owner == accessorId ||
+          readers.contains(accessorId) ||
+          writers.contains(accessorId));
 
   bool hasWriteAccess(String accessorId) =>
       accessorId != null &&
-          (owner == accessorId || writers.contains(accessorId));
+      (owner == accessorId || writers.contains(accessorId));
 }
+*/
 
-class Frame {
-  String id;
-
-  int width;
-
-  int height;
-
-  String programId;
-}
-
+/*
 class Player {
   String id;
 
@@ -65,11 +62,12 @@ class Player {
 
   bool hasReadAccess(String accessorId) =>
       accessorId != null &&
-          (owner == accessorId ||
-              readers.contains(accessorId) ||
-              writers.contains(accessorId));
+      (owner == accessorId ||
+          readers.contains(accessorId) ||
+          writers.contains(accessorId));
 
   bool hasWriteAccess(String accessorId) =>
       accessorId != null &&
-          (owner == accessorId || writers.contains(accessorId));
+      (owner == accessorId || writers.contains(accessorId));
 }
+*/

@@ -27,14 +27,14 @@ class VideoItem implements PageItem {
 
   VideoItem(
       {this.id,
-        this.name: 'Video',
-        this.left: 0,
-        this.top: 0,
-        this.width: 0,
-        this.height: 0,
-        this.bgColor: 'transparent',
-        this.url,
-        this.fit: Fit.cover}) {
+      this.name: 'Video',
+      this.left: 0,
+      this.top: 0,
+      this.width: 0,
+      this.height: 0,
+      this.bgColor: 'transparent',
+      this.url,
+      this.fit: Fit.cover}) {
     id ??= ObjectId().toHexString();
   }
 }
