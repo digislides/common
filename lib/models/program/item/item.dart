@@ -33,7 +33,23 @@ class Fit {
   }
 }
 
-enum Align { left, center, right }
+class Align {
+  final int id;
+
+  final String name;
+
+  final String css;
+
+  const Align(this.id, this.name, this.css);
+
+  static const left = Align(0, 'Left', 'left');
+
+  static const center = Align(1, 'Center', 'center');
+
+  static const right = Align(2, 'Right', 'right');
+
+  String toString() => css;
+}
 
 /*
 PageItem createItem(int type, Map v) {
