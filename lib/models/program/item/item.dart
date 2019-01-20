@@ -72,16 +72,6 @@ class Align {
   String toString() => css;
 }
 
-/*
-PageItem createItem(int type, Map v) {
-  if (type == PageItemType.text.index) return TextItem()..fromMap(v);
-  if (type == PageItemType.image.index) return ImageItem()..fromMap(v);
-  if (type == PageItemType.video.index) return VideoItem()..fromMap(v);
-  // TODO
-  return null;
-}
-*/
-
 abstract class PageItem implements Sizable {
   String get id;
 
@@ -97,7 +87,7 @@ abstract class PageItem implements Sizable {
 
   int height;
 
-  String bgColor;
+  String color;
 
   Stream<Rectangle<int>> get onRectChange;
 

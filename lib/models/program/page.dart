@@ -26,7 +26,7 @@ class Page implements Sizable {
 
   Fit fit;
 
-  int duration;
+  int _duration = 5;
 
   int transition;
 
@@ -42,17 +42,28 @@ class Page implements Sizable {
     this.color: 'white',
     this.image,
     this.fit: Fit.cover,
-    this.duration: 5,
+    int duration: 5,
     this.transition: 0,
     this.transitionDuration: 0,
     List<PageItem> items,
   }) {
     if (items != null) this.items.addAll(items);
+    this._duration = duration;
   }
 
   String get imageUrl {
-    if(image == null || image.trim().isEmpty) return 'none';
+    if (image == null || image.trim().isEmpty) return 'none';
     return 'url($image)';
+  }
+
+  int get duration => _duration;
+
+  set duration(dynamic value) {
+    if (value is String) {
+      _duration = int.tryParse(value) ?? 5;
+    } else {
+      _duration = value;
+    }
   }
 
   /*
