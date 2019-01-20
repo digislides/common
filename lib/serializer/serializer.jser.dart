@@ -179,12 +179,13 @@ abstract class _$PageSerializer implements Serializer<Page> {
 
 abstract class _$FontPropertiesSerializer
     implements Serializer<FontProperties> {
+  final _alignFieldProcessor = const AlignFieldProcessor();
   @override
   Map<String, dynamic> toMap(FontProperties model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'size', model.size);
-    setMapValue(ret, 'align', model.align.index);
+    setMapValue(ret, 'align', _alignFieldProcessor.serialize(model.align));
     setMapValue(ret, 'family', model.family);
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'bold', model.bold);
@@ -198,7 +199,7 @@ abstract class _$FontPropertiesSerializer
     if (map == null) return null;
     final obj = new FontProperties();
     obj.size = map['size'] as int;
-    obj.align = Align.values[map['align'] as int];
+    obj.align = _alignFieldProcessor.deserialize(map['align'] as int);
     obj.family = map['family'] as String;
     obj.color = map['color'] as String;
     obj.bold = map['bold'] as bool;
@@ -219,13 +220,13 @@ abstract class _$TextItemSerializer implements Serializer<TextItem> {
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'bgColor', model.bgColor);
+    setMapValue(ret, 'text', model.text);
+    setMapValue(ret, 'font', _fontPropertiesSerializer.toMap(model.font));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
-    setMapValue(ret, 'bgColor', model.bgColor);
-    setMapValue(ret, 'text', model.text);
-    setMapValue(ret, 'font', _fontPropertiesSerializer.toMap(model.font));
     return ret;
   }
 
@@ -237,12 +238,12 @@ abstract class _$TextItemSerializer implements Serializer<TextItem> {
             getJserDefault('font'));
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.bgColor = map['bgColor'] as String;
+    obj.text = map['text'] as String;
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
-    obj.bgColor = map['bgColor'] as String;
-    obj.text = map['text'] as String;
     return obj;
   }
 }
@@ -256,13 +257,13 @@ abstract class _$ImageItemSerializer implements Serializer<ImageItem> {
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'bgColor', model.bgColor);
+    setMapValue(ret, 'url', model.url);
+    setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
-    setMapValue(ret, 'bgColor', model.bgColor);
-    setMapValue(ret, 'url', model.url);
-    setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
     return ret;
   }
 
@@ -272,13 +273,13 @@ abstract class _$ImageItemSerializer implements Serializer<ImageItem> {
     final obj = new ImageItem();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.bgColor = map['bgColor'] as String;
+    obj.url = map['url'] as String;
+    obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
-    obj.bgColor = map['bgColor'] as String;
-    obj.url = map['url'] as String;
-    obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
     return obj;
   }
 }
@@ -292,13 +293,13 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'bgColor', model.bgColor);
+    setMapValue(ret, 'url', model.url);
+    setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
-    setMapValue(ret, 'bgColor', model.bgColor);
-    setMapValue(ret, 'url', model.url);
-    setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
     return ret;
   }
 
@@ -308,13 +309,13 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
     final obj = new VideoItem();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.bgColor = map['bgColor'] as String;
+    obj.url = map['url'] as String;
+    obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
-    obj.bgColor = map['bgColor'] as String;
-    obj.url = map['url'] as String;
-    obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
     return obj;
   }
 }

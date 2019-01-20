@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:common/models/program/page.dart';
 
 import 'package:common/models/program/item/text.dart';
@@ -48,6 +51,8 @@ class Align {
 
   static const right = Align(2, 'Right', 'right');
 
+  static List<Align> values = [left, center, right];
+
   String toString() => css;
 }
 
@@ -77,6 +82,8 @@ abstract class PageItem implements Sizable {
   int height;
 
   String bgColor;
+
+  Stream<Rectangle<int>> get onRectChange;
 
   // TODO clone
 }

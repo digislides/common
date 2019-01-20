@@ -17,6 +17,19 @@ class FitFieldProcessor implements FieldProcessor<Fit, int> {
   int serialize(Fit value) => value?.id;
 }
 
+class AlignFieldProcessor implements FieldProcessor<Align, int> {
+  const AlignFieldProcessor();
+
+  @override
+  Align deserialize(int value) {
+    if (value == null) return Align.values[0];
+    return Align.values[value];
+  }
+
+  @override
+  int serialize(Align value) => value?.id;
+}
+
 @GenSerializer()
 class ProgramCreatorSerializer extends Serializer<ProgramCreator>
     with _$ProgramCreatorSerializer {}
@@ -46,19 +59,23 @@ class PageItemSerializer extends Serializer<PageItem> {
   }
 }
 
-@GenSerializer()
+@GenSerializer(fields: {'align': Field(processor: AlignFieldProcessor())})
 class FontPropertiesSerializer extends Serializer<FontProperties>
     with _$FontPropertiesSerializer {}
 
-@GenSerializer()
+@GenSerializer(ignore: ['onRectChange'])
 class TextItemSerializer extends Serializer<TextItem>
     with _$TextItemSerializer {}
 
-@GenSerializer(fields: {'fit': Field(processor: FitFieldProcessor())})
+@GenSerializer(
+    ignore: ['onRectChange'],
+    fields: {'fit': Field(processor: FitFieldProcessor())})
 class ImageItemSerializer extends Serializer<ImageItem>
     with _$ImageItemSerializer {}
 
-@GenSerializer(fields: {'fit': Field(processor: FitFieldProcessor())})
+@GenSerializer(
+    ignore: ['onRectChange'],
+    fields: {'fit': Field(processor: FitFieldProcessor())})
 class VideoItemSerializer extends Serializer<VideoItem>
     with _$VideoItemSerializer {}
 
