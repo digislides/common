@@ -18,14 +18,30 @@ class Fit {
 
   final String name;
 
-  const Fit._(this.id, this.name);
+  final String repeatCss;
 
-  static const normal = const Fit._(0, 'Normal');
-  static const contain = const Fit._(1, 'Contain');
-  static const cover = const Fit._(2, 'Cover');
-  static const tile = const Fit._(3, 'Tile');
+  final String sizeCss;
+
+  const Fit._(this.id, this.name, this.repeatCss, this.sizeCss);
+
+  static const normal = const Fit._(0, 'Normal', 'no-repeat', 'auto');
+  static const contain = const Fit._(1, 'Contain', 'no-repeat', 'contain');
+  static const cover = const Fit._(2, 'Cover', 'no-repeat', 'cover');
+  static const tile = const Fit._(3, 'Tile', 'repeat', 'auto');
 
   static List<Fit> get values => [normal, contain, cover, tile];
+
+  static const namedValues = {
+    'normal': normal,
+    'contain': contain,
+    'cover': cover,
+    'tile': tile
+  };
+
+  static Fit map(value) {
+    if (value is int) return values[value];
+    return namedValues[(value as String).toLowerCase()];
+  }
 
   static Fit find(index) {
     if (index is int) {

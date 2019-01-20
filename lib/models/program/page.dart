@@ -50,6 +50,11 @@ class Page implements Sizable {
     if (items != null) this.items.addAll(items);
   }
 
+  String get imageUrl {
+    if(image == null || image.trim().isEmpty) return 'none';
+    return 'url($image)';
+  }
+
   /*
   void fromMap(Map map) {
     id = map['id'];

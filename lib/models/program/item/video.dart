@@ -78,4 +78,9 @@ class VideoItem implements PageItem {
     this.height = height;
     _rectStream = _rectChange.stream.asBroadcastStream();
   }
+
+  String get videoUrl {
+    if(url == null || url.trim().isEmpty) return 'none';
+    return 'url($url)';
+  }
 }

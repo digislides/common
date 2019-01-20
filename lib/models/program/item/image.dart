@@ -79,4 +79,9 @@ class ImageItem implements PageItem {
     this.height = height;
     _rectStream = _rectChange.stream.asBroadcastStream();
   }
+
+  String get imageUrl {
+    if(url == null || url.trim().isEmpty) return 'none';
+    return 'url($url)';
+  }
 }
