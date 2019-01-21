@@ -58,6 +58,15 @@ class Frame {
     });
   }
 
+  void addNewPage({String name: 'New page'}) {
+    // TODO set id
+    pages.add(Page(name: name, width: width, height: height));
+  }
+
+  void removePage(String id) {
+    pages.removeWhere((p) => p.id == id);
+  }
+
   void removePagesById(Set<String> ids) {
     pages.removeWhere((p) => ids.contains(p.id));
   }
