@@ -1,5 +1,3 @@
-import 'program/program.dart';
-
 export 'program/program.dart';
 
 /// Model used to create a new program

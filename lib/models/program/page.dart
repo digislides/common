@@ -1,5 +1,4 @@
-import 'dart:math';
-import 'package:bson_objectid/bson_objectid.dart';
+import 'package:common/utils/id.dart';
 
 import 'package:common/models/program/program.dart';
 import 'package:common/models/program/item/item.dart';
@@ -64,6 +63,11 @@ class Page implements Sizable {
     } else {
       _duration = value;
     }
+  }
+
+  void addNewItem(PageItem item) {
+    item.id = newId;
+    items.add(item);
   }
 
   /*

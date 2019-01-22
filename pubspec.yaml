@@ -9,8 +9,7 @@ environment:
 
 dependencies:
   jaguar_serializer: ^2.2.6
-  bson_objectid:
-    path: ../bson_objectid
+  crossplat_objectid:
 
 dev_dependencies:
   test: ^1.0.0

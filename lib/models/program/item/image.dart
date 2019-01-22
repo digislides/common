@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:bson_objectid/bson_objectid.dart';
-
 import 'package:common/models/program/item/item.dart';
 
 /// Represents an image embedded in a page
@@ -88,7 +86,6 @@ class ImageItem implements PageItem {
       this.color: 'transparent',
       this.url,
       this.fit: Fit.cover}) {
-    id ??= ObjectId().toHexString();
     this.left = left;
     this.top = top;
     this.width = width;

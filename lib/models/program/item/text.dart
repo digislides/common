@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:bson_objectid/bson_objectid.dart';
-
 import 'package:common/models/program/item/item.dart';
 
 class FontProperties {
@@ -130,7 +128,6 @@ class TextItem implements PageItem {
       this.text: 'Text',
       FontProperties font})
       : font = font ?? FontProperties() {
-    id ??= ObjectId().toHexString();
     this.left = left;
     this.top = top;
     this.width = width;

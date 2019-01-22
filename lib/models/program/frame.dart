@@ -59,8 +59,7 @@ class Frame {
   }
 
   void addNewPage({String name: 'New page'}) {
-    // TODO set id
-    pages.add(Page(name: name, width: width, height: height));
+    pages.add(Page(id: newId, name: name, width: width, height: height));
   }
 
   void removePage(String id) {
@@ -84,12 +83,14 @@ class Frame {
 
   void movePageTo(String pageId, int newPos) {
     final page = pages.firstWhere((p) => p.id == pageId, orElse: () => null);
-    pages.remove(page);
+    int oldIndex = pages.indexOf(page);
+    pages[oldIndex] = null;
     if (newPos < pages.length) {
       pages.insert(newPos, page);
     } else {
       pages.add(page);
     }
+    pages.removeWhere((p) => p == null);
   }
 
   void newPage(

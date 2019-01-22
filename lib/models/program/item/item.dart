@@ -3,10 +3,6 @@ import 'dart:math';
 
 import 'package:common/models/program/page.dart';
 
-import 'package:common/models/program/item/text.dart';
-import 'package:common/models/program/item/image.dart';
-import 'package:common/models/program/item/video.dart';
-
 export 'package:common/models/program/item/text.dart';
 export 'package:common/models/program/item/image.dart';
 export 'package:common/models/program/item/video.dart';
@@ -73,7 +69,7 @@ class Align {
 }
 
 abstract class PageItem implements Sizable {
-  String get id;
+  String id;
 
   PageItemType get type;
 
