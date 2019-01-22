@@ -50,12 +50,25 @@ class PageSerializer extends Serializer<Page> with _$PageSerializer {}
 class PageItemSerializer extends Serializer<PageItem> {
   @override
   PageItem fromMap(Map map) {
-    // TODO
+    if (map == null) return null;
+    final type = map['type'];
+    if (type is! int) return null;
+    if (type == PageItemType.text)
+      return TextItemSerializer.serializer.fromMap(map);
+    if (type == PageItemType.image)
+      return ImageItemSerializer.serializer.fromMap(map);
+    if (type == PageItemType.video)
+      return VideoItemSerializer.serializer.fromMap(map);
+    throw Exception("Unknown item!");
   }
 
   @override
   Map<String, dynamic> toMap(PageItem model) {
-    // TODO
+    if (model == null) return null;
+    if (model is TextItem) return TextItemSerializer.serializer.toMap(model);
+    if (model is ImageItem) return ImageItemSerializer.serializer.toMap(model);
+    if (model is VideoItem) return VideoItemSerializer.serializer.toMap(model);
+    throw Exception("Unknown item!");
   }
 }
 
@@ -65,18 +78,24 @@ class FontPropertiesSerializer extends Serializer<FontProperties>
 
 @GenSerializer(ignore: ['onRectChange'])
 class TextItemSerializer extends Serializer<TextItem>
-    with _$TextItemSerializer {}
+    with _$TextItemSerializer {
+  static final serializer = TextItemSerializer();
+}
 
 @GenSerializer(
     ignore: ['onRectChange'],
     fields: {'fit': Field(processor: FitFieldProcessor())})
 class ImageItemSerializer extends Serializer<ImageItem>
-    with _$ImageItemSerializer {}
+    with _$ImageItemSerializer {
+  static final serializer = ImageItemSerializer();
+}
 
 @GenSerializer(
     ignore: ['onRectChange'],
     fields: {'fit': Field(processor: FitFieldProcessor())})
 class VideoItemSerializer extends Serializer<VideoItem>
-    with _$VideoItemSerializer {}
+    with _$VideoItemSerializer {
+  static final serializer = VideoItemSerializer();
+}
 
 // TODO items
