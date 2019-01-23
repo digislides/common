@@ -1,13 +1,13 @@
 export 'program/program.dart';
 
+class ValidationException implements Exception {
+  final String message;
+
+  ValidationException(this.message);
+}
+
 /// Model used to create a new program
 class ProgramCreator {
-  /// Id of the program
-  String id;
-
-  /// Owner of the program
-  String owner;
-
   /// Name of the program
   String name;
 
@@ -16,6 +16,32 @@ class ProgramCreator {
 
   /// Height of the program
   int height;
+
+  ProgramCreator({this.name: '', this.width, this.height});
+
+  void reset() {
+    name = '';
+    width = 100;
+    height = 100;
+  }
+
+  void validate() {
+    if (name == null || name.isEmpty)
+      throw ValidationException("Name cannot be empty!");
+
+    if (name.trim().length > name.length)
+      throw ValidationException(
+          "Name should not contain space at the beginning or end!");
+
+    if (name.length > 20)
+      throw ValidationException("Maximum character limit for name is 20!");
+
+    if (width == null || width < 0)
+      throw ValidationException("Width should be a positive number!");
+
+    if (height == null || height < 0)
+      throw ValidationException("Height should be a positive number!");
+  }
 }
 
 /*

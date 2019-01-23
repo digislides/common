@@ -12,8 +12,6 @@ abstract class _$ProgramCreatorSerializer
   Map<String, dynamic> toMap(ProgramCreator model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
-    setMapValue(ret, 'id', model.id);
-    setMapValue(ret, 'owner', model.owner);
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
@@ -24,8 +22,6 @@ abstract class _$ProgramCreatorSerializer
   ProgramCreator fromMap(Map map) {
     if (map == null) return null;
     final obj = new ProgramCreator();
-    obj.id = map['id'] as String;
-    obj.owner = map['owner'] as String;
     obj.name = map['name'] as String;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
@@ -145,7 +141,6 @@ abstract class _$PageSerializer implements Serializer<Page> {
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'image', model.image);
     setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
-    setMapValue(ret, 'duration', model.duration);
     setMapValue(ret, 'transition', model.transition);
     setMapValue(ret, 'transitionDuration', model.transitionDuration);
     setMapValue(
@@ -153,6 +148,8 @@ abstract class _$PageSerializer implements Serializer<Page> {
         'items',
         codeIterable(
             model.items, (val) => _pageItemSerializer.toMap(val as PageItem)));
+    setMapValue(ret, 'imageUrl', model.imageUrl);
+    setMapValue(ret, 'duration', model.duration);
     return ret;
   }
 
@@ -170,9 +167,9 @@ abstract class _$PageSerializer implements Serializer<Page> {
     obj.color = map['color'] as String;
     obj.image = map['image'] as String;
     obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
-    obj.duration = map['duration'] as int;
     obj.transition = map['transition'] as int;
     obj.transitionDuration = map['transitionDuration'] as num;
+    obj.duration = map['duration'] as int;
     return obj;
   }
 }
@@ -184,13 +181,13 @@ abstract class _$FontPropertiesSerializer
   Map<String, dynamic> toMap(FontProperties model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
-    setMapValue(ret, 'size', model.size);
     setMapValue(ret, 'align', _alignFieldProcessor.serialize(model.align));
     setMapValue(ret, 'family', model.family);
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'bold', model.bold);
     setMapValue(ret, 'italic', model.italic);
     setMapValue(ret, 'underline', model.underline);
+    setMapValue(ret, 'size', model.size);
     return ret;
   }
 
@@ -198,13 +195,13 @@ abstract class _$FontPropertiesSerializer
   FontProperties fromMap(Map map) {
     if (map == null) return null;
     final obj = new FontProperties();
-    obj.size = map['size'] as int;
     obj.align = _alignFieldProcessor.deserialize(map['align'] as int);
     obj.family = map['family'] as String;
     obj.color = map['color'] as String;
     obj.bold = map['bold'] as bool;
     obj.italic = map['italic'] as bool;
     obj.underline = map['underline'] as bool;
+    obj.size = map['size'] as int;
     return obj;
   }
 }
@@ -220,7 +217,7 @@ abstract class _$TextItemSerializer implements Serializer<TextItem> {
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
-    setMapValue(ret, 'bgColor', model.color);
+    setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'text', model.text);
     setMapValue(ret, 'font', _fontPropertiesSerializer.toMap(model.font));
     setMapValue(ret, 'left', model.left);
@@ -238,7 +235,7 @@ abstract class _$TextItemSerializer implements Serializer<TextItem> {
             getJserDefault('font'));
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
-    obj.color = map['bgColor'] as String;
+    obj.color = map['color'] as String;
     obj.text = map['text'] as String;
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
@@ -257,13 +254,14 @@ abstract class _$ImageItemSerializer implements Serializer<ImageItem> {
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
-    setMapValue(ret, 'bgColor', model.color);
+    setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'url', model.url);
     setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
+    setMapValue(ret, 'imageUrl', model.imageUrl);
     return ret;
   }
 
@@ -273,7 +271,7 @@ abstract class _$ImageItemSerializer implements Serializer<ImageItem> {
     final obj = new ImageItem();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
-    obj.color = map['bgColor'] as String;
+    obj.color = map['color'] as String;
     obj.url = map['url'] as String;
     obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
     obj.left = map['left'] as int;
@@ -293,13 +291,14 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
-    setMapValue(ret, 'bgColor', model.color);
+    setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'url', model.url);
     setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
+    setMapValue(ret, 'videoUrl', model.videoUrl);
     return ret;
   }
 
@@ -309,7 +308,7 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
     final obj = new VideoItem();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
-    obj.color = map['bgColor'] as String;
+    obj.color = map['color'] as String;
     obj.url = map['url'] as String;
     obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
     obj.left = map['left'] as int;
