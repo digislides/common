@@ -6,6 +6,28 @@ part of 'serializer.dart';
 // JaguarSerializerGenerator
 // **************************************************************************
 
+abstract class _$SignupSerializer implements Serializer<Signup> {
+  @override
+  Map<String, dynamic> toMap(Signup model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'email', model.email);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'password', model.password);
+    return ret;
+  }
+
+  @override
+  Signup fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new Signup();
+    obj.email = map['email'] as String;
+    obj.name = map['name'] as String;
+    obj.password = map['password'] as String;
+    return obj;
+  }
+}
+
 abstract class _$UserSerializer implements Serializer<User> {
   @override
   Map<String, dynamic> toMap(User model) {

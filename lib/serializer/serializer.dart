@@ -31,6 +31,12 @@ class AlignFieldProcessor implements FieldProcessor<Align, int> {
 }
 
 @GenSerializer()
+class SignupSerializer extends Serializer<Signup>
+    with _$SignupSerializer {
+  static final serializer = SignupSerializer();
+}
+
+@GenSerializer()
 class UserSerializer extends Serializer<User>
     with _$UserSerializer {
   static final serializer = UserSerializer();

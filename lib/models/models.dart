@@ -107,3 +107,19 @@ class User {
 
   String name;
 }
+
+class Signup {
+  String email;
+
+  String name;
+
+  String password;
+
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  void validate() {
+    // TODO
+  }
+
+  static final serializer = SignupSerializer();
+}
