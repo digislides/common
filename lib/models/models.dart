@@ -1,5 +1,7 @@
 export 'program/program.dart';
 
+import 'package:common/serializer/serializer.dart';
+
 class ValidationException implements Exception {
   final String message;
 
@@ -42,6 +44,8 @@ class ProgramCreator {
     if (height == null || height < 0)
       throw ValidationException("Height should be a positive number!");
   }
+
+  static final serializer = ProgramCreatorSerializer();
 }
 
 /*
@@ -95,3 +99,11 @@ class Player {
       (owner == accessorId || writers.contains(accessorId));
 }
 */
+
+class User {
+  String id;
+
+  String email;
+
+  String name;
+}
