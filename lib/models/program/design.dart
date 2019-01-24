@@ -1,6 +1,8 @@
 import 'frame.dart';
 import 'page.dart';
 
+import 'package:common/serializer/serializer.dart';
+
 export 'frame.dart';
 export 'page.dart';
 
@@ -64,4 +66,6 @@ class ProgramDesign {
   // TODO reorder frame
 
   // TODO duplicate frame
+
+  static final serializer = ProgramDesignSerializer();
 }
