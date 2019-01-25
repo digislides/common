@@ -112,3 +112,7 @@ class VideoItemSerializer extends Serializer<VideoItem>
 
 @GenSerializer()
 class ChannelSerializer extends Serializer<Channel> with _$ChannelSerializer {}
+
+@GenSerializer()
+class ChannelCreatorSerializer extends Serializer<ChannelCreator>
+    with _$ChannelCreatorSerializer {}
