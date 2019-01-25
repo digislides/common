@@ -31,14 +31,12 @@ class AlignFieldProcessor implements FieldProcessor<Align, int> {
 }
 
 @GenSerializer()
-class SignupSerializer extends Serializer<Signup>
-    with _$SignupSerializer {
+class SignupSerializer extends Serializer<Signup> with _$SignupSerializer {
   static final serializer = SignupSerializer();
 }
 
 @GenSerializer()
-class UserSerializer extends Serializer<User>
-    with _$UserSerializer {
+class UserSerializer extends Serializer<User> with _$UserSerializer {
   static final serializer = UserSerializer();
 }
 
@@ -112,4 +110,5 @@ class VideoItemSerializer extends Serializer<VideoItem>
   static final serializer = VideoItemSerializer();
 }
 
-// TODO items
+@GenSerializer()
+class ChannelSerializer extends Serializer<Channel> with _$ChannelSerializer {}

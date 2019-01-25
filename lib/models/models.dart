@@ -1,6 +1,8 @@
-export 'program/program.dart';
-
 import 'package:common/serializer/serializer.dart';
+
+export 'has_access.dart';
+export 'channel/channel.dart';
+export 'program/program.dart';
 
 class ValidationException implements Exception {
   final String message;

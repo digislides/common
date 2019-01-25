@@ -82,6 +82,8 @@ abstract class _$ProgramSerializer implements Serializer<Program> {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'owner', model.owner);
+    setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'design', _programDesignSerializer.toMap(model.design));
     return ret;
@@ -92,6 +94,8 @@ abstract class _$ProgramSerializer implements Serializer<Program> {
     if (map == null) return null;
     final obj = new Program();
     obj.id = map['id'] as String;
+    obj.owner = map['owner'] as String;
+    obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.name = map['name'] as String;
     obj.design = _programDesignSerializer.fromMap(map['design'] as Map);
     return obj;
@@ -359,6 +363,32 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
+    return obj;
+  }
+}
+
+abstract class _$ChannelSerializer implements Serializer<Channel> {
+  @override
+  Map<String, dynamic> toMap(Channel model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'owner', model.owner);
+    setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'program', model.program);
+    return ret;
+  }
+
+  @override
+  Channel fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new Channel();
+    obj.id = map['id'] as String;
+    obj.owner = map['owner'] as String;
+    obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
+    obj.name = map['name'] as String;
+    obj.program = map['program'] as String;
     return obj;
   }
 }
