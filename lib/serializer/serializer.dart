@@ -4,6 +4,14 @@ import 'package:common/models/models.dart';
 
 part 'serializer.jser.dart';
 
+final repo = JsonRepo(serializers: [
+  SignupSerializer(),
+  ProgramCreatorSerializer(),
+  ProgramSerializer(),
+  ChannelCreatorSerializer(),
+  ChannelSerializer(),
+]);
+
 class FitFieldProcessor implements FieldProcessor<Fit, int> {
   const FitFieldProcessor();
 

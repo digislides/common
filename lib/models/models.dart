@@ -117,6 +117,8 @@ class Signup {
 
   String password;
 
+  Signup({this.email, this.name, this.password});
+
   Map<String, dynamic> toJson() => serializer.toMap(this);
 
   void validate() {
