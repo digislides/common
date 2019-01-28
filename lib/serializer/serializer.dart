@@ -6,6 +6,7 @@ part 'serializer.jser.dart';
 
 final repo = JsonRepo(serializers: [
   SignupSerializer(),
+  LoginSerializer(),
   ProgramCreatorSerializer(),
   ProgramSerializer(),
   ChannelCreatorSerializer(),
@@ -41,6 +42,11 @@ class AlignFieldProcessor implements FieldProcessor<Align, int> {
 @GenSerializer()
 class SignupSerializer extends Serializer<Signup> with _$SignupSerializer {
   static final serializer = SignupSerializer();
+}
+
+@GenSerializer()
+class LoginSerializer extends Serializer<Login> with _$LoginSerializer {
+  static final serializer = LoginSerializer();
 }
 
 @GenSerializer()

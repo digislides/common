@@ -127,3 +127,19 @@ class Signup {
 
   static final serializer = SignupSerializer();
 }
+
+class Login {
+  String username;
+
+  String password;
+
+  Login({this.username, this.password});
+
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  void validate() {
+    // TODO
+  }
+
+  static final serializer = LoginSerializer();
+}

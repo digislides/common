@@ -8,6 +8,10 @@ main() async {
 
   final authApi = AuthApi(Route("http://localhost:10000/api"));
 
+  /*
   await authApi.signup(
       Signup(name: 'Teja', email: 'tejainece@gmail.com', password: 's3cr3t'));
+      */
+
+  await authApi.login(Login(username: 'tejainece@gmail.com', password: 's3cr3t'));
 }

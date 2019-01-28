@@ -13,4 +13,10 @@ abstract class _$AuthApiClient implements ApiClient {
         base.post.path(basePath).path("/signup").json(jsonConverter.to(model));
     await req.go(throwOnErr: true);
   }
+
+  Future<void> login(Login model) async {
+    var req =
+        base.post.path(basePath).path("/login").json(jsonConverter.to(model));
+    await req.go(throwOnErr: true);
+  }
 }
