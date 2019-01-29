@@ -16,5 +16,5 @@ class AuthApi extends ApiClient with _$AuthApiClient {
   Future<void> signup(@AsJson() Signup model) => super.signup(model);
 
   @PostReq(path: '/login')
-  Future<void> login(@AsJson() Login model) => super.login(model);
+  Future<StringResponse> login(@AsJson() Login model) => super.login(model);
 }

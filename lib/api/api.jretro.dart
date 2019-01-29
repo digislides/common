@@ -14,9 +14,9 @@ abstract class _$AuthApiClient implements ApiClient {
     await req.go(throwOnErr: true);
   }
 
-  Future<void> login(Login model) async {
+  Future<StringResponse> login(Login model) async {
     var req =
         base.post.path(basePath).path("/login").json(jsonConverter.to(model));
-    await req.go(throwOnErr: true);
+    return req.go(throwOnErr: true);
   }
 }
