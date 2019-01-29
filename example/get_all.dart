@@ -16,9 +16,13 @@ main() async {
   await authApi
       .login(Login(username: 'tejainece@gmail.com', password: 's3cr3t'));
 
-  print(await programApi.getAll(""));
+  final programs = await programApi.getAll("");
+
+  print(programs);
 
   print(await programApi.getAll("1"));
 
   print(await programApi.getAll("^Prog.*"));
+
+  print(await programApi.getById(programs.first.id));
 }
