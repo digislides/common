@@ -18,9 +18,14 @@ class Program extends HasAccess {
 
   ProgramDesign design;
 
-  Program({this.id, this.name: 'Program', this.design}) {
+  Program(
+      {this.id, this.name: 'Program', this.design, this.owner, this.members}) {
     id ??= newId;
   }
 
   static final serializer = ProgramSerializer();
+
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  String toString() => toJson().toString();
 }

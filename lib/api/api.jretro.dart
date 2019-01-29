@@ -23,9 +23,9 @@ abstract class _$AuthApiClient implements ApiClient {
 
 abstract class _$ProgramApiClient implements ApiClient {
   final String basePath = "/program";
-  Future<void> create(ProgramCreator model) async {
+  Future<Program> create(ProgramCreator model) async {
     var req = base.post.path(basePath).json(jsonConverter.to(model));
-    await req.go(throwOnErr: true);
+    return req.go(throwOnErr: true).map(decodeOne);
   }
 
   Future<void> save(String id, Map<dynamic, dynamic> data) async {
@@ -37,9 +37,14 @@ abstract class _$ProgramApiClient implements ApiClient {
     await req.go(throwOnErr: true);
   }
 
-  Future<void> getById(String id) async {
+  Future<Program> getById(String id) async {
     var req = base.get.path(basePath).path("/:id").pathParams("id", id);
-    await req.go(throwOnErr: true);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<List<Program>> getAll(String search) async {
+    var req = base.get.path(basePath).query("search", search);
+    return req.go(throwOnErr: true).map(decodeList);
   }
 
   Future<void> delete(String id) async {

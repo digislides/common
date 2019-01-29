@@ -9,6 +9,7 @@ final repo = JsonRepo(serializers: [
   LoginSerializer(),
   ProgramCreatorSerializer(),
   ProgramSerializer(),
+  ProgramDesignSerializer(),
   ChannelCreatorSerializer(),
   ChannelSerializer(),
 ]);

@@ -28,14 +28,18 @@ class ProgramApi extends ApiClient with _$ProgramApiClient {
   }
 
   @PostReq()
-  Future<void> create(@AsJson() ProgramCreator model) => super.create(model);
+  Future<Program> create(@AsJson() ProgramCreator model) => super.create(model);
 
   @PutReq(path: '/:id')
   Future<void> save(@PathParam() String id, @AsJson() Map data) =>
       super.save(id, data);
 
   @GetReq(path: '/:id')
-  Future<void> getById(@PathParam() String id) => super.getById(id);
+  Future<Program> getById(@PathParam() String id) => super.getById(id);
+
+  @GetReq()
+  Future<List<Program>> getAll(@QueryParam() String search) =>
+      super.getAll(search);
 
   @DeleteReq(path: '/:id')
   Future<void> delete(@PathParam() String id) => super.delete(id);
