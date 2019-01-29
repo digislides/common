@@ -16,18 +16,8 @@ main() async {
   await authApi
       .login(Login(username: 'tejainece@gmail.com', password: 's3cr3t'));
 
-  print(await programApi
-      .create(ProgramCreator(name: 'Program 1', width: 100, height: 100)));
+  final programs = await programApi.getAll("");
 
-  print(await programApi
-      .create(ProgramCreator(name: 'Program 2', width: 100, height: 100)));
-
-  print(await programApi
-      .create(ProgramCreator(name: 'Program 3', width: 100, height: 100)));
-
-  print(await programApi
-      .create(ProgramCreator(name: 'Medis', width: 100, height: 100)));
-
-  print(await programApi
-      .create(ProgramCreator(name: 'McD', width: 100, height: 100)));
+  await programApi.save(
+      programs.first.id, ProgramDesign(width: 50, height: 50));
 }

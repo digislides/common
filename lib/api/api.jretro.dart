@@ -28,7 +28,7 @@ abstract class _$ProgramApiClient implements ApiClient {
     return req.go(throwOnErr: true).map(decodeOne);
   }
 
-  Future<void> save(String id, Map<dynamic, dynamic> data) async {
+  Future<void> save(String id, ProgramDesign data) async {
     var req = base.put
         .path(basePath)
         .path("/:id")
