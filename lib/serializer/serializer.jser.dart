@@ -106,6 +106,8 @@ abstract class _$ProgramSerializer implements Serializer<Program> {
     setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'design', _programDesignSerializer.toMap(model.design));
+    setMapValue(
+        ret, 'published', _programDesignSerializer.toMap(model.published));
     return ret;
   }
 
@@ -118,6 +120,7 @@ abstract class _$ProgramSerializer implements Serializer<Program> {
     obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.name = map['name'] as String;
     obj.design = _programDesignSerializer.fromMap(map['design'] as Map);
+    obj.published = _programDesignSerializer.fromMap(map['published'] as Map);
     return obj;
   }
 }

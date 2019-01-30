@@ -18,6 +18,8 @@ class Program extends HasAccess {
 
   ProgramDesign design;
 
+  ProgramDesign published;
+
   Program(
       {this.id, this.name: 'Program', this.design, this.owner, this.members}) {
     id ??= newId;
