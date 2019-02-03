@@ -142,4 +142,6 @@ class Login {
   }
 
   static final serializer = LoginSerializer();
+
+  String toString() => toJson().toString();
 }
