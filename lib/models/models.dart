@@ -47,6 +47,10 @@ class ProgramCreator {
       throw ValidationException("Height should be a positive number!");
   }
 
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  String toString() => toJson().toString();
+
   static final serializer = ProgramCreatorSerializer();
 }
 
