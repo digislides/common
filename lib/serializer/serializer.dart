@@ -80,11 +80,11 @@ class PageItemSerializer extends Serializer<PageItem> {
     if (map == null) return null;
     final type = map['type'];
     if (type is! int) return null;
-    if (type == PageItemType.text)
+    if (type == PageItemType.text.index)
       return TextItemSerializer.serializer.fromMap(map);
-    if (type == PageItemType.image)
+    if (type == PageItemType.image.index)
       return ImageItemSerializer.serializer.fromMap(map);
-    if (type == PageItemType.video)
+    if (type == PageItemType.video.index)
       return VideoItemSerializer.serializer.fromMap(map);
     throw Exception("Unknown item!");
   }
