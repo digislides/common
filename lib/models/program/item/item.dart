@@ -6,8 +6,10 @@ import 'package:common/models/program/page.dart';
 export 'package:common/models/program/item/text.dart';
 export 'package:common/models/program/item/image.dart';
 export 'package:common/models/program/item/video.dart';
+export 'package:common/models/program/item/clock.dart';
+export 'package:common/models/program/item/weather.dart';
 
-enum PageItemType { text, image, video }
+enum PageItemType { text, image, video, clock, weather }
 
 class Fit {
   final int id;
