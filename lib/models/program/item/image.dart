@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:common/models/program/item/item.dart';
+import 'package:common/serializer/serializer.dart';
 
 /// Represents an image embedded in a page
 class ImageItem implements PageItem {
@@ -97,4 +98,10 @@ class ImageItem implements PageItem {
     if (url == null || url.trim().isEmpty) return 'none';
     return 'url($url)';
   }
+
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  String toString() => toJson().toString();
+
+  static final serializer = ImageItemSerializer();
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:common/models/program/item/item.dart';
+import 'package:common/serializer/serializer.dart';
 
 class FontProperties {
   /// Size of the font
@@ -134,4 +135,10 @@ class TextItem implements PageItem {
     this.height = height;
     _rectStream = _rectChange.stream.asBroadcastStream();
   }
+
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  String toString() => toJson().toString();
+
+  static final serializer = TextItemSerializer();
 }

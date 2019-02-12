@@ -1,5 +1,6 @@
 import 'package:common/utils/id.dart';
 import 'package:common/models/program/page.dart';
+import 'package:common/serializer/serializer.dart';
 
 class Frame {
   String id;
@@ -107,4 +108,10 @@ class Frame {
           color: color,
           image: image,
           items: items));
+
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  String toString() => toJson().toString();
+
+  static final serializer = FrameSerializer();
 }

@@ -390,6 +390,68 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
   }
 }
 
+abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
+  @override
+  Map<String, dynamic> toMap(ClockItem model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'type', model.type.index);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'color', model.color);
+    setMapValue(ret, 'left', model.left);
+    setMapValue(ret, 'top', model.top);
+    setMapValue(ret, 'width', model.width);
+    setMapValue(ret, 'height', model.height);
+    return ret;
+  }
+
+  @override
+  ClockItem fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new ClockItem();
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    obj.color = map['color'] as String;
+    obj.left = map['left'] as int;
+    obj.top = map['top'] as int;
+    obj.width = map['width'] as int;
+    obj.height = map['height'] as int;
+    return obj;
+  }
+}
+
+abstract class _$WeatherItemSerializer implements Serializer<WeatherItem> {
+  @override
+  Map<String, dynamic> toMap(WeatherItem model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'type', model.type.index);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'color', model.color);
+    setMapValue(ret, 'left', model.left);
+    setMapValue(ret, 'top', model.top);
+    setMapValue(ret, 'width', model.width);
+    setMapValue(ret, 'height', model.height);
+    return ret;
+  }
+
+  @override
+  WeatherItem fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new WeatherItem();
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    obj.color = map['color'] as String;
+    obj.left = map['left'] as int;
+    obj.top = map['top'] as int;
+    obj.width = map['width'] as int;
+    obj.height = map['height'] as int;
+    return obj;
+  }
+}
+
 abstract class _$ChannelSerializer implements Serializer<Channel> {
   @override
   Map<String, dynamic> toMap(Channel model) {

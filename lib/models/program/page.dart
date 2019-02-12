@@ -2,6 +2,7 @@ import 'package:common/utils/id.dart';
 
 import 'package:common/models/program/program.dart';
 import 'package:common/models/program/item/item.dart';
+import 'package:common/serializer/serializer.dart';
 
 export 'package:common/models/program/item/item.dart';
 
@@ -92,4 +93,10 @@ class Page implements Sizable {
         .cast<PageItem>());
   }
   */
+
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  String toString() => toJson().toString();
+
+  static final serializer = PageSerializer();
 }

@@ -67,5 +67,9 @@ class ProgramDesign {
 
   // TODO duplicate frame
 
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  String toString() => toJson().toString();
+
   static final serializer = ProgramDesignSerializer();
 }

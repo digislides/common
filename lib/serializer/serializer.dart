@@ -86,6 +86,10 @@ class PageItemSerializer extends Serializer<PageItem> {
       return ImageItemSerializer.serializer.fromMap(map);
     if (type == PageItemType.video.index)
       return VideoItemSerializer.serializer.fromMap(map);
+    if (type == PageItemType.clock.index)
+      return ClockItemSerializer.serializer.fromMap(map);
+    if (type == PageItemType.weather.index)
+      return WeatherItemSerializer.serializer.fromMap(map);
     throw Exception("Unknown item!");
   }
 
@@ -95,6 +99,9 @@ class PageItemSerializer extends Serializer<PageItem> {
     if (model is TextItem) return TextItemSerializer.serializer.toMap(model);
     if (model is ImageItem) return ImageItemSerializer.serializer.toMap(model);
     if (model is VideoItem) return VideoItemSerializer.serializer.toMap(model);
+    if (model is ClockItem) return ClockItemSerializer.serializer.toMap(model);
+    if (model is WeatherItem)
+      return WeatherItemSerializer.serializer.toMap(model);
     throw Exception("Unknown item!");
   }
 }
@@ -123,6 +130,18 @@ class ImageItemSerializer extends Serializer<ImageItem>
 class VideoItemSerializer extends Serializer<VideoItem>
     with _$VideoItemSerializer {
   static final serializer = VideoItemSerializer();
+}
+
+@GenSerializer(ignore: ['onRectChange'], fields: {})
+class ClockItemSerializer extends Serializer<ClockItem>
+    with _$ClockItemSerializer {
+  static final serializer = ClockItemSerializer();
+}
+
+@GenSerializer(ignore: ['onRectChange'], fields: {})
+class WeatherItemSerializer extends Serializer<WeatherItem>
+    with _$WeatherItemSerializer {
+  static final serializer = WeatherItemSerializer();
 }
 
 @GenSerializer()
