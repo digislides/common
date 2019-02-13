@@ -18,6 +18,8 @@ class Program extends HasAccess {
 
   ProgramDesign design;
 
+  DateTime publishedAt;
+
   ProgramDesign published;
 
   Program(

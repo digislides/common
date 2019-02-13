@@ -53,6 +53,32 @@ class ProgramApi extends ApiClient with _$ProgramApiClient {
   // TODO getAll
 
   // TODO duplicate
+}
 
-  // TODO publish
+@GenApiClient(path: '/channel')
+class ChannelApi extends ApiClient with _$ChannelApiClient {
+  final Route base;
+
+  ChannelApi(this.base) {
+    jsonConverter = repo;
+  }
+
+  @PostReq()
+  Future<Channel> create(@AsJson() ChannelCreator model) => super.create(model);
+
+  /*
+  @PutReq(path: '/:id')
+  Future<void> save(@PathParam() String id, @AsJson() Channel data) =>
+      super.save(id, data);
+      */
+
+  @GetReq(path: '/:id')
+  Future<Channel> getById(@PathParam() String id) => super.getById(id);
+
+  @GetReq()
+  Future<List<Channel>> getAll(@QueryParam() String search) =>
+      super.getAll(search);
+
+  @DeleteReq(path: '/:id')
+  Future<void> delete(@PathParam() String id) => super.delete(id);
 }

@@ -61,7 +61,11 @@ class ProgramCreatorSerializer extends Serializer<ProgramCreator>
   static final serializer = ProgramCreatorSerializer();
 }
 
-@GenSerializer()
+@GenSerializer(
+  fields: {
+    'publishedAt': Field(processor: MillisecondsProcessor()),
+  },
+)
 class ProgramSerializer extends Serializer<Program> with _$ProgramSerializer {}
 
 @GenSerializer(serializers: [FrameSerializer])

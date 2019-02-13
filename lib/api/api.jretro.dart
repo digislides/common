@@ -61,3 +61,26 @@ abstract class _$ProgramApiClient implements ApiClient {
     await req.go(throwOnErr: true);
   }
 }
+
+abstract class _$ChannelApiClient implements ApiClient {
+  final String basePath = "/channel";
+  Future<Channel> create(ChannelCreator model) async {
+    var req = base.post.path(basePath).json(jsonConverter.to(model));
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<Channel> getById(String id) async {
+    var req = base.get.path(basePath).path("/:id").pathParams("id", id);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<List<Channel>> getAll(String search) async {
+    var req = base.get.path(basePath).query("search", search);
+    return req.go(throwOnErr: true).map(decodeList);
+  }
+
+  Future<void> delete(String id) async {
+    var req = base.delete.path(basePath).path("/:id").pathParams("id", id);
+    await req.go(throwOnErr: true);
+  }
+}
