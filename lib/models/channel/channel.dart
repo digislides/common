@@ -33,3 +33,20 @@ class ChannelCreator {
 
   static final serializer = ChannelCreatorSerializer();
 }
+
+class ChannelPublic {
+  String id;
+
+  String name;
+
+  ChannelPublic({this.id, this.name});
+
+  factory ChannelPublic.from(Channel chan) =>
+      ChannelPublic(id: chan.id, name: chan.name);
+
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  String toString() => toJson().toString();
+
+  static final serializer = ChannelPublicSerializer();
+}

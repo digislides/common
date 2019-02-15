@@ -11,6 +11,7 @@ final repo = JsonRepo(serializers: [
   ProgramSerializer(),
   ProgramDesignSerializer(),
   ChannelCreatorSerializer(),
+  ChannelPublicSerializer(),
   ChannelSerializer(),
 ]);
 
@@ -150,6 +151,10 @@ class WeatherItemSerializer extends Serializer<WeatherItem>
 
 @GenSerializer()
 class ChannelSerializer extends Serializer<Channel> with _$ChannelSerializer {}
+
+@GenSerializer()
+class ChannelPublicSerializer extends Serializer<ChannelPublic>
+    with _$ChannelPublicSerializer {}
 
 @GenSerializer()
 class ChannelCreatorSerializer extends Serializer<ChannelCreator>

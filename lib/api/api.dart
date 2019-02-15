@@ -66,11 +66,9 @@ class ChannelApi extends ApiClient with _$ChannelApiClient {
   @PostReq()
   Future<Channel> create(@AsJson() ChannelCreator model) => super.create(model);
 
-  /*
   @PutReq(path: '/:id')
-  Future<void> save(@PathParam() String id, @AsJson() Channel data) =>
+  Future<void> save(@PathParam() String id, @AsJson() ChannelCreator data) =>
       super.save(id, data);
-      */
 
   @GetReq(path: '/:id')
   Future<Channel> getById(@PathParam() String id) => super.getById(id);

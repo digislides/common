@@ -69,6 +69,15 @@ abstract class _$ChannelApiClient implements ApiClient {
     return req.go(throwOnErr: true).map(decodeOne);
   }
 
+  Future<void> save(String id, ChannelCreator data) async {
+    var req = base.put
+        .path(basePath)
+        .path("/:id")
+        .pathParams("id", id)
+        .json(jsonConverter.to(data));
+    await req.go(throwOnErr: true);
+  }
+
   Future<Channel> getById(String id) async {
     var req = base.get.path(basePath).path("/:id").pathParams("id", id);
     return req.go(throwOnErr: true).map(decodeOne);

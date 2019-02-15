@@ -483,6 +483,26 @@ abstract class _$ChannelSerializer implements Serializer<Channel> {
   }
 }
 
+abstract class _$ChannelPublicSerializer implements Serializer<ChannelPublic> {
+  @override
+  Map<String, dynamic> toMap(ChannelPublic model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'name', model.name);
+    return ret;
+  }
+
+  @override
+  ChannelPublic fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new ChannelPublic();
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    return obj;
+  }
+}
+
 abstract class _$ChannelCreatorSerializer
     implements Serializer<ChannelCreator> {
   @override
