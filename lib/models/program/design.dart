@@ -24,8 +24,12 @@ class ProgramDesign {
 
   int get width => _width;
 
-  set width(int v) {
-    _width = v;
+  set width(dynamic value) {
+    if (value is String) {
+      _width = int.tryParse(value) ?? 0;
+    } else {
+      _width = value;
+    }
     frames.where((f) => f.fullview).forEach((f) {
       f.width = _width;
     });
@@ -33,14 +37,17 @@ class ProgramDesign {
 
   int get height => _height;
 
-  set height(int v) {
-    _height = v;
+  set height(dynamic value) {
+    if (value is String) {
+      _height = int.tryParse(value) ?? 0;
+    } else {
+      _height = value;
+    }
     frames.where((f) => f.fullview).forEach((f) {
       f.height = _height;
     });
   }
 
-  // TODO add frame
   void addNewFrame(
           {String id,
           String name: 'New frame',

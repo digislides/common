@@ -143,6 +143,7 @@ abstract class _$ProgramDesignSerializer implements Serializer<ProgramDesign> {
         'frames',
         codeIterable(
             model.frames, (val) => _frameSerializer.toMap(val as Frame)));
+    setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
     return ret;
@@ -154,6 +155,7 @@ abstract class _$ProgramDesignSerializer implements Serializer<ProgramDesign> {
     final obj = new ProgramDesign();
     obj.frames = codeIterable<Frame>(map['frames'] as Iterable,
         (val) => _frameSerializer.fromMap(val as Map));
+    obj.color = map['color'] as String;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
     return obj;
@@ -173,10 +175,10 @@ abstract class _$FrameSerializer implements Serializer<Frame> {
     setMapValue(ret, 'pages',
         codeIterable(model.pages, (val) => _pageSerializer.toMap(val as Page)));
     setMapValue(ret, 'fullview', model.fullview);
-    setMapValue(ret, 'left', model.left);
-    setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'image', model.image);
+    setMapValue(ret, 'left', model.left);
+    setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
     return ret;
@@ -191,10 +193,10 @@ abstract class _$FrameSerializer implements Serializer<Frame> {
     obj.pages = codeIterable<Page>(
         map['pages'] as Iterable, (val) => _pageSerializer.fromMap(val as Map));
     obj.fullview = map['fullview'] as bool;
-    obj.left = map['left'] as int;
-    obj.top = map['top'] as int;
     obj.color = map['color'] as String;
     obj.image = map['image'] as String;
+    obj.left = map['left'] as int;
+    obj.top = map['top'] as int;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
     return obj;

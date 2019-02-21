@@ -73,7 +73,7 @@ class ProgramSerializer extends Serializer<Program> with _$ProgramSerializer {}
 class ProgramDesignSerializer extends Serializer<ProgramDesign>
     with _$ProgramDesignSerializer {}
 
-@GenSerializer()
+@GenSerializer(ignore: ['onRectChange'])
 class FrameSerializer extends Serializer<Frame> with _$FrameSerializer {}
 
 @GenSerializer(fields: {'fit': Field(processor: FitFieldProcessor())})
