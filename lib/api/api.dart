@@ -34,7 +34,7 @@ class ProgramApi extends ApiClient with _$ProgramApiClient {
   Future<void> save(@PathParam() String id, @AsJson() ProgramDesign data) =>
       super.save(id, data);
 
-  @PostReq(path: '/publish/:id')
+  @PostReq(path: '/:id/publish')
   Future<void> publish(@PathParam() String id, @AsJson() ProgramDesign data) =>
       super.publish(id, data);
 
@@ -48,9 +48,11 @@ class ProgramApi extends ApiClient with _$ProgramApiClient {
   @DeleteReq(path: '/:id')
   Future<void> delete(@PathParam() String id) => super.delete(id);
 
-  // TODO transferOwnership
+  @PostReq(path: '/:id/name/:name')
+  Future<void> setName(@PathParam() String id, @PathParam() String name) =>
+      super.setName(id, name);
 
-  // TODO getAll
+  // TODO transferOwnership
 
   // TODO duplicate
 }
@@ -67,8 +69,9 @@ class ChannelApi extends ApiClient with _$ChannelApiClient {
   Future<Channel> create(@AsJson() ChannelCreator model) => super.create(model);
 
   @PutReq(path: '/:id')
-  Future<void> save(@PathParam() String id, @AsJson() ChannelCreator data) =>
-      super.save(id, data);
+  Future<Channel> save(
+          @PathParam() String id, @AsJson() ChannelCreator model) =>
+      super.save(id, model);
 
   @GetReq(path: '/:id')
   Future<Channel> getById(@PathParam() String id) => super.getById(id);

@@ -13,6 +13,8 @@ class Channel extends HasAccess {
 
   String program;
 
+  Channel({this.id, this.name, this.program});
+
   Map<String, dynamic> toJson() => serializer.toMap(this);
 
   String toString() => toJson().toString();
@@ -26,6 +28,11 @@ class ChannelCreator {
   String program;
 
   ChannelCreator({this.name, this.program});
+
+  void reset() {
+    name = '';
+    program = null;
+  }
 
   Map<String, dynamic> toJson() => serializer.toMap(this);
 

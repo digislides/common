@@ -137,7 +137,7 @@ class VideoItemSerializer extends Serializer<VideoItem>
   static final serializer = VideoItemSerializer();
 }
 
-@GenSerializer(ignore: ['onRectChange'], fields: {})
+@GenSerializer(ignore: ['onRectChange', 'size'], fields: {})
 class ClockItemSerializer extends Serializer<ClockItem>
     with _$ClockItemSerializer {
   static final serializer = ClockItemSerializer();
