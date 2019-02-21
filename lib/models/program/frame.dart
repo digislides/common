@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:common/utils/id.dart';
 import 'package:common/models/program/page.dart';
 import 'package:common/serializer/serializer.dart';
@@ -11,9 +14,9 @@ class Frame {
 
   bool fullview;
 
-  int left;
+  int _left = 0;
 
-  int top;
+  int _top = 0;
 
   int _width = 0;
 
@@ -28,35 +31,71 @@ class Frame {
     this.name: 'Frame',
     this.pages,
     this.fullview: false,
-    this.left: 0,
-    this.top: 0,
-    int width,
-    int height,
+    int left: 0,
+    int top: 0,
+    int width: 0,
+    int height: 0,
     this.color: 'transparent',
     this.image,
   }) {
     id ??= newId;
     pages ??= <Page>[];
+    this.left = left;
+    this.top = top;
     this.width = width;
     this.height = height;
+
+    _rectStream = _rectChange.stream.asBroadcastStream();
+  }
+
+  final _rectChange = StreamController<Rectangle<int>>();
+
+  Stream<Rectangle<int>> _rectStream;
+
+  Stream<Rectangle<int>> get onRectChange => _rectStream;
+
+  int get left => _left;
+
+  set left(dynamic value) {
+    if (value is String) {
+      _left = int.tryParse(value) ?? 0;
+    } else {
+      _left = value;
+    }
+    _rectChange.add(Rectangle<int>(left, top, width, height));
+  }
+
+  int get top => _top;
+
+  set top(dynamic value) {
+    if (value is String) {
+      _top = int.tryParse(value) ?? 0;
+    } else {
+      _top = value;
+    }
+    _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
   int get width => _width;
 
-  set width(int v) {
-    _width = v;
-    pages.forEach((Page p) {
-      p.width = _width;
-    });
+  set width(dynamic value) {
+    if (value is String) {
+      _width = int.tryParse(value) ?? 0;
+    } else {
+      _width = value;
+    }
+    _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
   int get height => _height;
 
-  set height(int v) {
-    _height = v;
-    pages.forEach((Page p) {
-      p.height = _height;
-    });
+  set height(dynamic value) {
+    if (value is String) {
+      _height = int.tryParse(value) ?? 0;
+    } else {
+      _height = value;
+    }
+    _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
   void addNewPage({String name: 'New page'}) {

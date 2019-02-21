@@ -49,6 +49,8 @@ class ClockItem implements PageItem {
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
+  int get size => _size;
+
   set size(dynamic value) {
     if (value is String) {
       _size = int.tryParse(value) ?? 0;

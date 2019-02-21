@@ -13,7 +13,10 @@ class ProgramDesign {
 
   List<Frame> frames;
 
-  ProgramDesign({int width: 0, int height: 0, this.frames}) {
+  String color;
+
+  ProgramDesign(
+      {int width: 0, int height: 0, this.frames, this.color: 'transparent'}) {
     frames ??= <Frame>[];
     this.width = width;
     this.height = height;
@@ -38,7 +41,7 @@ class ProgramDesign {
   }
 
   // TODO add frame
-  void newFrame(
+  void addNewFrame(
           {String id,
           String name: 'New frame',
           List<Page> pages,
@@ -61,9 +64,25 @@ class ProgramDesign {
           color: color,
           image: image));
 
-  // TODO remove frame
+  void removeFrame(String id) {
+    frames.removeWhere((f) => f.id == id);
+  }
 
-  // TODO reorder frame
+  void removeFramesById(Set<String> ids) {
+    frames.removeWhere((f) => ids.contains(f.id));
+  }
+
+  void moveFrameTo(String pageId, int newPos) {
+    final page = frames.firstWhere((p) => p.id == pageId, orElse: () => null);
+    int oldIndex = frames.indexOf(page);
+    frames[oldIndex] = null;
+    if (newPos < frames.length) {
+      frames.insert(newPos, page);
+    } else {
+      frames.add(page);
+    }
+    frames.removeWhere((p) => p == null);
+  }
 
   // TODO duplicate frame
 
