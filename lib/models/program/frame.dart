@@ -12,8 +12,6 @@ class Frame {
 
   List<Page> pages;
 
-  bool fullview;
-
   int _left = 0;
 
   int _top = 0;
@@ -22,20 +20,16 @@ class Frame {
 
   int _height = 0;
 
-  String color;
-
   String image;
 
   Frame({
     this.id,
     this.name: 'Frame',
     this.pages,
-    this.fullview: false,
     int left: 0,
     int top: 0,
     int width: 0,
     int height: 0,
-    this.color: 'transparent',
     this.image,
   }) {
     id ??= newId;
@@ -84,6 +78,7 @@ class Frame {
     } else {
       _width = value;
     }
+    for (Page page in pages) page.width = _width;
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
@@ -95,6 +90,7 @@ class Frame {
     } else {
       _height = value;
     }
+    for (Page page in pages) page.height = _height;
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 

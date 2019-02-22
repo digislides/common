@@ -174,8 +174,6 @@ abstract class _$FrameSerializer implements Serializer<Frame> {
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'pages',
         codeIterable(model.pages, (val) => _pageSerializer.toMap(val as Page)));
-    setMapValue(ret, 'fullview', model.fullview);
-    setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'image', model.image);
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
@@ -192,8 +190,6 @@ abstract class _$FrameSerializer implements Serializer<Frame> {
     obj.name = map['name'] as String;
     obj.pages = codeIterable<Page>(
         map['pages'] as Iterable, (val) => _pageSerializer.fromMap(val as Map));
-    obj.fullview = map['fullview'] as bool;
-    obj.color = map['color'] as String;
     obj.image = map['image'] as String;
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;

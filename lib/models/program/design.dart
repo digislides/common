@@ -30,9 +30,6 @@ class ProgramDesign {
     } else {
       _width = value;
     }
-    frames.where((f) => f.fullview).forEach((f) {
-      f.width = _width;
-    });
   }
 
   int get height => _height;
@@ -43,9 +40,6 @@ class ProgramDesign {
     } else {
       _height = value;
     }
-    frames.where((f) => f.fullview).forEach((f) {
-      f.height = _height;
-    });
   }
 
   void addNewFrame(
@@ -63,12 +57,10 @@ class ProgramDesign {
           id: id,
           name: name,
           pages: pages,
-          fullview: fullview,
           left: left,
           top: top,
           width: width ?? this.width,
           height: height ?? this.height,
-          color: color,
           image: image));
 
   void removeFrame(String id) {
