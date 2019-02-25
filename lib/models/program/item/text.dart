@@ -141,4 +141,7 @@ class TextItem implements PageItem {
   String toString() => toJson().toString();
 
   static final serializer = TextItemSerializer();
+
+  void collectUrls(Map<String, bool> urls) {
+  }
 }

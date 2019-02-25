@@ -149,4 +149,10 @@ class Frame {
   String toString() => toJson().toString();
 
   static final serializer = FrameSerializer();
+
+  void collectUrls(Map<String, bool> urls) {
+    for(Page page in pages) {
+      page.collectUrls(urls);
+    }
+  }
 }

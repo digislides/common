@@ -103,4 +103,8 @@ class VideoItem implements PageItem {
   String toString() => toJson().toString();
 
   static final serializer = VideoItemSerializer();
+
+  void collectUrls(Map<String, bool> urls) {
+    urls[url] = false;
+  }
 }

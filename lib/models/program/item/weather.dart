@@ -92,4 +92,7 @@ class WeatherItem implements PageItem {
   String toString() => toJson().toString();
 
   static final serializer = WeatherItemSerializer();
+
+  void collectUrls(Map<String, bool> urls) {
+  }
 }

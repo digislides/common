@@ -90,4 +90,6 @@ abstract class PageItem implements Sizable {
   Stream<Rectangle<int>> get onRectChange;
 
   // TODO clone
+
+  void collectUrls(Map<String, bool> urls);
 }

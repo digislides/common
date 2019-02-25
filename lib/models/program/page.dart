@@ -99,4 +99,11 @@ class Page implements Sizable {
   String toString() => toJson().toString();
 
   static final serializer = PageSerializer();
+
+  void collectUrls(Map<String, bool> urls) {
+    urls[image] = false;
+    for(PageItem item in items) {
+      item.collectUrls(urls);
+    }
+  }
 }

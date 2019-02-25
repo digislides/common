@@ -104,4 +104,8 @@ class ImageItem implements PageItem {
   String toString() => toJson().toString();
 
   static final serializer = ImageItemSerializer();
+
+  void collectUrls(Map<String, bool> urls) {
+    urls[url] = false;
+  }
 }

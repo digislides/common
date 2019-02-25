@@ -101,4 +101,6 @@ class ClockItem implements PageItem {
   String toString() => toJson().toString();
 
   static final serializer = ClockItemSerializer();
+
+  void collectUrls(Map<String, bool> urls) {}
 }
