@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:common/utils/url.dart';
+
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
@@ -105,6 +107,6 @@ class VideoItem implements PageItem {
   static final serializer = VideoItemSerializer();
 
   void collectUrls(Map<String, bool> urls) {
-    urls[url] = false;
+    if (isMediaUrl(url)) urls[url] = false;
   }
 }

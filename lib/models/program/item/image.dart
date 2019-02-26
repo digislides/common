@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:common/utils/url.dart';
+
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
@@ -106,6 +108,6 @@ class ImageItem implements PageItem {
   static final serializer = ImageItemSerializer();
 
   void collectUrls(Map<String, bool> urls) {
-    urls[url] = false;
+    if (isMediaUrl(url)) urls[url] = false;
   }
 }

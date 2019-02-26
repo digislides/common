@@ -1,4 +1,5 @@
 import 'package:common/utils/id.dart';
+import 'package:common/utils/url.dart';
 
 import 'package:common/models/program/program.dart';
 import 'package:common/models/program/item/item.dart';
@@ -101,8 +102,8 @@ class Page implements Sizable {
   static final serializer = PageSerializer();
 
   void collectUrls(Map<String, bool> urls) {
-    urls[image] = false;
-    for(PageItem item in items) {
+    if (isMediaUrl(image)) urls[image] = false;
+    for (PageItem item in items) {
       item.collectUrls(urls);
     }
   }
