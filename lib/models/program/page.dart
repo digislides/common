@@ -53,7 +53,7 @@ class Page implements Sizable {
   }
 
   String get imageUrl {
-    if (image == null || image.trim().isEmpty) return 'none';
+    if(!isValidMediaUrl(image)) return 'none';
     return 'url($image)';
   }
 
@@ -102,7 +102,7 @@ class Page implements Sizable {
   static final serializer = PageSerializer();
 
   void collectUrls(Map<String, bool> urls) {
-    if (isMediaUrl(image)) urls[image] = false;
+    if (isDownloadableMediaUrl(image)) urls[image] = false;
     for (PageItem item in items) {
       item.collectUrls(urls);
     }

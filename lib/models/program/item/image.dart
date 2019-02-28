@@ -97,7 +97,7 @@ class ImageItem implements PageItem {
   }
 
   String get imageUrl {
-    if (url == null || url.trim().isEmpty) return 'none';
+    if(!isValidMediaUrl(url)) return 'none';
     return 'url($url)';
   }
 
@@ -108,6 +108,6 @@ class ImageItem implements PageItem {
   static final serializer = ImageItemSerializer();
 
   void collectUrls(Map<String, bool> urls) {
-    if (isMediaUrl(url)) urls[url] = false;
+    if (isDownloadableMediaUrl(url)) urls[url] = false;
   }
 }

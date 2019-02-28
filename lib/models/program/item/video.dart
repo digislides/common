@@ -96,7 +96,7 @@ class VideoItem implements PageItem {
   }
 
   String get videoUrl {
-    if (url == null || url.trim().isEmpty) return 'none';
+    if(!isValidMediaUrl(url)) return 'none';
     return 'url($url)';
   }
 
@@ -107,6 +107,6 @@ class VideoItem implements PageItem {
   static final serializer = VideoItemSerializer();
 
   void collectUrls(Map<String, bool> urls) {
-    if (isMediaUrl(url)) urls[url] = false;
+    if (isDownloadableMediaUrl(url)) urls[url] = false;
   }
 }
