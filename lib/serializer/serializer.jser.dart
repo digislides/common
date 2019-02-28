@@ -130,6 +130,30 @@ abstract class _$ProgramSerializer implements Serializer<Program> {
   }
 }
 
+abstract class _$PublishedProgramSerializer
+    implements Serializer<PublishedProgram> {
+  Serializer<ProgramDesign> __programDesignSerializer;
+  Serializer<ProgramDesign> get _programDesignSerializer =>
+      __programDesignSerializer ??= new ProgramDesignSerializer();
+  @override
+  Map<String, dynamic> toMap(PublishedProgram model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'design', _programDesignSerializer.toMap(model.design));
+    return ret;
+  }
+
+  @override
+  PublishedProgram fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new PublishedProgram();
+    obj.id = map['id'] as String;
+    obj.design = _programDesignSerializer.fromMap(map['design'] as Map);
+    return obj;
+  }
+}
+
 abstract class _$ProgramDesignSerializer implements Serializer<ProgramDesign> {
   Serializer<Frame> __frameSerializer;
   Serializer<Frame> get _frameSerializer =>

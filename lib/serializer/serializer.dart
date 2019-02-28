@@ -10,6 +10,7 @@ final repo = JsonRepo(serializers: [
   ProgramCreatorSerializer(),
   ProgramSerializer(),
   ProgramDesignSerializer(),
+  PublishedProgramSerializer(),
   ChannelCreatorSerializer(),
   ChannelPublicSerializer(),
   ChannelSerializer(),
@@ -68,6 +69,10 @@ class ProgramCreatorSerializer extends Serializer<ProgramCreator>
   },
 )
 class ProgramSerializer extends Serializer<Program> with _$ProgramSerializer {}
+
+@GenSerializer()
+class PublishedProgramSerializer extends Serializer<PublishedProgram>
+    with _$PublishedProgramSerializer {}
 
 @GenSerializer(serializers: [FrameSerializer])
 class ProgramDesignSerializer extends Serializer<ProgramDesign>

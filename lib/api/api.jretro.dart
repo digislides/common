@@ -101,4 +101,14 @@ abstract class _$ChannelApiClient implements ApiClient {
     var req = base.delete.path(basePath).path("/:id").pathParams("id", id);
     await req.go(throwOnErr: true);
   }
+
+  Future<String> getVersion(String id) async {
+    var req = base.get.path(basePath).path("/:id/version").pathParams("id", id);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<PublishedProgram> getContent(String id) async {
+    var req = base.get.path(basePath).path("/:id/content").pathParams("id", id);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
 }

@@ -33,3 +33,11 @@ class Program extends HasAccess {
 
   String toString() => toJson().toString();
 }
+
+class PublishedProgram {
+  String id;
+
+  ProgramDesign design;
+
+  PublishedProgram({this.id, this.design});
+}

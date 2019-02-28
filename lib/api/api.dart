@@ -68,6 +68,8 @@ class ChannelApi extends ApiClient with _$ChannelApiClient {
   @PostReq()
   Future<Channel> create(@AsJson() ChannelCreator model) => super.create(model);
 
+  // TODO duplicate
+
   @PutReq(path: '/:id')
   Future<Channel> save(
           @PathParam() String id, @AsJson() ChannelCreator model) =>
@@ -82,4 +84,11 @@ class ChannelApi extends ApiClient with _$ChannelApiClient {
 
   @DeleteReq(path: '/:id')
   Future<void> delete(@PathParam() String id) => super.delete(id);
+
+  @GetReq(path: '/:id/version')
+  Future<String> getVersion(@PathParam() String id) => super.getVersion(id);
+
+  @GetReq(path: '/:id/content')
+  Future<PublishedProgram> getContent(@PathParam() String id) =>
+      super.getContent(id);
 }
