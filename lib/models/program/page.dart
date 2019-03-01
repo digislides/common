@@ -53,7 +53,7 @@ class Page implements Sizable {
   }
 
   String get imageUrl {
-    if(!isValidMediaUrl(image)) return 'none';
+    if (!isValidMediaUrl(image)) return 'none';
     return 'url($image)';
   }
 

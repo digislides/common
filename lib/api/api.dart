@@ -38,6 +38,10 @@ class ProgramApi extends ApiClient with _$ProgramApiClient {
   Future<void> publish(@PathParam() String id, @AsJson() ProgramDesign data) =>
       super.publish(id, data);
 
+  @GetReq(path: '/:id/published')
+  Future<PublishedProgram> getPublished(@PathParam() String id) =>
+      super.getPublished(id);
+
   @GetReq(path: '/:id')
   Future<Program> getById(@PathParam() String id) => super.getById(id);
 

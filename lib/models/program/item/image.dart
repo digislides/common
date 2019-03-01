@@ -97,7 +97,7 @@ class ImageItem implements PageItem {
   }
 
   String get imageUrl {
-    if(!isValidMediaUrl(url)) return 'none';
+    if (!isValidMediaUrl(url)) return 'none';
     return 'url($url)';
   }
 

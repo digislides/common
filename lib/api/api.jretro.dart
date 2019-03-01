@@ -46,6 +46,12 @@ abstract class _$ProgramApiClient implements ApiClient {
     await req.go(throwOnErr: true);
   }
 
+  Future<PublishedProgram> getPublished(String id) async {
+    var req =
+        base.get.path(basePath).path("/:id/published").pathParams("id", id);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
   Future<Program> getById(String id) async {
     var req = base.get.path(basePath).path("/:id").pathParams("id", id);
     return req.go(throwOnErr: true).map(decodeOne);

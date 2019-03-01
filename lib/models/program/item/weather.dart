@@ -93,6 +93,5 @@ class WeatherItem implements PageItem {
 
   static final serializer = WeatherItemSerializer();
 
-  void collectUrls(Map<String, bool> urls) {
-  }
+  void collectUrls(Map<String, bool> urls) {}
 }

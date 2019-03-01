@@ -142,6 +142,5 @@ class TextItem implements PageItem {
 
   static final serializer = TextItemSerializer();
 
-  void collectUrls(Map<String, bool> urls) {
-  }
+  void collectUrls(Map<String, bool> urls) {}
 }

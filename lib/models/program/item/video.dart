@@ -96,7 +96,7 @@ class VideoItem implements PageItem {
   }
 
   String get videoUrl {
-    if(!isValidMediaUrl(url)) return 'none';
+    if (!isValidMediaUrl(url)) return 'none';
     return 'url($url)';
   }
 

@@ -151,7 +151,7 @@ class Frame {
   static final serializer = FrameSerializer();
 
   void collectUrls(Map<String, bool> urls) {
-    for(Page page in pages) {
+    for (Page page in pages) {
       page.collectUrls(urls);
     }
   }

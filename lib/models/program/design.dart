@@ -92,7 +92,7 @@ class ProgramDesign {
   static final serializer = ProgramDesignSerializer();
 
   void collectUrls(Map<String, bool> urls) {
-    for(Frame frame in frames) {
+    for (Frame frame in frames) {
       frame.collectUrls(urls);
     }
   }
