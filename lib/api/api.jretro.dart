@@ -62,6 +62,11 @@ abstract class _$ProgramApiClient implements ApiClient {
     return req.go(throwOnErr: true).map(decodeList);
   }
 
+  Future<List<Program>> getRecent() async {
+    var req = base.get.path(basePath);
+    return req.go(throwOnErr: true).map(decodeList);
+  }
+
   Future<void> delete(String id) async {
     var req = base.delete.path(basePath).path("/:id").pathParams("id", id);
     await req.go(throwOnErr: true);

@@ -49,6 +49,9 @@ class ProgramApi extends ApiClient with _$ProgramApiClient {
   Future<List<Program>> getAll(@QueryParam() String search) =>
       super.getAll(search);
 
+  @GetReq()
+  Future<List<Program>> getRecent() => super.getRecent();
+
   @DeleteReq(path: '/:id')
   Future<void> delete(@PathParam() String id) => super.delete(id);
 
