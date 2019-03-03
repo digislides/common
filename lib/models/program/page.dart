@@ -72,28 +72,21 @@ class Page implements Sizable {
     items.add(item);
   }
 
-  /*
-  void fromMap(Map map) {
-    id = map['id'];
-    name = map['name'] ?? 'Page';
-    color = map['color'] ?? 'white';
-    image = map['image'];
-    fit = Fit.find(map['fit']);
-    duration = map['duration'] ?? 0;
-    // TODO transition
-    // TODO transitionDuration
-    items.assignAll(((map['items'] ?? <Map>[]) as List)
-        .map((m) {
-      if (m['type'] is int) {
-        return createItem(m['type'], m);
-      }
-      return null;
-    })
-        .where((v) => v is PageItem)
-        .toList()
-        .cast<PageItem>());
+  void removeItem(String itemId) {
+    items.removeWhere((item) => item.id == itemId);
   }
-  */
+
+  void moveItemTo(String itemId, int newPos) {
+    final item = items.firstWhere((i) => i.id == itemId, orElse: () => null);
+    int oldIndex = items.indexOf(item);
+    items[oldIndex] = null;
+    if (newPos < items.length) {
+      items.insert(newPos, item);
+    } else {
+      items.add(item);
+    }
+    items.removeWhere((p) => p == null);
+  }
 
   Map<String, dynamic> toJson() => serializer.toMap(this);
 
