@@ -28,6 +28,7 @@ class VideoItem implements PageItem {
   String url;
 
   Fit fit;
+
   final _rectChange = StreamController<Rectangle<int>>();
 
   Stream<Rectangle<int>> _rectStream;
@@ -83,8 +84,8 @@ class VideoItem implements PageItem {
       this.name: 'Video',
       int left: 0,
       int top: 0,
-      int width: 0,
-      int height: 0,
+      int width: 100,
+      int height: 100,
       this.color: 'transparent',
       this.url,
       this.fit: Fit.cover}) {
