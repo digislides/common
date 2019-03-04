@@ -50,6 +50,50 @@ class Fit {
   }
 }
 
+class VideoFit {
+  final int id;
+
+  final String name;
+
+  final String css;
+
+  const VideoFit._(this.id, this.name, this.css);
+
+  static const auto = const VideoFit._(0, 'Auto', 'scale-down');
+  static const contain = const VideoFit._(1, 'Contain', 'contain');
+  static const cover = const VideoFit._(2, 'Cover', 'cover');
+  static const fill = const VideoFit._(3, 'Fill', 'fill');
+  static const original = const VideoFit._(4, 'Original', 'none');
+
+  static List<VideoFit> get values => [auto, contain, cover, fill, original];
+
+  static const namedValues = {
+    'auto': auto,
+    'contain': contain,
+    'cover': cover,
+    'fill': fill,
+    'original': original,
+    'Auto': auto,
+    'Contain': contain,
+    'Cover': cover,
+    'Fill': fill,
+    'Original': original,
+  };
+
+  static VideoFit map(value) {
+    if (value is int) return values[value];
+    return namedValues[value];
+  }
+
+  static VideoFit find(index) {
+    if (index is int) {
+      if (index < 0 || index > 3) index = 0;
+      return values[index];
+    }
+    return auto;
+  }
+}
+
 class Align {
   final int id;
 

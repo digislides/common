@@ -27,7 +27,7 @@ class VideoItem implements PageItem {
 
   String url;
 
-  Fit fit;
+  VideoFit fit;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -88,7 +88,7 @@ class VideoItem implements PageItem {
       int height: 100,
       this.color: 'transparent',
       this.url,
-      this.fit: Fit.cover}) {
+      this.fit: VideoFit.auto}) {
     this.left = left;
     this.top = top;
     this.width = width;
@@ -98,7 +98,7 @@ class VideoItem implements PageItem {
 
   String get videoUrl {
     if (!isValidMediaUrl(url)) return 'none';
-    return 'url($url)';
+    return '$url';
   }
 
   Map<String, dynamic> toJson() => serializer.toMap(this);

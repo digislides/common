@@ -381,7 +381,7 @@ abstract class _$ImageItemSerializer implements Serializer<ImageItem> {
 }
 
 abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
-  final _fitFieldProcessor = const FitFieldProcessor();
+  final _videoFitFieldProcessor = const VideoFitFieldProcessor();
   @override
   Map<String, dynamic> toMap(VideoItem model) {
     if (model == null) return null;
@@ -391,7 +391,7 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'url', model.url);
-    setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
+    setMapValue(ret, 'fit', _videoFitFieldProcessor.serialize(model.fit));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
@@ -408,7 +408,7 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
     obj.name = map['name'] as String;
     obj.color = map['color'] as String;
     obj.url = map['url'] as String;
-    obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
+    obj.fit = _videoFitFieldProcessor.deserialize(map['fit'] as int);
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;

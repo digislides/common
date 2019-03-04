@@ -29,6 +29,19 @@ class FitFieldProcessor implements FieldProcessor<Fit, int> {
   int serialize(Fit value) => value?.id;
 }
 
+class VideoFitFieldProcessor implements FieldProcessor<VideoFit, int> {
+  const VideoFitFieldProcessor();
+
+  @override
+  VideoFit deserialize(int value) {
+    if (value == null) return VideoFit.values[0];
+    return VideoFit.values[value];
+  }
+
+  @override
+  int serialize(VideoFit value) => value?.id;
+}
+
 class AlignFieldProcessor implements FieldProcessor<Align, int> {
   const AlignFieldProcessor();
 
@@ -136,7 +149,7 @@ class ImageItemSerializer extends Serializer<ImageItem>
 
 @GenSerializer(
     ignore: ['onRectChange'],
-    fields: {'fit': Field(processor: FitFieldProcessor())})
+    fields: {'fit': Field(processor: VideoFitFieldProcessor())})
 class VideoItemSerializer extends Serializer<VideoItem>
     with _$VideoItemSerializer {
   static final serializer = VideoItemSerializer();
