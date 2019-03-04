@@ -14,6 +14,7 @@ final repo = JsonRepo(serializers: [
   ChannelCreatorSerializer(),
   ChannelPublicSerializer(),
   ChannelSerializer(),
+  ChannelRunningSerializer(),
 ]);
 
 class FitFieldProcessor implements FieldProcessor<Fit, int> {
@@ -171,6 +172,10 @@ class WeatherItemSerializer extends Serializer<WeatherItem>
 
 @GenSerializer()
 class ChannelSerializer extends Serializer<Channel> with _$ChannelSerializer {}
+
+@GenSerializer()
+class ChannelRunningSerializer extends Serializer<ChannelRunning>
+    with _$ChannelRunningSerializer {}
 
 @GenSerializer()
 class ChannelPublicSerializer extends Serializer<ChannelPublic>

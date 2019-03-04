@@ -122,4 +122,13 @@ abstract class _$ChannelApiClient implements ApiClient {
     var req = base.get.path(basePath).path("/:id/content").pathParams("id", id);
     return req.go(throwOnErr: true).map(decodeOne);
   }
+
+  Future<void> setPlaying(String id, String running) async {
+    var req = base.put
+        .path(basePath)
+        .path("/:id/playing")
+        .pathParams("id", id)
+        .query("running", running);
+    await req.go(throwOnErr: true);
+  }
 }

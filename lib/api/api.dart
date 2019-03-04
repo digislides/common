@@ -98,4 +98,9 @@ class ChannelApi extends ApiClient with _$ChannelApiClient {
   @GetReq(path: '/:id/content')
   Future<PublishedProgram> getContent(@PathParam() String id) =>
       super.getContent(id);
+
+  @PutReq(path: '/:id/playing')
+  Future<void> setPlaying(
+          @PathParam() String id, @QueryParam() String running) =>
+      super.setPlaying(id, running);
 }

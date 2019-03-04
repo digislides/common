@@ -494,6 +494,9 @@ abstract class _$WeatherItemSerializer implements Serializer<WeatherItem> {
 }
 
 abstract class _$ChannelSerializer implements Serializer<Channel> {
+  Serializer<ChannelRunning> __channelRunningSerializer;
+  Serializer<ChannelRunning> get _channelRunningSerializer =>
+      __channelRunningSerializer ??= new ChannelRunningSerializer();
   @override
   Map<String, dynamic> toMap(Channel model) {
     if (model == null) return null;
@@ -503,6 +506,7 @@ abstract class _$ChannelSerializer implements Serializer<Channel> {
     setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'program', model.program);
+    setMapValue(ret, 'running', _channelRunningSerializer.toMap(model.running));
     return ret;
   }
 
@@ -515,17 +519,43 @@ abstract class _$ChannelSerializer implements Serializer<Channel> {
     obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.name = map['name'] as String;
     obj.program = map['program'] as String;
+    obj.running = _channelRunningSerializer.fromMap(map['running'] as Map);
+    return obj;
+  }
+}
+
+abstract class _$ChannelRunningSerializer
+    implements Serializer<ChannelRunning> {
+  @override
+  Map<String, dynamic> toMap(ChannelRunning model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'running', model.running);
+    setMapValue(ret, 'when', dateTimeUtcProcessor.serialize(model.when));
+    return ret;
+  }
+
+  @override
+  ChannelRunning fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new ChannelRunning();
+    obj.running = map['running'] as String;
+    obj.when = dateTimeUtcProcessor.deserialize(map['when'] as String);
     return obj;
   }
 }
 
 abstract class _$ChannelPublicSerializer implements Serializer<ChannelPublic> {
+  Serializer<ChannelRunning> __channelRunningSerializer;
+  Serializer<ChannelRunning> get _channelRunningSerializer =>
+      __channelRunningSerializer ??= new ChannelRunningSerializer();
   @override
   Map<String, dynamic> toMap(ChannelPublic model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'running', _channelRunningSerializer.toMap(model.running));
     return ret;
   }
 
@@ -535,6 +565,7 @@ abstract class _$ChannelPublicSerializer implements Serializer<ChannelPublic> {
     final obj = new ChannelPublic();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.running = _channelRunningSerializer.fromMap(map['running'] as Map);
     return obj;
   }
 }

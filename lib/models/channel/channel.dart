@@ -2,6 +2,16 @@ import 'package:common/models/has_access.dart';
 
 import 'package:common/serializer/serializer.dart';
 
+class ChannelRunning {
+  String running;
+
+  DateTime when;
+
+  ChannelRunning({this.running, this.when});
+
+  static final serializer = ChannelRunningSerializer();
+}
+
 class Channel extends HasAccess {
   String id;
 
@@ -12,6 +22,8 @@ class Channel extends HasAccess {
   String name;
 
   String program;
+
+  ChannelRunning running;
 
   Channel({this.id, this.name, this.program});
 
@@ -45,6 +57,8 @@ class ChannelPublic {
   String id;
 
   String name;
+
+  ChannelRunning running;
 
   ChannelPublic({this.id, this.name});
 
