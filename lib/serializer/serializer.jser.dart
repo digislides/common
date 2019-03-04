@@ -420,6 +420,7 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
 }
 
 abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
+  final _durationProcessor = const DurationProcessor();
   @override
   Map<String, dynamic> toMap(ClockItem model) {
     if (model == null) return null;
@@ -428,7 +429,7 @@ abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'color', model.color);
-    setMapValue(ret, 'timezone', model.timezone);
+    setMapValue(ret, 'timezone', _durationProcessor.serialize(model.timezone));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
@@ -443,7 +444,7 @@ abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
     obj.color = map['color'] as String;
-    obj.timezone = map['timezone'] as int;
+    obj.timezone = _durationProcessor.deserialize(map['timezone'] as int);
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;

@@ -21,7 +21,7 @@ class ClockItem implements PageItem {
 
   String color;
 
-  int timezone;
+  Duration timezone;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -91,7 +91,7 @@ class ClockItem implements PageItem {
     int top: 0,
     int size: 100,
     this.color: 'transparent',
-    this.timezone: 0,
+    this.timezone: const Duration(),
   }) {
     this.left = left;
     this.top = top;
