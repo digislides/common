@@ -428,12 +428,17 @@ abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
-    setMapValue(ret, 'color', model.color);
-    setMapValue(ret, 'timezone', _durationProcessor.serialize(model.timezone));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
+    setMapValue(ret, 'color', model.color);
+    setMapValue(ret, 'url', model.url);
+    setMapValue(ret, 'textColor', model.textColor);
+    setMapValue(ret, 'hourColor', model.hourColor);
+    setMapValue(ret, 'minuteColor', model.minuteColor);
+    setMapValue(ret, 'timezone', _durationProcessor.serialize(model.timezone));
+    setMapValue(ret, 'imageUrl', model.imageUrl);
     return ret;
   }
 
@@ -443,12 +448,16 @@ abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
     final obj = new ClockItem();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
-    obj.color = map['color'] as String;
-    obj.timezone = _durationProcessor.deserialize(map['timezone'] as int);
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
+    obj.color = map['color'] as String;
+    obj.url = map['url'] as String;
+    obj.textColor = map['textColor'] as String;
+    obj.hourColor = map['hourColor'] as String;
+    obj.minuteColor = map['minuteColor'] as String;
+    obj.timezone = _durationProcessor.deserialize(map['timezone'] as int);
     return obj;
   }
 }

@@ -156,7 +156,7 @@ class VideoItemSerializer extends Serializer<VideoItem>
 }
 
 @GenSerializer(
-    ignore: ['onRectChange', 'size'],
+    ignore: ['onRectChange', 'onViewChange', 'size'],
     fields: {'timezone': EnDecode(processor: DurationProcessor())})
 class ClockItemSerializer extends Serializer<ClockItem>
     with _$ClockItemSerializer {

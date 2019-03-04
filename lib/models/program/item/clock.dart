@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/utils/url.dart';
+
 /// Represents an image embedded in a page
 class ClockItem implements PageItem {
   String id;
@@ -19,9 +21,17 @@ class ClockItem implements PageItem {
 
   int _size = 0;
 
-  String color;
+  String _color;
 
-  Duration timezone;
+  String _url;
+
+  String _textColor;
+
+  String _hourColor;
+
+  String _minuteColor;
+
+  Duration _timezone;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -84,19 +94,80 @@ class ClockItem implements PageItem {
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
+  final _viewChange = StreamController<Null>();
+
+  Stream<Null> _viewStream;
+
+  Stream<Null> get onViewChange => _viewStream;
+
+  String get color => _color;
+
+  set color(String value) {
+    _color = value;
+    _viewChange.add(null);
+  }
+
+  String get url => _url;
+
+  set url(String value) {
+    _url = value;
+    _viewChange.add(null);
+  }
+
+  String get textColor => _textColor;
+
+  set textColor(String value) {
+    _textColor = value;
+    _viewChange.add(null);
+  }
+
+  String get hourColor => _hourColor;
+
+  set hourColor(String value) {
+    _hourColor = value;
+    _viewChange.add(null);
+  }
+
+  String get minuteColor => _minuteColor;
+
+  set minuteColor(String value) {
+    _minuteColor = value;
+    _viewChange.add(null);
+  }
+
+  Duration get timezone => _timezone;
+
+  set timezone(Duration value) {
+    _timezone = value;
+    _viewChange.add(null);
+  }
+
   ClockItem({
     this.id,
     this.name: 'Clock',
     int left: 0,
     int top: 0,
     int size: 100,
-    this.color: 'transparent',
-    this.timezone: const Duration(),
+    String color: 'transparent',
+    String textColor: 'black',
+    String hourColor: 'black',
+    String minuteColor: 'black',
+    String url: 'none',
+    Duration timezone: const Duration(),
   }) {
     this.left = left;
     this.top = top;
     this.size = size;
+
+    this.color = color;
+    this.textColor = textColor;
+    this.hourColor = hourColor;
+    this.minuteColor = minuteColor;
+    this.url = url;
+    this.timezone = timezone;
+
     _rectStream = _rectChange.stream.asBroadcastStream();
+    _viewStream = _viewChange.stream.asBroadcastStream();
   }
 
   Map<String, dynamic> toJson() => serializer.toMap(this);
@@ -105,5 +176,12 @@ class ClockItem implements PageItem {
 
   static final serializer = ClockItemSerializer();
 
-  void collectUrls(Map<String, bool> urls) {}
+  String get imageUrl {
+    if (!isValidMediaUrl(url)) return 'none';
+    return 'url($url)';
+  }
+
+  void collectUrls(Map<String, bool> urls) {
+    if (isDownloadableMediaUrl(url)) urls[url] = false;
+  }
 }
