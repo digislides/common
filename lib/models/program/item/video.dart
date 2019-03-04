@@ -29,6 +29,8 @@ class VideoItem implements PageItem {
 
   VideoFit fit;
 
+  bool muted;
+
   final _rectChange = StreamController<Rectangle<int>>();
 
   Stream<Rectangle<int>> _rectStream;
@@ -88,7 +90,8 @@ class VideoItem implements PageItem {
       int height: 100,
       this.color: 'transparent',
       this.url,
-      this.fit: VideoFit.auto}) {
+      this.fit: VideoFit.auto,
+      this.muted: true}) {
     this.left = left;
     this.top = top;
     this.width = width;

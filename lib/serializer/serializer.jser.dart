@@ -392,6 +392,7 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'url', model.url);
     setMapValue(ret, 'fit', _videoFitFieldProcessor.serialize(model.fit));
+    setMapValue(ret, 'muted', model.muted);
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
@@ -409,6 +410,7 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
     obj.color = map['color'] as String;
     obj.url = map['url'] as String;
     obj.fit = _videoFitFieldProcessor.deserialize(map['fit'] as int);
+    obj.muted = map['muted'] as bool;
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;
@@ -426,6 +428,7 @@ abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'color', model.color);
+    setMapValue(ret, 'timezone', model.timezone);
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
@@ -440,6 +443,7 @@ abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
     obj.color = map['color'] as String;
+    obj.timezone = map['timezone'] as int;
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;
