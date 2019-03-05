@@ -1,3 +1,5 @@
+import 'package:date_format/date_format.dart';
+
 import 'package:common/utils/id.dart';
 
 import 'package:common/models/program/design.dart';
@@ -25,6 +27,17 @@ class Program extends HasAccess {
   Program(
       {this.id, this.name: 'Program', this.design, this.owner, this.members}) {
     id ??= newId;
+  }
+
+  String publishedAtString() {
+    if (publishedAt == null) return "Not published yet!";
+    return formatDate(
+        publishedAt.toLocal(), [yyyy, '-', mm, '-', dd, ' ', hh, ':', nn]);
+  }
+
+  String publishString() {
+    if (publishedAt == null) return "none";
+    return '$id:${publishedAtString()}';
   }
 
   static final serializer = ProgramSerializer();
