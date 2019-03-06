@@ -1,6 +1,7 @@
 import 'package:date_format/date_format.dart';
 
 import 'package:common/utils/id.dart';
+import 'package:common/utils/published_at_format.dart';
 
 import 'package:common/models/program/design.dart';
 import 'package:common/models/has_access.dart';
@@ -29,14 +30,17 @@ class Program extends HasAccess {
     id ??= newId;
   }
 
+  String publishVersion() {
+    if (publishedAt == null) return "$id:None";
+    return '$id:${publishedAtDateToHuman(publishedAt)}';
+  }
+
   String publishedAtString() {
-    if (publishedAt == null) return "Not published yet!";
-    return formatDate(
-        publishedAt.toLocal(), [yyyy, '-', mm, '-', dd, ' ', hh, ':', nn]);
+    if (publishedAt == null) return "None";
+    return dateToHuman(publishedAt);
   }
 
   String publishString() {
-    if (publishedAt == null) return "none";
     return '$id:${publishedAtString()}';
   }
 

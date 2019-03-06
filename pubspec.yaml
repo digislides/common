@@ -8,8 +8,8 @@ environment:
   sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
-  jaguar_serializer: ^2.2.6
-  # crossplat_objectid:
+  jaguar_serializer: ^2.2.10
+  crossplat_objectid:
   jaguar_retrofit:
   date_format: ^1.0.6
 

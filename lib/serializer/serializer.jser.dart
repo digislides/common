@@ -94,7 +94,7 @@ abstract class _$ProgramCreatorSerializer
 }
 
 abstract class _$ProgramSerializer implements Serializer<Program> {
-  final _millisecondsProcessor = const MillisecondsProcessor();
+  final _seconds2019Processor = const Seconds2019Processor();
   Serializer<ProgramDesign> __programDesignSerializer;
   Serializer<ProgramDesign> get _programDesignSerializer =>
       __programDesignSerializer ??= new ProgramDesignSerializer();
@@ -107,8 +107,8 @@ abstract class _$ProgramSerializer implements Serializer<Program> {
     setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'design', _programDesignSerializer.toMap(model.design));
-    setMapValue(ret, 'publishedAt',
-        _millisecondsProcessor.serialize(model.publishedAt));
+    setMapValue(
+        ret, 'publishedAt', _seconds2019Processor.serialize(model.publishedAt));
     setMapValue(
         ret, 'published', _programDesignSerializer.toMap(model.published));
     return ret;
@@ -124,7 +124,7 @@ abstract class _$ProgramSerializer implements Serializer<Program> {
     obj.name = map['name'] as String;
     obj.design = _programDesignSerializer.fromMap(map['design'] as Map);
     obj.publishedAt =
-        _millisecondsProcessor.deserialize(map['publishedAt'] as int);
+        _seconds2019Processor.deserialize(map['publishedAt'] as int);
     obj.published = _programDesignSerializer.fromMap(map['published'] as Map);
     return obj;
   }

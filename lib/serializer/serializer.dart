@@ -1,6 +1,7 @@
 import 'package:jaguar_serializer/jaguar_serializer.dart';
 
 import 'package:common/models/models.dart';
+import 'package:common/utils/published_at_format.dart';
 
 part 'serializer.jser.dart';
 
@@ -16,6 +17,21 @@ final repo = JsonRepo(serializers: [
   ChannelSerializer(),
   ChannelRunningSerializer(),
 ]);
+
+class Seconds2019Processor implements FieldProcessor<DateTime, int> {
+  const Seconds2019Processor();
+
+  int serialize(DateTime value) {
+    if (value == null) return null;
+    return (value.toUtc().difference(refDate)).inSeconds;
+  }
+
+  @override
+  DateTime deserialize(int value) {
+    if (value == null) return null;
+    return refDate.add(Duration(seconds: value));
+  }
+}
 
 class FitFieldProcessor implements FieldProcessor<Fit, int> {
   const FitFieldProcessor();
@@ -79,7 +95,7 @@ class ProgramCreatorSerializer extends Serializer<ProgramCreator>
 
 @GenSerializer(
   fields: {
-    'publishedAt': Field(processor: MillisecondsProcessor()),
+    'publishedAt': Field(processor: Seconds2019Processor()),
   },
 )
 class ProgramSerializer extends Serializer<Program> with _$ProgramSerializer {}

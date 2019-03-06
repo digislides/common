@@ -10,6 +10,10 @@ class ChannelRunning {
   ChannelRunning({this.running, this.when});
 
   static final serializer = ChannelRunningSerializer();
+
+  Map<String, dynamic> toJson() => serializer.toMap(this);
+
+  String toString() => toJson().toString();
 }
 
 class Channel extends HasAccess {
