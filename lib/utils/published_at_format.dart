@@ -26,7 +26,7 @@ String publishedAtHumanToString(String human) {
 
 String versionToHuman(String str) {
   if (str == null) return "None";
-  if (str == null) return "None";
+  if (str == "None") return "None";
 
   final parts = str.split(":");
 
