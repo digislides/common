@@ -202,4 +202,25 @@ class WeatherIconType {
     "13n": WeatherIconType.snowNight,
     "50n": WeatherIconType.mistNight,
   };
+
+  static final labels = <String>[
+    WeatherIconType.clearSky.name,
+    WeatherIconType.fewClouds.name,
+    WeatherIconType.scatteredClouds.name,
+    WeatherIconType.brokenClouds.name,
+    WeatherIconType.showerRain.name,
+    WeatherIconType.rain.name,
+    WeatherIconType.thunderstorm.name,
+    WeatherIconType.snow.name,
+    WeatherIconType.mist.name,
+    WeatherIconType.clearSkyNight.name,
+    WeatherIconType.fewCloudsNight.name,
+    WeatherIconType.scatteredCloudsNight.name,
+    WeatherIconType.brokenCloudsNight.name,
+    WeatherIconType.showerRainNight.name,
+    WeatherIconType.rainNight.name,
+    WeatherIconType.thunderstormNight.name,
+    WeatherIconType.snowNight.name,
+    WeatherIconType.mistNight.name,
+  ];
 }

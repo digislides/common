@@ -46,6 +46,20 @@ class WeatherThemeProcessor implements FieldProcessor<WeatherTheme, int> {
   int serialize(WeatherTheme value) => value?.id;
 }
 
+class WeatherIconTypeProcessor
+    implements FieldProcessor<WeatherIconType, String> {
+  const WeatherIconTypeProcessor();
+
+  @override
+  WeatherIconType deserialize(String value) {
+    if (value == null) return WeatherIconType.clearSky;
+    return WeatherIconType.values[value];
+  }
+
+  @override
+  String serialize(WeatherIconType value) => value?.id;
+}
+
 class FitFieldProcessor implements FieldProcessor<Fit, int> {
   const FitFieldProcessor();
 
@@ -193,9 +207,14 @@ class ClockItemSerializer extends Serializer<ClockItem>
   static final serializer = ClockItemSerializer();
 }
 
-@GenSerializer(
-    ignore: ['onRectChange', 'onViewChange', 'size'],
-    fields: {'theme': EnDecode(processor: WeatherThemeProcessor())})
+@GenSerializer(ignore: [
+  'onRectChange',
+  'onViewChange',
+  'size'
+], fields: {
+  'theme': EnDecode(processor: WeatherThemeProcessor()),
+  'dummy': EnDecode(processor: WeatherIconTypeProcessor())
+})
 class WeatherItemSerializer extends Serializer<WeatherItem>
     with _$WeatherItemSerializer {
   static final serializer = WeatherItemSerializer();
