@@ -4,6 +4,31 @@ import 'dart:math';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
+class WeatherTheme {
+  final int id;
+  final String label;
+  final String css;
+
+  const WeatherTheme._(this.id, this.label, this.css);
+
+  String toString() => label;
+
+  static const flatFilled = const WeatherTheme._(0, "Flat filled", 'wi-flat');
+  static const flatThin = const WeatherTheme._(1, "Flat thin", 'wi-flat-thin');
+
+  static const values = <WeatherTheme>[flatFilled, flatThin];
+
+  static const map = {
+    "Flat filled": flatFilled,
+    "Flat thin": flatThin,
+  };
+
+  static final labels = <String>[
+    flatFilled.label,
+    flatThin.label,
+  ];
+}
+
 /// Represents an image embedded in a page
 class WeatherItem implements PageItem {
   String id;
@@ -20,6 +45,10 @@ class WeatherItem implements PageItem {
   int _size = 0;
 
   String color;
+
+  WeatherTheme theme;
+
+  WeatherIconType dummy;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -71,19 +100,30 @@ class WeatherItem implements PageItem {
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
+  int get size => _size;
+
+  set size(dynamic value) {
+    if (value is String) {
+      _size = int.tryParse(value) ?? 0;
+    } else {
+      _size = value;
+    }
+    _rectChange.add(Rectangle<int>(left, top, width, height));
+  }
+
   WeatherItem({
     this.id,
     this.name: 'Weather',
     int left: 0,
     int top: 0,
-    int width: 100,
-    int height: 100,
-    this.color: 'transparent',
+    int size: 100,
+    this.color: 'black',
+    this.theme: WeatherTheme.flatFilled,
+    this.dummy: WeatherIconType.clearSky,
   }) {
     this.left = left;
     this.top = top;
-    this.width = width;
-    this.height = height;
+    this.size = size;
     _rectStream = _rectChange.stream.asBroadcastStream();
   }
 
@@ -94,4 +134,72 @@ class WeatherItem implements PageItem {
   static final serializer = WeatherItemSerializer();
 
   void collectUrls(Map<String, bool> urls) {}
+}
+
+class WeatherIconType {
+  final String id;
+
+  final String name;
+
+  const WeatherIconType(this.id, this.name);
+
+  String get css => 'wi-$id';
+
+  static const clearSky = WeatherIconType("01d", "Clear sky");
+
+  static const fewClouds = WeatherIconType("02d", "Few clouds");
+
+  static const scatteredClouds = WeatherIconType("03d", "Scattered clouds");
+
+  static const brokenClouds = WeatherIconType("04d", "Broken clouds");
+
+  static const showerRain = WeatherIconType("09d", "Shower rain");
+
+  static const rain = WeatherIconType("10d", "Rain");
+
+  static const thunderstorm = WeatherIconType("11d", "Thunderstorm");
+
+  static const snow = WeatherIconType("13d", "Snow");
+
+  static const mist = WeatherIconType("50d", "mist");
+
+  static const clearSkyNight = WeatherIconType("01n", "Clear sky");
+
+  static const fewCloudsNight = WeatherIconType("02n", "Few clouds");
+
+  static const scatteredCloudsNight =
+      WeatherIconType("03n", "Scattered clouds");
+
+  static const brokenCloudsNight = WeatherIconType("04n", "Broken clouds");
+
+  static const showerRainNight = WeatherIconType("09n", "Shower rain");
+
+  static const rainNight = WeatherIconType("10n", "Rain");
+
+  static const thunderstormNight = WeatherIconType("11n", "Thunderstorm");
+
+  static const snowNight = WeatherIconType("13n", "Snow");
+
+  static const mistNight = WeatherIconType("50n", "mist");
+
+  static const values = <String, WeatherIconType>{
+    "01d": WeatherIconType.clearSky,
+    "02d": WeatherIconType.fewClouds,
+    "03d": WeatherIconType.scatteredClouds,
+    "04d": WeatherIconType.brokenClouds,
+    "09d": WeatherIconType.showerRain,
+    "10d": WeatherIconType.rain,
+    "11d": WeatherIconType.thunderstorm,
+    "13d": WeatherIconType.snow,
+    "50d": WeatherIconType.mist,
+    "01n": WeatherIconType.clearSkyNight,
+    "02n": WeatherIconType.fewCloudsNight,
+    "03n": WeatherIconType.scatteredCloudsNight,
+    "04n": WeatherIconType.brokenCloudsNight,
+    "09n": WeatherIconType.showerRainNight,
+    "10n": WeatherIconType.rainNight,
+    "11n": WeatherIconType.thunderstormNight,
+    "13n": WeatherIconType.snowNight,
+    "50n": WeatherIconType.mistNight,
+  };
 }

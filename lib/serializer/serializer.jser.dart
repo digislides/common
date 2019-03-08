@@ -463,6 +463,7 @@ abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
 }
 
 abstract class _$WeatherItemSerializer implements Serializer<WeatherItem> {
+  final _weatherThemeProcessor = const WeatherThemeProcessor();
   @override
   Map<String, dynamic> toMap(WeatherItem model) {
     if (model == null) return null;
@@ -471,6 +472,7 @@ abstract class _$WeatherItemSerializer implements Serializer<WeatherItem> {
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'color', model.color);
+    setMapValue(ret, 'theme', _weatherThemeProcessor.serialize(model.theme));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
@@ -485,6 +487,7 @@ abstract class _$WeatherItemSerializer implements Serializer<WeatherItem> {
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
     obj.color = map['color'] as String;
+    obj.theme = _weatherThemeProcessor.deserialize(map['theme'] as int);
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;

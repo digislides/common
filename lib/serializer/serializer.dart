@@ -33,6 +33,19 @@ class Seconds2019Processor implements FieldProcessor<DateTime, int> {
   }
 }
 
+class WeatherThemeProcessor implements FieldProcessor<WeatherTheme, int> {
+  const WeatherThemeProcessor();
+
+  @override
+  WeatherTheme deserialize(int value) {
+    if (value == null) return WeatherTheme.values[0];
+    return WeatherTheme.values[value];
+  }
+
+  @override
+  int serialize(WeatherTheme value) => value?.id;
+}
+
 class FitFieldProcessor implements FieldProcessor<Fit, int> {
   const FitFieldProcessor();
 
@@ -180,7 +193,9 @@ class ClockItemSerializer extends Serializer<ClockItem>
   static final serializer = ClockItemSerializer();
 }
 
-@GenSerializer(ignore: ['onRectChange'], fields: {})
+@GenSerializer(
+    ignore: ['onRectChange', 'onViewChange', 'size'],
+    fields: {'theme': EnDecode(processor: WeatherThemeProcessor())})
 class WeatherItemSerializer extends Serializer<WeatherItem>
     with _$WeatherItemSerializer {
   static final serializer = WeatherItemSerializer();
