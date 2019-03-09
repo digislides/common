@@ -12,6 +12,7 @@ dependencies:
   crossplat_objectid:
   jaguar_retrofit:
   date_format: ^1.0.6
+  open_weather_api:
 
 dev_dependencies:
   test: ^1.0.0
