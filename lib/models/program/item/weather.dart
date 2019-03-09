@@ -161,7 +161,7 @@ class WeatherIconType {
 
   static const snow = WeatherIconType("13d", "Snow");
 
-  static const mist = WeatherIconType("50d", "mist");
+  static const mist = WeatherIconType("50d", "Mist");
 
   static const clearSkyNight = WeatherIconType("01n", "Clear sky");
 
@@ -180,7 +180,7 @@ class WeatherIconType {
 
   static const snowNight = WeatherIconType("13n", "Snow");
 
-  static const mistNight = WeatherIconType("50n", "mist");
+  static const mistNight = WeatherIconType("50n", "Mist");
 
   static const values = <String, WeatherIconType>{
     "01d": WeatherIconType.clearSky,
