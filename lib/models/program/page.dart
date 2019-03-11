@@ -5,6 +5,8 @@ import 'package:common/models/program/program.dart';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/data_text/data_text.dart';
+
 export 'package:common/models/program/item/item.dart';
 
 abstract class Sizable {
@@ -33,6 +35,8 @@ class Page implements Sizable {
 
   num transitionDuration;
 
+  final DataRepository dataRepository;
+
   final items = <PageItem>[];
 
   Page({
@@ -47,6 +51,7 @@ class Page implements Sizable {
     this.transition: 0,
     this.transitionDuration: 0,
     List<PageItem> items,
+    this.dataRepository,
   }) {
     if (items != null) this.items.addAll(items);
     this._duration = duration;

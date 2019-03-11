@@ -9,9 +9,9 @@ main() async {
   globalClient = IOClient();
 
   final authApi =
-      AuthApi(Route("http://localhost:10000/api").before(cookieJar));
+      AuthApi(Route("http://localhost:10000").before(cookieJar));
   final programApi =
-      ProgramApi(Route("http://localhost:10000/api").before(cookieJar));
+      ProgramApi(Route("http://localhost:10000").before(cookieJar));
 
   await authApi
       .login(Login(username: 'tejainece@gmail.com', password: 's3cr3t'));

@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/data_text/data_text.dart';
+
 class FontProperties {
   /// Size of the font
   int _size;
@@ -64,9 +66,11 @@ class TextItem implements PageItem {
 
   String color;
 
-  String text;
+  String _text;
 
   final FontProperties font;
+
+  final DataRepository dataRepository;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -118,6 +122,19 @@ class TextItem implements PageItem {
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
+  DataText _dataText;
+
+  String get text => _text;
+
+  set text(String value) {
+    _text = value;
+    _dataText = DataText.parse(_text);
+  }
+
+  String get linkedText {
+    return _dataText.substitute(dataRepository);
+  }
+
   TextItem(
       {this.id,
       this.name: 'New text',
@@ -126,13 +143,15 @@ class TextItem implements PageItem {
       int width: 50,
       int height: 40,
       this.color: 'transparent',
-      this.text: 'Text',
-      FontProperties font})
+      String text: 'Text',
+      FontProperties font,
+      this.dataRepository})
       : font = font ?? FontProperties() {
     this.left = left;
     this.top = top;
     this.width = width;
     this.height = height;
+    this.text = text;
     _rectStream = _rectChange.stream.asBroadcastStream();
   }
 

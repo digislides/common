@@ -3,6 +3,8 @@ import 'page.dart';
 
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/data_text/data_text.dart';
+
 export 'frame.dart';
 export 'page.dart';
 
@@ -15,8 +17,14 @@ class ProgramDesign {
 
   String color;
 
+  final DataRepository dataRepository;
+
   ProgramDesign(
-      {int width: 0, int height: 0, this.frames, this.color: 'transparent'}) {
+      {int width: 0,
+      int height: 0,
+      this.frames,
+      this.color: 'transparent',
+      this.dataRepository}) {
     frames ??= <Frame>[];
     this.width = width;
     this.height = height;
@@ -46,7 +54,6 @@ class ProgramDesign {
           {String id,
           String name: 'New frame',
           List<Page> pages,
-          bool fullview: false,
           int left: 0,
           int top: 0,
           int width,
@@ -61,7 +68,8 @@ class ProgramDesign {
           top: top,
           width: width ?? this.width,
           height: height ?? this.height,
-          image: image));
+          image: image,
+          dataRepository: dataRepository));
 
   void removeFrame(String id) {
     frames.removeWhere((f) => f.id == id);

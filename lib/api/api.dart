@@ -4,7 +4,7 @@ import 'package:common/serializer/serializer.dart';
 
 part 'api.jretro.dart';
 
-@GenApiClient(path: '/auth')
+@GenApiClient(path: '/api/auth')
 class AuthApi extends ApiClient with _$AuthApiClient {
   final Route base;
 
@@ -19,7 +19,7 @@ class AuthApi extends ApiClient with _$AuthApiClient {
   Future<StringResponse> login(@AsJson() Login model) => super.login(model);
 }
 
-@GenApiClient(path: '/program')
+@GenApiClient(path: '/api/program')
 class ProgramApi extends ApiClient with _$ProgramApiClient {
   final Route base;
 
@@ -64,7 +64,7 @@ class ProgramApi extends ApiClient with _$ProgramApiClient {
   // TODO duplicate
 }
 
-@GenApiClient(path: '/channel')
+@GenApiClient(path: '/api/channel')
 class ChannelApi extends ApiClient with _$ChannelApiClient {
   final Route base;
 
@@ -103,4 +103,21 @@ class ChannelApi extends ApiClient with _$ChannelApiClient {
   Future<void> setPlaying(
           @PathParam() String id, @QueryParam() String running) =>
       super.setPlaying(id, running);
+}
+
+@GenApiClient(path: '/api/data/weather')
+class WeatherApi extends ApiClient with _$WeatherApiClient {
+  final Route base;
+
+  WeatherApi(this.base) {
+    jsonConverter = repo;
+  }
+
+  @GetReq(path: '/current/:place')
+  Future<Weather> getByName(@PathParam() String place) =>
+      super.getByName(place);
+
+  @GetReq(path: '/hourly/:place')
+  Future<HourlyForecasts> getHourlyByName(@PathParam() String place) =>
+      super.getHourlyByName(place);
 }

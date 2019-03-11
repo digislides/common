@@ -5,6 +5,8 @@ import 'package:common/utils/id.dart';
 import 'package:common/models/program/page.dart';
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/data_text/data_text.dart';
+
 class Frame {
   String id;
 
@@ -22,6 +24,8 @@ class Frame {
 
   String image;
 
+  final DataRepository dataRepository;
+
   Frame({
     this.id,
     this.name: 'Frame',
@@ -31,6 +35,7 @@ class Frame {
     int width: 0,
     int height: 0,
     this.image,
+    this.dataRepository,
   }) {
     id ??= newId;
     pages ??= <Page>[];

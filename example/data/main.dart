@@ -2,7 +2,7 @@ import 'package:common/data_text/data_text.dart';
 
 import 'package:open_weather_api/simple.dart';
 
-class WeatherData extends Data {
+class WeatherData extends DataSource {
   final List<String> template = ['weather', ':place', ':param'];
 
   final weathers = <String, Weather>{};
@@ -26,7 +26,7 @@ class WeatherData extends Data {
 }
 
 main() {
-  final data = ParsedDataText.parse("""
+  final data = DataText.parse("""
 Stockholm {{ weather/Stockholm/temperature }} *C
 Berlin    {{ weather/Berlin/temperature }} *C""");
 

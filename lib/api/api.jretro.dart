@@ -132,3 +132,22 @@ abstract class _$ChannelApiClient implements ApiClient {
     await req.go(throwOnErr: true);
   }
 }
+
+abstract class _$WeatherApiClient implements ApiClient {
+  final String basePath = "/data/weather";
+  Future<Weather> getByName(String place) async {
+    var req = base.get
+        .path(basePath)
+        .path("/current/:place")
+        .pathParams("place", place);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<HourlyForecasts> getHourlyByName(String place) async {
+    var req = base.get
+        .path(basePath)
+        .path("/hourly/:place")
+        .pathParams("place", place);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+}

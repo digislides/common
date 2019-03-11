@@ -59,12 +59,12 @@ class DataLink {
   }
 }
 
-class ParsedDataText {
+class DataText {
   final List<dynamic> elements;
 
-  ParsedDataText(this.elements);
+  DataText(this.elements);
 
-  static ParsedDataText parse(String str) {
+  static DataText parse(String str) {
     final regex = RegExp("\{\{.*\}\}");
     final matches = regex.allMatches(str);
 
@@ -80,7 +80,7 @@ class ParsedDataText {
       elements.add(DataLink.parse(decl));
     }
     elements.add(str.substring(index));
-    return ParsedDataText(elements);
+    return DataText(elements);
   }
 
   String substitute(DataRepository repo) {
@@ -97,12 +97,12 @@ class ParsedDataText {
   }
 }
 
-abstract class Data {
+abstract class DataSource {
   final _paramsPos = <String, int>{};
 
   List<String> get template;
 
-  Data() {
+  DataSource() {
     for (int i = 0; i < template.length; i++) {
       String param = template[i];
       if (!param.startsWith(":")) continue;
@@ -132,7 +132,7 @@ abstract class Data {
 }
 
 class DataRepository {
-  final List<Data> sources;
+  final List<DataSource> sources;
 
   DataRepository(this.sources);
 

@@ -1,7 +1,9 @@
 import 'package:jaguar_serializer/jaguar_serializer.dart';
+import 'package:open_weather_api/simple.dart';
 
 import 'package:common/models/models.dart';
 import 'package:common/utils/published_at_format.dart';
+export 'package:open_weather_api/simple.dart';
 
 part 'serializer.jser.dart';
 
@@ -16,6 +18,9 @@ final repo = JsonRepo(serializers: [
   ChannelPublicSerializer(),
   ChannelSerializer(),
   ChannelRunningSerializer(),
+  SimpleWeatherSerializer(),
+  SimpleHourlyForecastsSerializer(),
+  // TODO daily forecasts
 ]);
 
 class Seconds2019Processor implements FieldProcessor<DateTime, int> {
