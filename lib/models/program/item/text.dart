@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
-import 'package:common/data_text/data_text.dart';
+import 'package:common/data_text/data_repo.dart';
 
 class FontProperties {
   /// Size of the font
@@ -70,7 +70,7 @@ class TextItem implements PageItem {
 
   final FontProperties font;
 
-  final DataRepository dataRepository;
+  DataRepository dataRepository;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -135,18 +135,18 @@ class TextItem implements PageItem {
     return _dataText.substitute(dataRepository);
   }
 
-  TextItem(
-      {this.id,
-      this.name: 'New text',
-      int left: 0,
-      int top: 0,
-      int width: 50,
-      int height: 40,
-      this.color: 'transparent',
-      String text: 'Text',
-      FontProperties font,
-      this.dataRepository})
-      : font = font ?? FontProperties() {
+  TextItem({
+    this.id,
+    this.name: 'New text',
+    int left: 0,
+    int top: 0,
+    int width: 50,
+    int height: 40,
+    this.color: 'transparent',
+    String text: 'Text',
+    FontProperties font,
+    this.dataRepository,
+  }) : font = font ?? FontProperties() {
     this.left = left;
     this.top = top;
     this.width = width;

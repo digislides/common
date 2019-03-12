@@ -4,6 +4,16 @@ import 'package:common/serializer/serializer.dart';
 
 part 'api.jretro.dart';
 
+final base = Route("");
+
+final authApi = AuthApi(base);
+
+final programApi = ProgramApi(base);
+
+final channelApi = ChannelApi(base);
+
+final weatherApi = WeatherApi(base);
+
 @GenApiClient(path: '/api/auth')
 class AuthApi extends ApiClient with _$AuthApiClient {
   final Route base;

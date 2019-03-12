@@ -1,4 +1,4 @@
-import 'package:common/data_text/data_text.dart';
+import 'package:common/data_text/data_repo.dart';
 
 import 'package:open_weather_api/simple.dart';
 

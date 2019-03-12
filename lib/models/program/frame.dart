@@ -5,14 +5,14 @@ import 'package:common/utils/id.dart';
 import 'package:common/models/program/page.dart';
 import 'package:common/serializer/serializer.dart';
 
-import 'package:common/data_text/data_text.dart';
+import 'package:common/data_text/data_repo.dart';
 
 class Frame {
   String id;
 
   String name;
 
-  List<Page> pages;
+  final pages = <Page>[];
 
   int _left = 0;
 
@@ -24,12 +24,12 @@ class Frame {
 
   String image;
 
-  final DataRepository dataRepository;
+  DataRepository dataRepository;
 
   Frame({
     this.id,
     this.name: 'Frame',
-    this.pages,
+    List<Page> pages,
     int left: 0,
     int top: 0,
     int width: 0,
@@ -38,13 +38,17 @@ class Frame {
     this.dataRepository,
   }) {
     id ??= newId;
-    pages ??= <Page>[];
+    if (pages != null) this.pages.addAll(pages);
     this.left = left;
     this.top = top;
     this.width = width;
     this.height = height;
 
     _rectStream = _rectChange.stream.asBroadcastStream();
+
+    for (Page page in pages) {
+      page.dataRepository = dataRepository;
+    }
   }
 
   final _rectChange = StreamController<Rectangle<int>>();
@@ -100,7 +104,12 @@ class Frame {
   }
 
   void addNewPage({String name: 'New page'}) {
-    pages.add(Page(id: newId, name: name, width: width, height: height));
+    pages.add(Page(
+        id: newId,
+        name: name,
+        width: width,
+        height: height,
+        dataRepository: dataRepository));
   }
 
   void removePage(String id) {
@@ -133,21 +142,6 @@ class Frame {
     }
     pages.removeWhere((p) => p == null);
   }
-
-  void newPage(
-          {String id,
-          String name: 'New page',
-          String color: 'white',
-          String image,
-          List<PageItem> items}) =>
-      pages.add(Page(
-          id: id,
-          name: name,
-          width: this.width,
-          height: this.height,
-          color: color,
-          image: image,
-          items: items));
 
   Map<String, dynamic> toJson() => serializer.toMap(this);
 

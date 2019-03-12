@@ -3,7 +3,7 @@ import 'page.dart';
 
 import 'package:common/serializer/serializer.dart';
 
-import 'package:common/data_text/data_text.dart';
+import 'package:common/data_text/data_repo.dart';
 
 export 'frame.dart';
 export 'page.dart';
@@ -13,21 +13,25 @@ class ProgramDesign {
 
   int _height = 0;
 
-  List<Frame> frames;
+  final frames = <Frame>[];
 
   String color;
 
-  final DataRepository dataRepository;
+  DataRepository dataRepository = DataRepository([]);
 
   ProgramDesign(
       {int width: 0,
       int height: 0,
-      this.frames,
+      List<Frame> frames,
       this.color: 'transparent',
       this.dataRepository}) {
-    frames ??= <Frame>[];
+    if (frames != null) this.frames.addAll(frames);
     this.width = width;
     this.height = height;
+
+    for (Frame frame in frames) {
+      frame.dataRepository = dataRepository;
+    }
   }
 
   int get width => _width;

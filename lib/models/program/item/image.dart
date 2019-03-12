@@ -6,6 +6,8 @@ import 'package:common/utils/url.dart';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/data_text/data_repo.dart';
+
 /// Represents an image embedded in a page
 class ImageItem implements PageItem {
   String id;
@@ -28,6 +30,8 @@ class ImageItem implements PageItem {
   String url;
 
   Fit fit;
+
+  DataRepository dataRepository;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -79,16 +83,18 @@ class ImageItem implements PageItem {
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
-  ImageItem(
-      {this.id,
-      this.name: 'Image',
-      int left: 0,
-      int top: 0,
-      int width: 100,
-      int height: 100,
-      this.color: 'transparent',
-      this.url,
-      this.fit: Fit.cover}) {
+  ImageItem({
+    this.id,
+    this.name: 'Image',
+    int left: 0,
+    int top: 0,
+    int width: 100,
+    int height: 100,
+    this.color: 'transparent',
+    this.url,
+    this.fit: Fit.cover,
+    this.dataRepository,
+  }) {
     this.left = left;
     this.top = top;
     this.width = width;

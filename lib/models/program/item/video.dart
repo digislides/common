@@ -6,6 +6,8 @@ import 'package:common/utils/url.dart';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/data_text/data_repo.dart';
+
 /// Represents an image embedded in a page
 class VideoItem implements PageItem {
   String id;
@@ -30,6 +32,8 @@ class VideoItem implements PageItem {
   VideoFit fit;
 
   bool muted;
+
+  DataRepository dataRepository;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -81,17 +85,19 @@ class VideoItem implements PageItem {
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
-  VideoItem(
-      {this.id,
-      this.name: 'Video',
-      int left: 0,
-      int top: 0,
-      int width: 100,
-      int height: 100,
-      this.color: 'transparent',
-      this.url,
-      this.fit: VideoFit.auto,
-      this.muted: true}) {
+  VideoItem({
+    this.id,
+    this.name: 'Video',
+    int left: 0,
+    int top: 0,
+    int width: 100,
+    int height: 100,
+    this.color: 'transparent',
+    this.url,
+    this.fit: VideoFit.auto,
+    this.muted: true,
+    this.dataRepository,
+  }) {
     this.left = left;
     this.top = top;
     this.width = width;

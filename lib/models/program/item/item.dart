@@ -3,6 +3,8 @@ import 'dart:math';
 
 import 'package:common/models/program/page.dart';
 
+import 'package:common/data_text/data_repo.dart';
+
 export 'package:common/models/program/item/text.dart';
 export 'package:common/models/program/item/image.dart';
 export 'package:common/models/program/item/video.dart';
@@ -132,6 +134,8 @@ abstract class PageItem implements Sizable {
   String color;
 
   Stream<Rectangle<int>> get onRectChange;
+
+  DataRepository dataRepository;
 
   // TODO clone
 

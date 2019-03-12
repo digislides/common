@@ -6,6 +6,8 @@ import 'package:common/serializer/serializer.dart';
 
 import 'package:common/utils/url.dart';
 
+import 'package:common/data_text/data_repo.dart';
+
 /// Represents an image embedded in a page
 class ClockItem implements PageItem {
   String id;
@@ -32,6 +34,8 @@ class ClockItem implements PageItem {
   String _minuteColor;
 
   Duration _timezone;
+
+  DataRepository dataRepository;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -154,6 +158,7 @@ class ClockItem implements PageItem {
     String minuteColor: 'black',
     String url: 'none',
     Duration timezone: const Duration(),
+    this.dataRepository,
   }) {
     this.left = left;
     this.top = top;

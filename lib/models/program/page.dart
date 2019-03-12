@@ -5,7 +5,7 @@ import 'package:common/models/program/program.dart';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
-import 'package:common/data_text/data_text.dart';
+import 'package:common/data_text/data_repo.dart';
 
 export 'package:common/models/program/item/item.dart';
 
@@ -35,7 +35,7 @@ class Page implements Sizable {
 
   num transitionDuration;
 
-  final DataRepository dataRepository;
+  DataRepository dataRepository;
 
   final items = <PageItem>[];
 
@@ -55,6 +55,10 @@ class Page implements Sizable {
   }) {
     if (items != null) this.items.addAll(items);
     this._duration = duration;
+
+    for (PageItem item in items) {
+      item.dataRepository = dataRepository;
+    }
   }
 
   String get imageUrl {
@@ -74,6 +78,7 @@ class Page implements Sizable {
 
   void addNewItem(PageItem item) {
     item.id = newId;
+    item.dataRepository = dataRepository;
     items.add(item);
   }
 

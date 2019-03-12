@@ -136,14 +136,16 @@ class ProgramSerializer extends Serializer<Program> with _$ProgramSerializer {}
 class PublishedProgramSerializer extends Serializer<PublishedProgram>
     with _$PublishedProgramSerializer {}
 
-@GenSerializer(serializers: [FrameSerializer])
+@GenSerializer(serializers: [FrameSerializer], ignore: ['dataRepository'])
 class ProgramDesignSerializer extends Serializer<ProgramDesign>
     with _$ProgramDesignSerializer {}
 
-@GenSerializer(ignore: ['onRectChange'])
+@GenSerializer(ignore: ['onRectChange', 'dataRepository'])
 class FrameSerializer extends Serializer<Frame> with _$FrameSerializer {}
 
-@GenSerializer(fields: {'fit': Field(processor: FitFieldProcessor())})
+@GenSerializer(
+    fields: {'fit': Field(processor: FitFieldProcessor())},
+    ignore: ['dataRepository'])
 class PageSerializer extends Serializer<Page> with _$PageSerializer {}
 
 class PageItemSerializer extends Serializer<PageItem> {
@@ -182,7 +184,7 @@ class PageItemSerializer extends Serializer<PageItem> {
 class FontPropertiesSerializer extends Serializer<FontProperties>
     with _$FontPropertiesSerializer {}
 
-@GenSerializer(ignore: ['onRectChange'])
+@GenSerializer(ignore: ['onRectChange', 'dataRepository'])
 class TextItemSerializer extends Serializer<TextItem>
     with _$TextItemSerializer {
   static final serializer = TextItemSerializer();

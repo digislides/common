@@ -8,8 +8,7 @@ final cookieJar = CookieJar();
 main() async {
   globalClient = IOClient();
 
-  final authApi =
-      AuthApi(Route("http://localhost:10000").before(cookieJar));
+  final authApi = AuthApi(Route("http://localhost:10000").before(cookieJar));
   final programApi =
       ChannelApi(Route("http://localhost:10000").before(cookieJar));
 

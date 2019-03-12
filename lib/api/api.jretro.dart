@@ -7,7 +7,7 @@ part of 'api.dart';
 // **************************************************************************
 
 abstract class _$AuthApiClient implements ApiClient {
-  final String basePath = "/auth";
+  final String basePath = "/api/auth";
   Future<void> signup(Signup model) async {
     var req =
         base.post.path(basePath).path("/signup").json(jsonConverter.to(model));
@@ -22,7 +22,7 @@ abstract class _$AuthApiClient implements ApiClient {
 }
 
 abstract class _$ProgramApiClient implements ApiClient {
-  final String basePath = "/program";
+  final String basePath = "/api/program";
   Future<Program> create(ProgramCreator model) async {
     var req = base.post.path(basePath).json(jsonConverter.to(model));
     return req.go(throwOnErr: true).map(decodeOne);
@@ -83,7 +83,7 @@ abstract class _$ProgramApiClient implements ApiClient {
 }
 
 abstract class _$ChannelApiClient implements ApiClient {
-  final String basePath = "/channel";
+  final String basePath = "/api/channel";
   Future<Channel> create(ChannelCreator model) async {
     var req = base.post.path(basePath).json(jsonConverter.to(model));
     return req.go(throwOnErr: true).map(decodeOne);
@@ -134,7 +134,7 @@ abstract class _$ChannelApiClient implements ApiClient {
 }
 
 abstract class _$WeatherApiClient implements ApiClient {
-  final String basePath = "/data/weather";
+  final String basePath = "/api/data/weather";
   Future<Weather> getByName(String place) async {
     var req = base.get
         .path(basePath)

@@ -176,9 +176,10 @@ abstract class _$ProgramDesignSerializer implements Serializer<ProgramDesign> {
   @override
   ProgramDesign fromMap(Map map) {
     if (map == null) return null;
-    final obj = new ProgramDesign();
-    obj.frames = codeIterable<Frame>(map['frames'] as Iterable,
-        (val) => _frameSerializer.fromMap(val as Map));
+    final obj = new ProgramDesign(
+        frames: codeIterable<Frame>(map['frames'] as Iterable,
+                (val) => _frameSerializer.fromMap(val as Map)) ??
+            getJserDefault('frames'));
     obj.color = map['color'] as String;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
@@ -209,11 +210,12 @@ abstract class _$FrameSerializer implements Serializer<Frame> {
   @override
   Frame fromMap(Map map) {
     if (map == null) return null;
-    final obj = new Frame();
+    final obj = new Frame(
+        pages: codeIterable<Page>(map['pages'] as Iterable,
+                (val) => _pageSerializer.fromMap(val as Map)) ??
+            getJserDefault('pages'));
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
-    obj.pages = codeIterable<Page>(
-        map['pages'] as Iterable, (val) => _pageSerializer.fromMap(val as Map));
     obj.image = map['image'] as String;
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
@@ -316,12 +318,13 @@ abstract class _$TextItemSerializer implements Serializer<TextItem> {
     setMapValue(ret, 'type', model.type.index);
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'color', model.color);
-    setMapValue(ret, 'text', model.text);
     setMapValue(ret, 'font', _fontPropertiesSerializer.toMap(model.font));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
+    setMapValue(ret, 'text', model.text);
+    setMapValue(ret, 'linkedText', model.linkedText);
     return ret;
   }
 
@@ -334,11 +337,11 @@ abstract class _$TextItemSerializer implements Serializer<TextItem> {
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
     obj.color = map['color'] as String;
-    obj.text = map['text'] as String;
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
+    obj.text = map['text'] as String;
     return obj;
   }
 }

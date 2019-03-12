@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/data_text/data_repo.dart';
+
 class WeatherTheme {
   final int id;
   final String label;
@@ -49,6 +51,8 @@ class WeatherItem implements PageItem {
   WeatherTheme theme;
 
   WeatherIconType dummy;
+
+  DataRepository dataRepository;
 
   final _rectChange = StreamController<Rectangle<int>>();
 
@@ -120,6 +124,7 @@ class WeatherItem implements PageItem {
     this.color: 'black',
     this.theme: WeatherTheme.flatFilled,
     this.dummy: WeatherIconType.clearSky,
+    this.dataRepository,
   }) {
     this.left = left;
     this.top = top;
