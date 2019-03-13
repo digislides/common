@@ -5,7 +5,7 @@ import 'package:common/utils/id.dart';
 import 'package:common/models/program/page.dart';
 import 'package:common/serializer/serializer.dart';
 
-import 'package:common/data_text/data_repo.dart';
+import 'package:common/data/data_repo.dart';
 
 class Frame {
   String id;
@@ -24,7 +24,15 @@ class Frame {
 
   String image;
 
-  DataRepository dataRepository;
+  DataRepository _dataRepository;
+
+  set dataRepository(DataRepository value) {
+    _dataRepository = value;
+
+    for (Page page in pages) page.dataRepository = _dataRepository;
+  }
+
+  DataRepository get dataRepository => _dataRepository;
 
   Frame({
     this.id,
@@ -35,7 +43,7 @@ class Frame {
     int width: 0,
     int height: 0,
     this.image,
-    this.dataRepository,
+    DataRepository dataRepository,
   }) {
     id ??= newId;
     if (pages != null) this.pages.addAll(pages);
@@ -44,11 +52,9 @@ class Frame {
     this.width = width;
     this.height = height;
 
-    _rectStream = _rectChange.stream.asBroadcastStream();
+    if (dataRepository != null) this.dataRepository = dataRepository;
 
-    for (Page page in pages) {
-      page.dataRepository = dataRepository;
-    }
+    _rectStream = _rectChange.stream.asBroadcastStream();
   }
 
   final _rectChange = StreamController<Rectangle<int>>();

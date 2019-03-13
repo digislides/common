@@ -1,3 +1,5 @@
+import 'dart:async';
+
 class DataLink {
   final List<String> segments;
 
@@ -129,6 +131,10 @@ abstract class DataSource {
     if (pos == null) throw Exception("Param not found!");
     return paths.elementAt(pos);
   }
+
+  FutureOr<void> start();
+
+  FutureOr<void> stop();
 }
 
 class DataRepository {
@@ -142,5 +148,26 @@ class DataRepository {
     if (match == null) return "";
 
     return match.get(link);
+  }
+
+  FutureOr<void> start() async {
+    for (DataSource source in sources) {
+      try {
+        await source.start();
+      } catch (e) {}
+    }
+  }
+
+  FutureOr<void> stop() async {
+    for (DataSource source in sources) {
+      try {
+        await source.stop();
+      } catch (e) {}
+    }
+  }
+
+  FutureOr<void> restart() async {
+    await stop();
+    await start();
   }
 }

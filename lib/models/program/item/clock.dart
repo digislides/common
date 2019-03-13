@@ -6,7 +6,7 @@ import 'package:common/serializer/serializer.dart';
 
 import 'package:common/utils/url.dart';
 
-import 'package:common/data_text/data_repo.dart';
+import 'package:common/data/data_repo.dart';
 
 /// Represents an image embedded in a page
 class ClockItem implements PageItem {

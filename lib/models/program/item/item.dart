@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:common/models/program/page.dart';
 
-import 'package:common/data_text/data_repo.dart';
+import 'package:common/data/data_repo.dart';
 
 export 'package:common/models/program/item/text.dart';
 export 'package:common/models/program/item/image.dart';

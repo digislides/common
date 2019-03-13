@@ -1,4 +1,4 @@
-import 'package:common/data_text/data_repo.dart';
+import 'package:common/data/data_repo.dart';
 
 import 'package:open_weather_api/simple.dart';
 
@@ -23,6 +23,10 @@ class WeatherData extends DataSource {
     final weather = weathers[places];
     return toData(weather, param);
   }
+
+  void start() {}
+
+  void stop() {}
 }
 
 main() {

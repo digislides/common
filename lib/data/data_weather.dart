@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:common/data_text/data_repo.dart';
+import 'data_repo.dart';
 import 'package:common/models.dart';
 import 'package:common/api/api.dart';
 
@@ -31,6 +31,10 @@ class WeatherData extends DataSource {
     await _update();
   }
 
+  void stop() {
+    if (_timer != null) _timer.cancel();
+  }
+
   Future<void> _update() async {
     for (String weather in _weathers.keys) {
       try {
@@ -55,9 +59,5 @@ class WeatherData extends DataSource {
     final weather = _weathers[places];
     if (weather == null) return "";
     return toData(weather, param);
-  }
-
-  void dispose() {
-    if (_timer != null) _timer.cancel();
   }
 }

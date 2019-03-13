@@ -3,7 +3,8 @@ import 'page.dart';
 
 import 'package:common/serializer/serializer.dart';
 
-import 'package:common/data_text/data_repo.dart';
+import 'package:common/data/data_repo.dart';
+import 'package:common/data/data_weather.dart';
 
 export 'frame.dart';
 export 'page.dart';
@@ -17,20 +18,33 @@ class ProgramDesign {
 
   String color;
 
-  DataRepository dataRepository = DataRepository([]);
+  DataRepository _dataRepository;
+
+  set dataRepository(DataRepository value) {
+    _dataRepository = value;
+
+    for (Frame frame in frames) frame.dataRepository = _dataRepository;
+  }
+
+  DataRepository get dataRepository => _dataRepository;
 
   ProgramDesign(
       {int width: 0,
       int height: 0,
       List<Frame> frames,
       this.color: 'transparent',
-      this.dataRepository}) {
+      DataRepository dataRepository}) {
     if (frames != null) this.frames.addAll(frames);
     this.width = width;
     this.height = height;
 
-    for (Frame frame in frames) {
-      frame.dataRepository = dataRepository;
+    if (dataRepository != null)
+      this.dataRepository = dataRepository;
+    else {
+      this.dataRepository = DataRepository([]);
+
+      final weather = WeatherData()..register('Stockholm');
+      this.dataRepository.sources.addAll([weather]);
     }
   }
 

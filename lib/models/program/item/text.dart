@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
-import 'package:common/data_text/data_repo.dart';
+import 'package:common/data/data_repo.dart';
 
 class FontProperties {
   /// Size of the font
