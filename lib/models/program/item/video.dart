@@ -85,6 +85,22 @@ class VideoItem implements PageItem {
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
+  Point<int> get pos => Point<int>(left, top);
+
+  set pos(Point<int> value) {
+    left = value.x;
+    top = value.y;
+  }
+
+  Rectangle<int> get rect => Rectangle<int>(left, top, width, height);
+
+  set rect(Rectangle<int> value) {
+    left = value.left;
+    top = value.top;
+    width = value.width;
+    height = value.height;
+  }
+
   VideoItem({
     this.id,
     this.name: 'Video',

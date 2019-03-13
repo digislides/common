@@ -133,6 +133,10 @@ abstract class PageItem implements Sizable {
 
   String color;
 
+  Point<int> pos;
+
+  Rectangle<int> rect;
+
   Stream<Rectangle<int>> get onRectChange;
 
   DataRepository dataRepository;
