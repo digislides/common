@@ -144,4 +144,6 @@ abstract class PageItem implements Sizable {
   // TODO clone
 
   void collectUrls(Map<String, bool> urls);
+
+  PageItem duplicate({String setId, String setName});
 }

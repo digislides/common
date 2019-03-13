@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/utils/id.dart';
+
 import 'package:common/data/data_repo.dart';
 
 class FontProperties {
@@ -45,6 +47,18 @@ class FontProperties {
     } else {
       _size = value;
     }
+  }
+
+  FontProperties duplicate() {
+    return FontProperties(
+      size: this.size,
+      align: this.align,
+      family: this.family,
+      color: this.color,
+      bold: this.bold,
+      italic: this.italic,
+      underline: this.underline,
+    );
   }
 }
 
@@ -178,4 +192,19 @@ class TextItem implements PageItem {
   static final serializer = TextItemSerializer();
 
   void collectUrls(Map<String, bool> urls) {}
+
+  TextItem duplicate({String setId, String setName}) {
+    return TextItem(
+      id: setId ?? newId,
+      name: setName ?? this.name,
+      left: this.left,
+      top: this.top,
+      width: this.width,
+      height: this.height,
+      color: this.color,
+      text: this.text,
+      font: this.font.duplicate(),
+      dataRepository: this.dataRepository,
+    );
+  }
 }

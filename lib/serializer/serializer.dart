@@ -184,14 +184,14 @@ class PageItemSerializer extends Serializer<PageItem> {
 class FontPropertiesSerializer extends Serializer<FontProperties>
     with _$FontPropertiesSerializer {}
 
-@GenSerializer(ignore: ['onRectChange', 'dataRepository'])
+@GenSerializer(ignore: ['onRectChange', 'dataRepository', 'pos', 'rect'])
 class TextItemSerializer extends Serializer<TextItem>
     with _$TextItemSerializer {
   static final serializer = TextItemSerializer();
 }
 
 @GenSerializer(
-    ignore: ['onRectChange'],
+    ignore: ['onRectChange', 'pos', 'rect', 'dataRepository'],
     fields: {'fit': Field(processor: FitFieldProcessor())})
 class ImageItemSerializer extends Serializer<ImageItem>
     with _$ImageItemSerializer {
@@ -199,16 +199,23 @@ class ImageItemSerializer extends Serializer<ImageItem>
 }
 
 @GenSerializer(
-    ignore: ['onRectChange'],
+    ignore: ['onRectChange', 'pos', 'rect', 'dataRepository'],
     fields: {'fit': Field(processor: VideoFitFieldProcessor())})
 class VideoItemSerializer extends Serializer<VideoItem>
     with _$VideoItemSerializer {
   static final serializer = VideoItemSerializer();
 }
 
-@GenSerializer(
-    ignore: ['onRectChange', 'onViewChange', 'size'],
-    fields: {'timezone': EnDecode(processor: DurationProcessor())})
+@GenSerializer(ignore: [
+  'onRectChange',
+  'onViewChange',
+  'size',
+  'pos',
+  'rect',
+  'dataRepository'
+], fields: {
+  'timezone': EnDecode(processor: DurationProcessor())
+})
 class ClockItemSerializer extends Serializer<ClockItem>
     with _$ClockItemSerializer {
   static final serializer = ClockItemSerializer();
@@ -217,7 +224,10 @@ class ClockItemSerializer extends Serializer<ClockItem>
 @GenSerializer(ignore: [
   'onRectChange',
   'onViewChange',
-  'size'
+  'size',
+  'dataRepository',
+  'pos',
+  'rect',
 ], fields: {
   'theme': EnDecode(processor: WeatherThemeProcessor()),
   'dummy': EnDecode(processor: WeatherIconTypeProcessor())

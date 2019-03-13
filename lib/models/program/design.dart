@@ -89,6 +89,13 @@ class ProgramDesign {
           image: image,
           dataRepository: dataRepository));
 
+  void duplicateFrame(String frameId) {
+    final frame = frames.firstWhere((f) => f.id == frameId, orElse: () => null);
+    if(frame == null) return;
+
+    frames.add(frame.duplicate(setName: frame.name + '_dup'));
+  }
+
   void removeFrame(String id) {
     frames.removeWhere((f) => f.id == id);
   }
@@ -97,19 +104,17 @@ class ProgramDesign {
     frames.removeWhere((f) => ids.contains(f.id));
   }
 
-  void moveFrameTo(String pageId, int newPos) {
-    final page = frames.firstWhere((p) => p.id == pageId, orElse: () => null);
-    int oldIndex = frames.indexOf(page);
+  void moveFrameTo(String frameId, int newPos) {
+    final frame = frames.firstWhere((f) => f.id == frameId, orElse: () => null);
+    int oldIndex = frames.indexOf(frame);
     frames[oldIndex] = null;
     if (newPos < frames.length) {
-      frames.insert(newPos, page);
+      frames.insert(newPos, frame);
     } else {
-      frames.add(page);
+      frames.add(frame);
     }
     frames.removeWhere((p) => p == null);
   }
-
-  // TODO duplicate frame
 
   Map<String, dynamic> toJson() => serializer.toMap(this);
 

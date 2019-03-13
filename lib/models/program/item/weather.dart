@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
+import 'package:common/utils/id.dart';
+
 import 'package:common/data/data_repo.dart';
 
 class WeatherTheme {
@@ -155,6 +157,20 @@ class WeatherItem implements PageItem {
   static final serializer = WeatherItemSerializer();
 
   void collectUrls(Map<String, bool> urls) {}
+
+  WeatherItem duplicate({String setId, String setName}) {
+    return WeatherItem(
+      id: setId ?? newId,
+      name: setName ?? this.name,
+      left: this.left,
+      top: this.top,
+      size: this.size,
+      color: this.color,
+      theme: this.theme,
+      dummy: this.dummy,
+      dataRepository: this.dataRepository,
+    );
+  }
 }
 
 class WeatherIconType {

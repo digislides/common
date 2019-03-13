@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:common/utils/url.dart';
+import 'package:common/utils/id.dart';
 
 import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
@@ -134,5 +135,21 @@ class VideoItem implements PageItem {
 
   void collectUrls(Map<String, bool> urls) {
     if (isDownloadableMediaUrl(url)) urls[url] = false;
+  }
+
+  VideoItem duplicate({String setId, String setName}) {
+    return VideoItem(
+      id: setId ?? newId,
+      name: setName ?? this.name,
+      left: this.left,
+      top: this.top,
+      width: this.width,
+      height: this.height,
+      color: this.color,
+      url: this.url,
+      fit: this.fit,
+      muted: this.muted,
+      dataRepository: this.dataRepository,
+    );
   }
 }

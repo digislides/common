@@ -37,12 +37,12 @@ class Frame {
   Frame({
     this.id,
     this.name: 'Frame',
-    List<Page> pages,
     int left: 0,
     int top: 0,
     int width: 0,
     int height: 0,
     this.image,
+    Iterable<Page> pages,
     DataRepository dataRepository,
   }) {
     id ??= newId;
@@ -118,6 +118,14 @@ class Frame {
         dataRepository: dataRepository));
   }
 
+  void duplicatePage(String pageId) {
+    final page = pages.firstWhere((p) => p.id == pageId, orElse: () => null);
+    if (page == null) return;
+
+    pages.add(page.duplicate(setName: page.name + '_dup'));
+    // TODO insert after [page]
+  }
+
   void removePage(String id) {
     pages.removeWhere((p) => p.id == id);
   }
@@ -125,17 +133,6 @@ class Frame {
   void removePagesById(Set<String> ids) {
     pages.removeWhere((p) => ids.contains(p.id));
   }
-
-  /* TODO
-  void duplicatePage(String pageId) {
-    final page = pages.firstWhere((p) => p.id == pageId, orElse: () => null);
-    if (page == null) return;
-    Page dupPage = page.clone();
-    // Add new page to pages
-    int pos = pages.indexOf(page);
-    pages.insert(pos + 1, dupPage);
-  }
-  */
 
   void movePageTo(String pageId, int newPos) {
     final page = pages.firstWhere((p) => p.id == pageId, orElse: () => null);
@@ -159,5 +156,19 @@ class Frame {
     for (Page page in pages) {
       page.collectUrls(urls);
     }
+  }
+
+  Frame duplicate({String setId, String setName}) {
+    return Frame(
+      id: setId ?? newId,
+      name: setName ?? this.name,
+      left: this.left,
+      top: this.top,
+      width: this.width,
+      height: this.height,
+      image: this.image,
+      pages: this.pages.map((p) => p.duplicate()),
+      dataRepository: this.dataRepository,
+    );
   }
 }

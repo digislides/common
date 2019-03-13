@@ -33,8 +33,6 @@ class Page implements Sizable {
 
   int transition;
 
-  num transitionDuration;
-
   DataRepository _dataRepository;
 
   set dataRepository(DataRepository value) {
@@ -57,8 +55,7 @@ class Page implements Sizable {
     this.fit: Fit.cover,
     int duration: 5,
     this.transition: 0,
-    this.transitionDuration: 0,
-    List<PageItem> items,
+    Iterable<PageItem> items,
     DataRepository dataRepository,
   }) {
     if (items != null) this.items.addAll(items);
@@ -88,6 +85,15 @@ class Page implements Sizable {
     items.add(item);
   }
 
+  void duplicateItem(String itemId) {
+    final item =
+        items.firstWhere((item) => item.id == itemId, orElse: () => null);
+    if (item == null) return;
+
+    items.add(item.duplicate(setName: item.name + "_dup"));
+    // TODO insert after [item]
+  }
+
   void removeItem(String itemId) {
     items.removeWhere((item) => item.id == itemId);
   }
@@ -115,5 +121,21 @@ class Page implements Sizable {
     for (PageItem item in items) {
       item.collectUrls(urls);
     }
+  }
+
+  Page duplicate({String setId, String setName}) {
+    return Page(
+      id: setId ?? newId,
+      name: setName ?? this.name,
+      width: this.width,
+      height: this.height,
+      color: this.color,
+      image: this.image,
+      fit: this.fit,
+      duration: this.duration,
+      transition: this.transition,
+      items: this.items.map((i) => i.duplicate()),
+      dataRepository: dataRepository,
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
 import 'package:common/utils/url.dart';
+import 'package:common/utils/id.dart';
 
 import 'package:common/data/data_repo.dart';
 
@@ -204,5 +205,22 @@ class ClockItem implements PageItem {
 
   void collectUrls(Map<String, bool> urls) {
     if (isDownloadableMediaUrl(url)) urls[url] = false;
+  }
+
+  ClockItem duplicate({String setId, String setName}) {
+    return ClockItem(
+      id: setId ?? newId,
+      name: setName ?? this.name,
+      left: this.left,
+      top: this.top,
+      size: this.size,
+      color: this.color,
+      textColor: this.textColor,
+      hourColor: this.hourColor,
+      minuteColor: this.minuteColor,
+      url: this.url,
+      timezone: this.timezone,
+      dataRepository: this.dataRepository,
+    );
   }
 }

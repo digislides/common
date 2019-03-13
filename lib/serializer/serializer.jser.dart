@@ -242,7 +242,6 @@ abstract class _$PageSerializer implements Serializer<Page> {
     setMapValue(ret, 'image', model.image);
     setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
     setMapValue(ret, 'transition', model.transition);
-    setMapValue(ret, 'transitionDuration', model.transitionDuration);
     setMapValue(
         ret,
         'items',
@@ -268,7 +267,6 @@ abstract class _$PageSerializer implements Serializer<Page> {
     obj.image = map['image'] as String;
     obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
     obj.transition = map['transition'] as int;
-    obj.transitionDuration = map['transitionDuration'] as num;
     obj.duration = map['duration'] as int;
     return obj;
   }
