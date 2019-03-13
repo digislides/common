@@ -91,7 +91,7 @@ class ProgramDesign {
 
   void duplicateFrame(String frameId) {
     final frame = frames.firstWhere((f) => f.id == frameId, orElse: () => null);
-    if(frame == null) return;
+    if (frame == null) return;
 
     frames.add(frame.duplicate(setName: frame.name + '_dup'));
   }
