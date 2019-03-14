@@ -31,7 +31,7 @@ class Page implements Sizable {
 
   int _duration = 5;
 
-  int transition;
+  Transition transition;
 
   DataRepository _dataRepository;
 
@@ -54,7 +54,7 @@ class Page implements Sizable {
     this.image,
     this.fit: Fit.cover,
     int duration: 5,
-    this.transition: 0,
+    this.transition: Transition.none,
     Iterable<PageItem> items,
     DataRepository dataRepository,
   }) {
@@ -137,5 +137,72 @@ class Page implements Sizable {
       items: this.items.map((i) => i.duplicate()),
       dataRepository: dataRepository,
     );
+  }
+}
+
+class Transition {
+  final int id;
+
+  final String name;
+
+  final String css;
+
+  const Transition(this.id, this.name, this.css);
+
+  static const none = Transition(0, 'None', 'none');
+
+  static const moveFromLeft = Transition(1, 'Move from Left', 'moveFromLeft');
+
+  static const moveFromRight =
+      Transition(2, 'Move from Right', 'moveFromRight');
+
+  static const moveFromTop = Transition(3, 'Move from Top', 'moveFromTop');
+
+  static const moveFromBottom =
+      Transition(4, 'Move from Bottom', 'moveFromBottom');
+
+  static const slideFromLeft =
+      Transition(11, 'Slide from Left', 'slideFromLeft');
+
+  static const slideFromRight =
+      Transition(12, 'Slide from Right', 'slideFromRight');
+
+  static const slideFromTop = Transition(13, 'Slide from Top', 'slideFromTop');
+
+  static const slideFromBottom =
+      Transition(14, 'Slide from Bottom', 'slideFromBottom');
+
+  static const fadeOut = Transition(100, 'Fade out', 'fadeOut');
+
+  static const fadeIn = Transition(101, 'Fade in', 'fadeIn');
+
+  static const values = <Transition>[
+    none,
+    moveFromLeft,
+    moveFromRight,
+    moveFromTop,
+    moveFromBottom,
+    slideFromLeft,
+    slideFromRight,
+    slideFromTop,
+    slideFromBottom,
+    fadeOut,
+    fadeIn,
+  ];
+
+  static Map<dynamic, Transition> _map;
+
+  static Map<dynamic, Transition> get map {
+    if(_map != null) return _map;
+
+    _map = {};
+
+    for(final v in values) {
+      _map[v.id] = v;
+      _map[v.id.toString()] = v;
+      _map[v.name] = v;
+    }
+
+    return _map;
   }
 }

@@ -227,6 +227,7 @@ abstract class _$FrameSerializer implements Serializer<Frame> {
 
 abstract class _$PageSerializer implements Serializer<Page> {
   final _fitFieldProcessor = const FitFieldProcessor();
+  final _transitionFieldProcessor = const TransitionFieldProcessor();
   Serializer<PageItem> __pageItemSerializer;
   Serializer<PageItem> get _pageItemSerializer =>
       __pageItemSerializer ??= new PageItemSerializer();
@@ -241,7 +242,8 @@ abstract class _$PageSerializer implements Serializer<Page> {
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'image', model.image);
     setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
-    setMapValue(ret, 'transition', model.transition);
+    setMapValue(ret, 'transition',
+        _transitionFieldProcessor.serialize(model.transition));
     setMapValue(
         ret,
         'items',
@@ -266,7 +268,8 @@ abstract class _$PageSerializer implements Serializer<Page> {
     obj.color = map['color'] as String;
     obj.image = map['image'] as String;
     obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
-    obj.transition = map['transition'] as int;
+    obj.transition =
+        _transitionFieldProcessor.deserialize(map['transition'] as int);
     obj.duration = map['duration'] as int;
     return obj;
   }

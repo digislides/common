@@ -104,6 +104,19 @@ class AlignFieldProcessor implements FieldProcessor<Align, int> {
   int serialize(Align value) => value?.id;
 }
 
+class TransitionFieldProcessor implements FieldProcessor<Transition, int> {
+  const TransitionFieldProcessor();
+
+  @override
+  Transition deserialize(int value) {
+    if (value == null) return Transition.none;
+    return Transition.map[value];
+  }
+
+  @override
+  int serialize(Transition value) => value?.id;
+}
+
 class VAlignFieldProcessor implements FieldProcessor<VAlign, int> {
   const VAlignFieldProcessor();
 
@@ -156,9 +169,12 @@ class ProgramDesignSerializer extends Serializer<ProgramDesign>
 @GenSerializer(ignore: ['onRectChange', 'dataRepository'])
 class FrameSerializer extends Serializer<Frame> with _$FrameSerializer {}
 
-@GenSerializer(
-    fields: {'fit': Field(processor: FitFieldProcessor())},
-    ignore: ['dataRepository'])
+@GenSerializer(fields: {
+  'fit': Field(processor: FitFieldProcessor()),
+  'transition': Field(processor: TransitionFieldProcessor())
+}, ignore: [
+  'dataRepository'
+])
 class PageSerializer extends Serializer<Page> with _$PageSerializer {}
 
 class PageItemSerializer extends Serializer<PageItem> {
