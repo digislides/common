@@ -14,6 +14,8 @@ class FontProperties {
 
   Align align;
 
+  VAlign valign;
+
   String family;
 
   String color;
@@ -29,6 +31,7 @@ class FontProperties {
   FontProperties({
     int size: 16,
     this.align: Align.left,
+    this.valign: VAlign.top,
     this.family,
     this.color: 'black',
     this.bold: false,
@@ -53,6 +56,7 @@ class FontProperties {
     return FontProperties(
       size: this.size,
       align: this.align,
+      valign: this.valign,
       family: this.family,
       color: this.color,
       bold: this.bold,

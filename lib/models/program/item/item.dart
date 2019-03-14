@@ -116,6 +116,26 @@ class Align {
   String toString() => css;
 }
 
+class VAlign {
+  final int id;
+
+  final String name;
+
+  final String css;
+
+  const VAlign(this.id, this.name, this.css);
+
+  static const top = VAlign(0, 'Top', 'flex-start');
+
+  static const middle = VAlign(1, 'Middle', 'center');
+
+  static const bottom = VAlign(2, 'Bottom', 'flex-end');
+
+  static List<VAlign> values = [top, middle, bottom];
+
+  String toString() => css;
+}
+
 abstract class PageItem implements Sizable {
   String id;
 

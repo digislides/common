@@ -275,11 +275,13 @@ abstract class _$PageSerializer implements Serializer<Page> {
 abstract class _$FontPropertiesSerializer
     implements Serializer<FontProperties> {
   final _alignFieldProcessor = const AlignFieldProcessor();
+  final _vAlignFieldProcessor = const VAlignFieldProcessor();
   @override
   Map<String, dynamic> toMap(FontProperties model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'align', _alignFieldProcessor.serialize(model.align));
+    setMapValue(ret, 'valign', _vAlignFieldProcessor.serialize(model.valign));
     setMapValue(ret, 'family', model.family);
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'bold', model.bold);
@@ -294,6 +296,7 @@ abstract class _$FontPropertiesSerializer
     if (map == null) return null;
     final obj = new FontProperties();
     obj.align = _alignFieldProcessor.deserialize(map['align'] as int);
+    obj.valign = _vAlignFieldProcessor.deserialize(map['valign'] as int);
     obj.family = map['family'] as String;
     obj.color = map['color'] as String;
     obj.bold = map['bold'] as bool;

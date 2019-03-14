@@ -104,6 +104,19 @@ class AlignFieldProcessor implements FieldProcessor<Align, int> {
   int serialize(Align value) => value?.id;
 }
 
+class VAlignFieldProcessor implements FieldProcessor<VAlign, int> {
+  const VAlignFieldProcessor();
+
+  @override
+  VAlign deserialize(int value) {
+    if (value == null) return VAlign.values[0];
+    return VAlign.values[value];
+  }
+
+  @override
+  int serialize(VAlign value) => value?.id;
+}
+
 @GenSerializer()
 class SignupSerializer extends Serializer<Signup> with _$SignupSerializer {
   static final serializer = SignupSerializer();
@@ -180,7 +193,10 @@ class PageItemSerializer extends Serializer<PageItem> {
   }
 }
 
-@GenSerializer(fields: {'align': Field(processor: AlignFieldProcessor())})
+@GenSerializer(fields: {
+  'align': Field(processor: AlignFieldProcessor()),
+  'valign': Field(processor: VAlignFieldProcessor())
+})
 class FontPropertiesSerializer extends Serializer<FontProperties>
     with _$FontPropertiesSerializer {}
 
