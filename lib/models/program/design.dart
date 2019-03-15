@@ -1,6 +1,8 @@
 import 'frame.dart';
 import 'page.dart';
 
+import 'package:common/utils/url.dart';
+
 import 'package:common/serializer/serializer.dart';
 
 import 'package:common/data/data_repo.dart';
@@ -18,6 +20,10 @@ class ProgramDesign {
 
   String color;
 
+  String image;
+
+  Fit fit;
+
   DataRepository _dataRepository;
 
   set dataRepository(DataRepository value) {
@@ -33,6 +39,8 @@ class ProgramDesign {
       int height: 0,
       List<Frame> frames,
       this.color: 'transparent',
+      this.image,
+      this.fit: Fit.cover,
       DataRepository dataRepository}) {
     if (frames != null) this.frames.addAll(frames);
     this.width = width;
@@ -122,7 +130,13 @@ class ProgramDesign {
 
   static final serializer = ProgramDesignSerializer();
 
+  String get imageUrl {
+    if (!isValidMediaUrl(image)) return 'none';
+    return 'url($image)';
+  }
+
   void collectUrls(Map<String, bool> urls) {
+    if (isDownloadableMediaUrl(image)) urls[image] = false;
     for (Frame frame in frames) {
       frame.collectUrls(urls);
     }
