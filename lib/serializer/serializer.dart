@@ -162,7 +162,13 @@ class ProgramSerializer extends Serializer<Program> with _$ProgramSerializer {}
 class PublishedProgramSerializer extends Serializer<PublishedProgram>
     with _$PublishedProgramSerializer {}
 
-@GenSerializer(serializers: [FrameSerializer], ignore: ['dataRepository'])
+@GenSerializer(fields: {
+  'fit': Field(processor: FitFieldProcessor()),
+}, serializers: [
+  FrameSerializer
+], ignore: [
+  'dataRepository'
+])
 class ProgramDesignSerializer extends Serializer<ProgramDesign>
     with _$ProgramDesignSerializer {}
 

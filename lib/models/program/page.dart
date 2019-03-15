@@ -193,11 +193,11 @@ class Transition {
   static Map<dynamic, Transition> _map;
 
   static Map<dynamic, Transition> get map {
-    if(_map != null) return _map;
+    if (_map != null) return _map;
 
     _map = {};
 
-    for(final v in values) {
+    for (final v in values) {
       _map[v.id] = v;
       _map[v.id.toString()] = v;
       _map[v.name] = v;

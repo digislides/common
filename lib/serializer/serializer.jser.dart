@@ -155,6 +155,7 @@ abstract class _$PublishedProgramSerializer
 }
 
 abstract class _$ProgramDesignSerializer implements Serializer<ProgramDesign> {
+  final _fitFieldProcessor = const FitFieldProcessor();
   Serializer<Frame> __frameSerializer;
   Serializer<Frame> get _frameSerializer =>
       __frameSerializer ??= new FrameSerializer();
@@ -168,8 +169,11 @@ abstract class _$ProgramDesignSerializer implements Serializer<ProgramDesign> {
         codeIterable(
             model.frames, (val) => _frameSerializer.toMap(val as Frame)));
     setMapValue(ret, 'color', model.color);
+    setMapValue(ret, 'url', model.url);
+    setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
+    setMapValue(ret, 'imageUrl', model.imageUrl);
     return ret;
   }
 
@@ -181,6 +185,8 @@ abstract class _$ProgramDesignSerializer implements Serializer<ProgramDesign> {
                 (val) => _frameSerializer.fromMap(val as Map)) ??
             getJserDefault('frames'));
     obj.color = map['color'] as String;
+    obj.url = map['url'] as String;
+    obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
     return obj;

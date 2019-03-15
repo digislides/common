@@ -20,7 +20,7 @@ class ProgramDesign {
 
   String color;
 
-  String image;
+  String url;
 
   Fit fit;
 
@@ -39,7 +39,7 @@ class ProgramDesign {
       int height: 0,
       List<Frame> frames,
       this.color: 'transparent',
-      this.image,
+      this.url,
       this.fit: Fit.cover,
       DataRepository dataRepository}) {
     if (frames != null) this.frames.addAll(frames);
@@ -131,12 +131,12 @@ class ProgramDesign {
   static final serializer = ProgramDesignSerializer();
 
   String get imageUrl {
-    if (!isValidMediaUrl(image)) return 'none';
-    return 'url($image)';
+    if (!isValidMediaUrl(url)) return 'none';
+    return 'url($url)';
   }
 
   void collectUrls(Map<String, bool> urls) {
-    if (isDownloadableMediaUrl(image)) urls[image] = false;
+    if (isDownloadableMediaUrl(url)) urls[url] = false;
     for (Frame frame in frames) {
       frame.collectUrls(urls);
     }
