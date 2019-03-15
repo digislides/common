@@ -40,6 +40,22 @@ class Frame {
 
   DataRepository get dataRepository => _dataRepository;
 
+  Point<int> get pos => Point<int>(left, top);
+
+  set pos(Point<int> value) {
+    left = value.x;
+    top = value.y;
+  }
+
+  Rectangle<int> get rect => Rectangle<int>(left, top, width, height);
+
+  set rect(Rectangle<int> value) {
+    left = value.left;
+    top = value.top;
+    width = value.width;
+    height = value.height;
+  }
+
   Frame({
     this.id,
     this.name: 'Frame',
