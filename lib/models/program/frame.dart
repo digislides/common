@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
+import 'package:common/utils/url.dart';
 import 'package:common/utils/id.dart';
 import 'package:common/models/program/page.dart';
 import 'package:common/serializer/serializer.dart';
@@ -22,7 +22,13 @@ class Frame {
 
   int _height = 0;
 
+  String color;
+
   String image;
+
+  Fit fit;
+
+  Transition transition;
 
   DataRepository _dataRepository;
 
@@ -41,7 +47,10 @@ class Frame {
     int top: 0,
     int width: 0,
     int height: 0,
+    this.color: 'transparent',
     this.image,
+    this.fit: Fit.cover,
+    this.transition: Transition.none,
     Iterable<Page> pages,
     DataRepository dataRepository,
   }) {
@@ -152,7 +161,13 @@ class Frame {
 
   static final serializer = FrameSerializer();
 
+  String get imageUrl {
+    if (!isValidMediaUrl(image)) return 'none';
+    return 'url($image)';
+  }
+
   void collectUrls(Map<String, bool> urls) {
+    if (isDownloadableMediaUrl(image)) urls[image] = false;
     for (Page page in pages) {
       page.collectUrls(urls);
     }

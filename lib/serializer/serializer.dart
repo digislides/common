@@ -166,7 +166,13 @@ class PublishedProgramSerializer extends Serializer<PublishedProgram>
 class ProgramDesignSerializer extends Serializer<ProgramDesign>
     with _$ProgramDesignSerializer {}
 
-@GenSerializer(ignore: ['onRectChange', 'dataRepository'])
+@GenSerializer(fields: {
+  'fit': Field(processor: FitFieldProcessor()),
+  'transition': Field(processor: TransitionFieldProcessor())
+}, ignore: [
+  'onRectChange',
+  'dataRepository'
+])
 class FrameSerializer extends Serializer<Frame> with _$FrameSerializer {}
 
 @GenSerializer(fields: {

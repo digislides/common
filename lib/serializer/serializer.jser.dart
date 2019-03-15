@@ -188,6 +188,8 @@ abstract class _$ProgramDesignSerializer implements Serializer<ProgramDesign> {
 }
 
 abstract class _$FrameSerializer implements Serializer<Frame> {
+  final _fitFieldProcessor = const FitFieldProcessor();
+  final _transitionFieldProcessor = const TransitionFieldProcessor();
   Serializer<Page> __pageSerializer;
   Serializer<Page> get _pageSerializer =>
       __pageSerializer ??= new PageSerializer();
@@ -199,11 +201,16 @@ abstract class _$FrameSerializer implements Serializer<Frame> {
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'pages',
         codeIterable(model.pages, (val) => _pageSerializer.toMap(val as Page)));
+    setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'image', model.image);
+    setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
+    setMapValue(ret, 'transition',
+        _transitionFieldProcessor.serialize(model.transition));
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
+    setMapValue(ret, 'imageUrl', model.imageUrl);
     return ret;
   }
 
@@ -216,7 +223,11 @@ abstract class _$FrameSerializer implements Serializer<Frame> {
             getJserDefault('pages'));
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.color = map['color'] as String;
     obj.image = map['image'] as String;
+    obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
+    obj.transition =
+        _transitionFieldProcessor.deserialize(map['transition'] as int);
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;
