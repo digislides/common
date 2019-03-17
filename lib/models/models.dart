@@ -3,6 +3,7 @@ import 'package:common/serializer/serializer.dart';
 export 'has_access.dart';
 export 'channel/channel.dart';
 export 'program/program.dart';
+export 'program/page_schedule.dart';
 export 'package:open_weather_api/simple.dart';
 
 class ValidationException implements Exception {

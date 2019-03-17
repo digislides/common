@@ -174,10 +174,12 @@ class ProgramDesignSerializer extends Serializer<ProgramDesign>
 
 @GenSerializer(fields: {
   'fit': Field(processor: FitFieldProcessor()),
-  'transition': Field(processor: TransitionFieldProcessor())
+  'transition': Field(processor: TransitionFieldProcessor()),
 }, ignore: [
   'onRectChange',
-  'dataRepository'
+  'dataRepository',
+  'pos',
+  'rect',
 ])
 class FrameSerializer extends Serializer<Frame> with _$FrameSerializer {}
 
@@ -295,3 +297,23 @@ class ChannelPublicSerializer extends Serializer<ChannelPublic>
 @GenSerializer()
 class ChannelCreatorSerializer extends Serializer<ChannelCreator>
     with _$ChannelCreatorSerializer {}
+
+@GenSerializer()
+class TimeIntervalSerializer extends Serializer<TimeInterval>
+    with _$TimeIntervalSerializer {}
+
+@GenSerializer(ignore: [
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
+])
+class WeekScheduleSerializer extends Serializer<WeekSchedule>
+    with _$WeekScheduleSerializer {}
+
+@GenSerializer()
+class PageScheduleSerializer extends Serializer<PageSchedule>
+    with _$PageScheduleSerializer {}

@@ -620,3 +620,78 @@ abstract class _$ChannelCreatorSerializer
     return obj;
   }
 }
+
+abstract class _$TimeIntervalSerializer implements Serializer<TimeInterval> {
+  @override
+  Map<String, dynamic> toMap(TimeInterval model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'start', model.start);
+    setMapValue(ret, 'stop', model.stop);
+    return ret;
+  }
+
+  @override
+  TimeInterval fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new TimeInterval(map['start'] as int ?? getJserDefault('start'),
+        map['stop'] as int ?? getJserDefault('stop'));
+    return obj;
+  }
+}
+
+abstract class _$WeekScheduleSerializer implements Serializer<WeekSchedule> {
+  Serializer<TimeInterval> __timeIntervalSerializer;
+  Serializer<TimeInterval> get _timeIntervalSerializer =>
+      __timeIntervalSerializer ??= new TimeIntervalSerializer();
+  @override
+  Map<String, dynamic> toMap(WeekSchedule model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'dayMap', model.dayMap);
+    setMapValue(
+        ret,
+        'times',
+        codeIterable(model.times,
+            (val) => _timeIntervalSerializer.toMap(val as TimeInterval)));
+    setMapValue(ret, 'not', model.not);
+    return ret;
+  }
+
+  @override
+  WeekSchedule fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new WeekSchedule();
+    obj.dayMap = map['dayMap'] as int;
+    obj.times = codeIterable<TimeInterval>(map['times'] as Iterable,
+        (val) => _timeIntervalSerializer.fromMap(val as Map));
+    obj.not = map['not'] as bool;
+    return obj;
+  }
+}
+
+abstract class _$PageScheduleSerializer implements Serializer<PageSchedule> {
+  Serializer<WeekSchedule> __weekScheduleSerializer;
+  Serializer<WeekSchedule> get _weekScheduleSerializer =>
+      __weekScheduleSerializer ??= new WeekScheduleSerializer();
+  @override
+  Map<String, dynamic> toMap(PageSchedule model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(
+        ret,
+        'schedule',
+        codeIterable(model.schedule,
+            (val) => _weekScheduleSerializer.toMap(val as WeekSchedule)));
+    return ret;
+  }
+
+  @override
+  PageSchedule fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new PageSchedule();
+    obj.schedule = codeIterable<WeekSchedule>(map['schedule'] as Iterable,
+        (val) => _weekScheduleSerializer.fromMap(val as Map));
+    return obj;
+  }
+}
