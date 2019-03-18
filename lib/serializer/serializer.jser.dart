@@ -628,14 +628,16 @@ abstract class _$TimeIntervalSerializer implements Serializer<TimeInterval> {
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'start', model.start);
     setMapValue(ret, 'stop', model.stop);
+    setMapValue(ret, 'isValid', model.isValid);
     return ret;
   }
 
   @override
   TimeInterval fromMap(Map map) {
     if (map == null) return null;
-    final obj = new TimeInterval(map['start'] as int ?? getJserDefault('start'),
-        map['stop'] as int ?? getJserDefault('stop'));
+    final obj = new TimeInterval();
+    obj.start = map['start'] as int;
+    obj.stop = map['stop'] as int;
     return obj;
   }
 }
