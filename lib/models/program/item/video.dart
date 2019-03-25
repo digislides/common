@@ -93,6 +93,13 @@ class VideoItem implements PageItem {
     top = value.y;
   }
 
+  Point<int> get size => Point<int>(width, height);
+
+  set size(Point<int> value) {
+    width = value.x;
+    height = value.y;
+  }
+
   Rectangle<int> get rect => Rectangle<int>(left, top, width, height);
 
   set rect(Rectangle<int> value) {
