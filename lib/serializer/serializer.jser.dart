@@ -705,6 +705,8 @@ abstract class _$MachineSerializer implements Serializer<Machine> {
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'owner', model.owner);
+    setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(
         ret, 'fields', codeIterable(model.fields, (val) => val as String));
     return ret;
@@ -716,6 +718,8 @@ abstract class _$MachineSerializer implements Serializer<Machine> {
     final obj = new Machine();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.owner = map['owner'] as String;
+    obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.fields =
         codeIterable<String>(map['fields'] as Iterable, (val) => val as String);
     return obj;
@@ -729,6 +733,8 @@ abstract class _$MediaImageSerializer implements Serializer<MediaImage> {
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'owner', model.owner);
+    setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
     setMapValue(ret, 'storage', model.storage);
     setMapValue(ret, 'width', model.width);
@@ -742,6 +748,8 @@ abstract class _$MediaImageSerializer implements Serializer<MediaImage> {
     final obj = new MediaImage();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.owner = map['owner'] as String;
+    obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.tags =
         codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
     obj.storage = map['storage'] as int;
@@ -758,6 +766,8 @@ abstract class _$MediaVideoSerializer implements Serializer<MediaVideo> {
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'owner', model.owner);
+    setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
     setMapValue(ret, 'storage', model.storage);
     setMapValue(ret, 'width', model.width);
@@ -772,6 +782,8 @@ abstract class _$MediaVideoSerializer implements Serializer<MediaVideo> {
     final obj = new MediaVideo();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.owner = map['owner'] as String;
+    obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.tags =
         codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
     obj.storage = map['storage'] as int;
@@ -789,6 +801,8 @@ abstract class _$MediaAudioSerializer implements Serializer<MediaAudio> {
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'owner', model.owner);
+    setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
     setMapValue(ret, 'storage', model.storage);
     setMapValue(ret, 'length', model.length);
@@ -801,6 +815,8 @@ abstract class _$MediaAudioSerializer implements Serializer<MediaAudio> {
     final obj = new MediaAudio();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.owner = map['owner'] as String;
+    obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.tags =
         codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
     obj.storage = map['storage'] as int;
@@ -816,6 +832,8 @@ abstract class _$MediaFontSerializer implements Serializer<MediaFont> {
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'owner', model.owner);
+    setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
     setMapValue(ret, 'storage', model.storage);
     return ret;
@@ -827,6 +845,8 @@ abstract class _$MediaFontSerializer implements Serializer<MediaFont> {
     final obj = new MediaFont();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
+    obj.owner = map['owner'] as String;
+    obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.tags =
         codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
     obj.storage = map['storage'] as int;

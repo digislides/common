@@ -237,7 +237,8 @@ class PageItemSerializer extends Serializer<PageItem> {
 class FontPropertiesSerializer extends Serializer<FontProperties>
     with _$FontPropertiesSerializer {}
 
-@GenSerializer(ignore: ['onRectChange', 'dataRepository', 'pos', 'rect', 'size'])
+@GenSerializer(
+    ignore: ['onRectChange', 'dataRepository', 'pos', 'rect', 'size'])
 class TextItemSerializer extends Serializer<TextItem>
     with _$TextItemSerializer {
   static final serializer = TextItemSerializer();
@@ -326,8 +327,7 @@ class PageScheduleSerializer extends Serializer<PageSchedule>
     with _$PageScheduleSerializer {}
 
 @GenSerializer()
-class MachineSerializer extends Serializer<Machine>
-    with _$MachineSerializer {}
+class MachineSerializer extends Serializer<Machine> with _$MachineSerializer {}
 
 @GenSerializer()
 class MediaImageSerializer extends Serializer<MediaImage>
