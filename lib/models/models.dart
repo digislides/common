@@ -5,6 +5,7 @@ export 'channel/channel.dart';
 export 'program/program.dart';
 export 'program/page_schedule.dart';
 export 'package:open_weather_api/simple.dart';
+export 'machine/machine.dart';
 
 class ValidationException implements Exception {
   final String message;

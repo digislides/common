@@ -697,3 +697,160 @@ abstract class _$PageScheduleSerializer implements Serializer<PageSchedule> {
     return obj;
   }
 }
+
+abstract class _$MachineSerializer implements Serializer<Machine> {
+  @override
+  Map<String, dynamic> toMap(Machine model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(
+        ret, 'fields', codeIterable(model.fields, (val) => val as String));
+    return ret;
+  }
+
+  @override
+  Machine fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new Machine();
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    obj.fields =
+        codeIterable<String>(map['fields'] as Iterable, (val) => val as String);
+    return obj;
+  }
+}
+
+abstract class _$MediaImageSerializer implements Serializer<MediaImage> {
+  @override
+  Map<String, dynamic> toMap(MediaImage model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
+    setMapValue(ret, 'storage', model.storage);
+    setMapValue(ret, 'width', model.width);
+    setMapValue(ret, 'height', model.height);
+    return ret;
+  }
+
+  @override
+  MediaImage fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new MediaImage();
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    obj.tags =
+        codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
+    obj.storage = map['storage'] as int;
+    obj.width = map['width'] as int;
+    obj.height = map['height'] as int;
+    return obj;
+  }
+}
+
+abstract class _$MediaVideoSerializer implements Serializer<MediaVideo> {
+  @override
+  Map<String, dynamic> toMap(MediaVideo model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
+    setMapValue(ret, 'storage', model.storage);
+    setMapValue(ret, 'width', model.width);
+    setMapValue(ret, 'height', model.height);
+    setMapValue(ret, 'length', model.length);
+    return ret;
+  }
+
+  @override
+  MediaVideo fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new MediaVideo();
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    obj.tags =
+        codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
+    obj.storage = map['storage'] as int;
+    obj.width = map['width'] as int;
+    obj.height = map['height'] as int;
+    obj.length = map['length'] as int;
+    return obj;
+  }
+}
+
+abstract class _$MediaAudioSerializer implements Serializer<MediaAudio> {
+  @override
+  Map<String, dynamic> toMap(MediaAudio model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
+    setMapValue(ret, 'storage', model.storage);
+    setMapValue(ret, 'length', model.length);
+    return ret;
+  }
+
+  @override
+  MediaAudio fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new MediaAudio();
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    obj.tags =
+        codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
+    obj.storage = map['storage'] as int;
+    obj.length = map['length'] as int;
+    return obj;
+  }
+}
+
+abstract class _$MediaFontSerializer implements Serializer<MediaFont> {
+  @override
+  Map<String, dynamic> toMap(MediaFont model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
+    setMapValue(ret, 'storage', model.storage);
+    return ret;
+  }
+
+  @override
+  MediaFont fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new MediaFont();
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    obj.tags =
+        codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
+    obj.storage = map['storage'] as int;
+    return obj;
+  }
+}
+
+abstract class _$MediaCreatorSerializer implements Serializer<MediaCreator> {
+  @override
+  Map<String, dynamic> toMap(MediaCreator model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
+    return ret;
+  }
+
+  @override
+  MediaCreator fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new MediaCreator();
+    obj.name = map['name'] as String;
+    obj.tags =
+        codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
+    return obj;
+  }
+}

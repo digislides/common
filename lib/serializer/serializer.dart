@@ -18,6 +18,12 @@ final repo = JsonRepo(serializers: [
   ChannelPublicSerializer(),
   ChannelSerializer(),
   ChannelRunningSerializer(),
+  MachineSerializer(),
+  MediaCreatorSerializer(),
+  MediaImageSerializer(),
+  MediaVideoSerializer(),
+  MediaAudioSerializer(),
+  MediaFontSerializer(),
   SimpleWeatherSerializer(),
   SimpleHourlyForecastsSerializer(),
   // TODO daily forecasts
@@ -180,6 +186,7 @@ class ProgramDesignSerializer extends Serializer<ProgramDesign>
   'dataRepository',
   'pos',
   'rect',
+  'size',
 ])
 class FrameSerializer extends Serializer<Frame> with _$FrameSerializer {}
 
@@ -230,14 +237,14 @@ class PageItemSerializer extends Serializer<PageItem> {
 class FontPropertiesSerializer extends Serializer<FontProperties>
     with _$FontPropertiesSerializer {}
 
-@GenSerializer(ignore: ['onRectChange', 'dataRepository', 'pos', 'rect'])
+@GenSerializer(ignore: ['onRectChange', 'dataRepository', 'pos', 'rect', 'size'])
 class TextItemSerializer extends Serializer<TextItem>
     with _$TextItemSerializer {
   static final serializer = TextItemSerializer();
 }
 
 @GenSerializer(
-    ignore: ['onRectChange', 'pos', 'rect', 'dataRepository'],
+    ignore: ['onRectChange', 'pos', 'rect', 'dataRepository', 'size'],
     fields: {'fit': Field(processor: FitFieldProcessor())})
 class ImageItemSerializer extends Serializer<ImageItem>
     with _$ImageItemSerializer {
@@ -245,7 +252,7 @@ class ImageItemSerializer extends Serializer<ImageItem>
 }
 
 @GenSerializer(
-    ignore: ['onRectChange', 'pos', 'rect', 'dataRepository'],
+    ignore: ['onRectChange', 'pos', 'rect', 'dataRepository', 'size'],
     fields: {'fit': Field(processor: VideoFitFieldProcessor())})
 class VideoItemSerializer extends Serializer<VideoItem>
     with _$VideoItemSerializer {
@@ -317,3 +324,27 @@ class WeekScheduleSerializer extends Serializer<WeekSchedule>
 @GenSerializer()
 class PageScheduleSerializer extends Serializer<PageSchedule>
     with _$PageScheduleSerializer {}
+
+@GenSerializer()
+class MachineSerializer extends Serializer<Machine>
+    with _$MachineSerializer {}
+
+@GenSerializer()
+class MediaImageSerializer extends Serializer<MediaImage>
+    with _$MediaImageSerializer {}
+
+@GenSerializer()
+class MediaVideoSerializer extends Serializer<MediaVideo>
+    with _$MediaVideoSerializer {}
+
+@GenSerializer()
+class MediaAudioSerializer extends Serializer<MediaAudio>
+    with _$MediaAudioSerializer {}
+
+@GenSerializer()
+class MediaFontSerializer extends Serializer<MediaFont>
+    with _$MediaFontSerializer {}
+
+@GenSerializer()
+class MediaCreatorSerializer extends Serializer<MediaCreator>
+    with _$MediaCreatorSerializer {}
