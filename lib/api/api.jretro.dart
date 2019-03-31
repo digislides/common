@@ -151,3 +151,20 @@ abstract class _$WeatherApiClient implements ApiClient {
     return req.go(throwOnErr: true).map(decodeOne);
   }
 }
+
+abstract class _$MediaImageApiClient implements ApiClient {
+  final String basePath = "/api/media/image";
+  Future<MediaImage> create(MediaCreator model, MultipartFile file) async {
+    var req = base.post
+        .path(basePath)
+        .multipart((jsonConverter.to(model) as Map<String, dynamic>)
+            .map((key, value) => MapEntry(key, value.toString())))
+        .multipart({"file": file});
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<List<MediaImage>> getAll(String search) async {
+    var req = base.get.path(basePath).query("search", search);
+    return req.go(throwOnErr: true).map(decodeList);
+  }
+}

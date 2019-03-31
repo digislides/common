@@ -14,6 +14,8 @@ final channelApi = ChannelApi(base);
 
 final weatherApi = WeatherApi(base);
 
+final mediaImageApi = MediaImageApi(base);
+
 @GenApiClient(path: '/api/auth')
 class AuthApi extends ApiClient with _$AuthApiClient {
   final Route base;
@@ -130,4 +132,35 @@ class WeatherApi extends ApiClient with _$WeatherApiClient {
   @GetReq(path: '/hourly/:place')
   Future<HourlyForecasts> getHourlyByName(@PathParam() String place) =>
       super.getHourlyByName(place);
+}
+
+@GenApiClient(path: '/api/media/image')
+class MediaImageApi extends ApiClient with _$MediaImageApiClient {
+  final Route base;
+
+  MediaImageApi(this.base) {
+    jsonConverter = repo;
+  }
+
+  @PostReq()
+  Future<MediaImage> create(@AsMultipart() MediaCreator model,
+          @AsMultipartField() MultipartFile file) =>
+      super.create(model, file);
+
+  @GetReq()
+  Future<List<MediaImage>> getAll(@QueryParam() String search) =>
+      super.getAll(search);
+
+  /*
+  @PutReq(path: '/:id')
+  Future<Channel> save(
+      @PathParam() String id, @AsJson() ChannelCreator model) =>
+      super.save(id, model);
+
+  @GetReq(path: '/:id')
+  Future<Channel> getById(@PathParam() String id) => super.getById(id);
+
+  @DeleteReq(path: '/:id')
+  Future<void> delete(@PathParam() String id) => super.delete(id);
+      */
 }
