@@ -167,4 +167,13 @@ abstract class _$MediaImageApiClient implements ApiClient {
     var req = base.get.path(basePath).query("search", search);
     return req.go(throwOnErr: true).map(decodeList);
   }
+
+  Future<Channel> save(String id, MediaCreator model) async {
+    var req = base.put
+        .path(basePath)
+        .path("/:id")
+        .pathParams("id", id)
+        .json(jsonConverter.to(model));
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
 }

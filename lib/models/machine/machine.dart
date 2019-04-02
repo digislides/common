@@ -39,6 +39,8 @@ abstract class Media implements HasAccess {
 
   List<String> tags;
 
+  String extension;
+
   int storage;
 }
 
@@ -53,6 +55,8 @@ class MediaImage extends HasAccess implements Media {
 
   List<String> tags;
 
+  String extension;
+
   int storage;
 
   int width;
@@ -65,11 +69,12 @@ class MediaImage extends HasAccess implements Media {
       this.owner,
       this.members: const {},
       this.tags,
+      this.extension,
       this.storage,
       this.width,
       this.height});
 
-  String get url => "/m/$name";
+  String get url => "/m/$id$extension";
 
   String get urlCss => "url($url)";
 
@@ -91,6 +96,8 @@ class MediaVideo extends HasAccess implements Media {
 
   List<String> tags;
 
+  String extension;
+
   int storage;
 
   int width;
@@ -105,10 +112,15 @@ class MediaVideo extends HasAccess implements Media {
       this.owner,
       this.members: const {},
       this.tags,
+      this.extension,
       this.storage,
       this.width,
       this.height,
       this.length});
+
+  String get url => "/m/$id$extension";
+
+  String get urlCss => "url($url)";
 
   Map toJson() => serializer.toMap(this);
 
@@ -128,6 +140,8 @@ class MediaAudio extends HasAccess implements Media {
 
   List<String> tags;
 
+  String extension;
+
   int storage;
 
   int length;
@@ -138,8 +152,13 @@ class MediaAudio extends HasAccess implements Media {
       this.owner,
       this.members: const {},
       this.tags,
+      this.extension,
       this.storage,
       this.length});
+
+  String get url => "/m/$id$extension";
+
+  String get urlCss => "url($url)";
 
   Map toJson() => serializer.toMap(this);
 
@@ -159,6 +178,8 @@ class MediaFont extends HasAccess implements Media {
 
   List<String> tags;
 
+  String extension;
+
   int storage;
 
   MediaFont(
@@ -167,7 +188,12 @@ class MediaFont extends HasAccess implements Media {
       this.owner,
       this.members: const {},
       this.tags,
+      this.extension,
       this.storage});
+
+  String get url => "/m/$id$extension";
+
+  String get urlCss => "url($url)";
 
   Map toJson() => serializer.toMap(this);
 

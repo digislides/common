@@ -736,9 +736,12 @@ abstract class _$MediaImageSerializer implements Serializer<MediaImage> {
     setMapValue(ret, 'owner', model.owner);
     setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
+    setMapValue(ret, 'extension', model.extension);
     setMapValue(ret, 'storage', model.storage);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
+    setMapValue(ret, 'url', model.url);
+    setMapValue(ret, 'urlCss', model.urlCss);
     return ret;
   }
 
@@ -752,6 +755,7 @@ abstract class _$MediaImageSerializer implements Serializer<MediaImage> {
     obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.tags =
         codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
+    obj.extension = map['extension'] as String;
     obj.storage = map['storage'] as int;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
@@ -769,10 +773,13 @@ abstract class _$MediaVideoSerializer implements Serializer<MediaVideo> {
     setMapValue(ret, 'owner', model.owner);
     setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
+    setMapValue(ret, 'extension', model.extension);
     setMapValue(ret, 'storage', model.storage);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
     setMapValue(ret, 'length', model.length);
+    setMapValue(ret, 'url', model.url);
+    setMapValue(ret, 'urlCss', model.urlCss);
     return ret;
   }
 
@@ -786,6 +793,7 @@ abstract class _$MediaVideoSerializer implements Serializer<MediaVideo> {
     obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.tags =
         codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
+    obj.extension = map['extension'] as String;
     obj.storage = map['storage'] as int;
     obj.width = map['width'] as int;
     obj.height = map['height'] as int;
@@ -804,8 +812,11 @@ abstract class _$MediaAudioSerializer implements Serializer<MediaAudio> {
     setMapValue(ret, 'owner', model.owner);
     setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
+    setMapValue(ret, 'extension', model.extension);
     setMapValue(ret, 'storage', model.storage);
     setMapValue(ret, 'length', model.length);
+    setMapValue(ret, 'url', model.url);
+    setMapValue(ret, 'urlCss', model.urlCss);
     return ret;
   }
 
@@ -819,6 +830,7 @@ abstract class _$MediaAudioSerializer implements Serializer<MediaAudio> {
     obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.tags =
         codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
+    obj.extension = map['extension'] as String;
     obj.storage = map['storage'] as int;
     obj.length = map['length'] as int;
     return obj;
@@ -835,7 +847,10 @@ abstract class _$MediaFontSerializer implements Serializer<MediaFont> {
     setMapValue(ret, 'owner', model.owner);
     setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(ret, 'tags', codeIterable(model.tags, (val) => val as String));
+    setMapValue(ret, 'extension', model.extension);
     setMapValue(ret, 'storage', model.storage);
+    setMapValue(ret, 'url', model.url);
+    setMapValue(ret, 'urlCss', model.urlCss);
     return ret;
   }
 
@@ -849,6 +864,7 @@ abstract class _$MediaFontSerializer implements Serializer<MediaFont> {
     obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
     obj.tags =
         codeIterable<String>(map['tags'] as Iterable, (val) => val as String);
+    obj.extension = map['extension'] as String;
     obj.storage = map['storage'] as int;
     return obj;
   }
