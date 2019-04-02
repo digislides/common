@@ -19,6 +19,8 @@ class MediaCreator {
 
   List<String> tags;
 
+  MediaCreator({this.name, this.tags});
+
   Map toJson() => serializer.toMap(this);
 
   String toString() => toJson().toString();
