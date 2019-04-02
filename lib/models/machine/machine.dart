@@ -69,6 +69,10 @@ class MediaImage extends HasAccess implements Media {
       this.width,
       this.height});
 
+  String get url => "/m/$name";
+
+  String get urlCss => "url($url)";
+
   Map toJson() => serializer.toMap(this);
 
   String toString() => toJson().toString();
