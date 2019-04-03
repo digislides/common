@@ -168,7 +168,7 @@ abstract class _$MediaImageApiClient implements ApiClient {
     return req.go(throwOnErr: true).map(decodeList);
   }
 
-  Future<Channel> save(String id, MediaCreator model) async {
+  Future<MediaVideo> save(String id, MediaCreator model) async {
     var req = base.put
         .path(basePath)
         .path("/:id")
@@ -178,6 +178,114 @@ abstract class _$MediaImageApiClient implements ApiClient {
   }
 
   Future<MediaImage> getById(String id) async {
+    var req = base.get.path(basePath).path("/:id").pathParams("id", id);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<void> delete(String id) async {
+    var req = base.delete.path(basePath).path("/:id").pathParams("id", id);
+    await req.go(throwOnErr: true);
+  }
+}
+
+abstract class _$MediaVideoApiClient implements ApiClient {
+  final String basePath = "/api/media/video";
+  Future<MediaVideo> create(MediaCreator model, MultipartFile file) async {
+    var req = base.post
+        .path(basePath)
+        .multipart((jsonConverter.to(model) as Map<String, dynamic>)
+            .map((key, value) => MapEntry(key, value.toString())))
+        .multipart({"file": file});
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<List<MediaVideo>> getAll(String search) async {
+    var req = base.get.path(basePath).query("search", search);
+    return req.go(throwOnErr: true).map(decodeList);
+  }
+
+  Future<MediaVideo> save(String id, MediaCreator model) async {
+    var req = base.put
+        .path(basePath)
+        .path("/:id")
+        .pathParams("id", id)
+        .json(jsonConverter.to(model));
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<MediaVideo> getById(String id) async {
+    var req = base.get.path(basePath).path("/:id").pathParams("id", id);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<void> delete(String id) async {
+    var req = base.delete.path(basePath).path("/:id").pathParams("id", id);
+    await req.go(throwOnErr: true);
+  }
+}
+
+abstract class _$MediaAudioApiClient implements ApiClient {
+  final String basePath = "/api/media/audio";
+  Future<MediaAudio> create(MediaCreator model, MultipartFile file) async {
+    var req = base.post
+        .path(basePath)
+        .multipart((jsonConverter.to(model) as Map<String, dynamic>)
+            .map((key, value) => MapEntry(key, value.toString())))
+        .multipart({"file": file});
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<List<MediaAudio>> getAll(String search) async {
+    var req = base.get.path(basePath).query("search", search);
+    return req.go(throwOnErr: true).map(decodeList);
+  }
+
+  Future<MediaAudio> save(String id, MediaCreator model) async {
+    var req = base.put
+        .path(basePath)
+        .path("/:id")
+        .pathParams("id", id)
+        .json(jsonConverter.to(model));
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<MediaAudio> getById(String id) async {
+    var req = base.get.path(basePath).path("/:id").pathParams("id", id);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<void> delete(String id) async {
+    var req = base.delete.path(basePath).path("/:id").pathParams("id", id);
+    await req.go(throwOnErr: true);
+  }
+}
+
+abstract class _$MediaFontApiClient implements ApiClient {
+  final String basePath = "/api/media/font";
+  Future<MediaFont> create(MediaCreator model, MultipartFile file) async {
+    var req = base.post
+        .path(basePath)
+        .multipart((jsonConverter.to(model) as Map<String, dynamic>)
+            .map((key, value) => MapEntry(key, value.toString())))
+        .multipart({"file": file});
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<List<MediaFont>> getAll(String search) async {
+    var req = base.get.path(basePath).query("search", search);
+    return req.go(throwOnErr: true).map(decodeList);
+  }
+
+  Future<MediaFont> save(String id, MediaCreator model) async {
+    var req = base.put
+        .path(basePath)
+        .path("/:id")
+        .pathParams("id", id)
+        .json(jsonConverter.to(model));
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<MediaFont> getById(String id) async {
     var req = base.get.path(basePath).path("/:id").pathParams("id", id);
     return req.go(throwOnErr: true).map(decodeOne);
   }

@@ -16,6 +16,12 @@ final weatherApi = WeatherApi(base);
 
 final mediaImageApi = MediaImageApi(base);
 
+final mediaVideoApi = MediaVideoApi(base);
+
+final mediaAudioApi = MediaAudioApi(base);
+
+final mediaFontApi = MediaFontApi(base);
+
 @GenApiClient(path: '/api/auth')
 class AuthApi extends ApiClient with _$AuthApiClient {
   final Route base;
@@ -152,11 +158,95 @@ class MediaImageApi extends ApiClient with _$MediaImageApiClient {
       super.getAll(search);
 
   @PutReq(path: '/:id')
-  Future<Channel> save(@PathParam() String id, @AsJson() MediaCreator model) =>
+  Future<MediaVideo> save(@PathParam() String id, @AsJson() MediaCreator model) =>
       super.save(id, model);
 
   @GetReq(path: '/:id')
   Future<MediaImage> getById(@PathParam() String id) => super.getById(id);
+
+  @DeleteReq(path: '/:id')
+  Future<void> delete(@PathParam() String id) => super.delete(id);
+}
+
+@GenApiClient(path: '/api/media/video')
+class MediaVideoApi extends ApiClient with _$MediaVideoApiClient {
+  final Route base;
+
+  MediaVideoApi(this.base) {
+    jsonConverter = repo;
+  }
+
+  @PostReq()
+  Future<MediaVideo> create(@AsMultipart() MediaCreator model,
+      @AsMultipartField() MultipartFile file) =>
+      super.create(model, file);
+
+  @GetReq()
+  Future<List<MediaVideo>> getAll(@QueryParam() String search) =>
+      super.getAll(search);
+
+  @PutReq(path: '/:id')
+  Future<MediaVideo> save(@PathParam() String id, @AsJson() MediaCreator model) =>
+      super.save(id, model);
+
+  @GetReq(path: '/:id')
+  Future<MediaVideo> getById(@PathParam() String id) => super.getById(id);
+
+  @DeleteReq(path: '/:id')
+  Future<void> delete(@PathParam() String id) => super.delete(id);
+}
+
+@GenApiClient(path: '/api/media/audio')
+class MediaAudioApi extends ApiClient with _$MediaAudioApiClient {
+  final Route base;
+
+  MediaAudioApi(this.base) {
+    jsonConverter = repo;
+  }
+
+  @PostReq()
+  Future<MediaAudio> create(@AsMultipart() MediaCreator model,
+      @AsMultipartField() MultipartFile file) =>
+      super.create(model, file);
+
+  @GetReq()
+  Future<List<MediaAudio>> getAll(@QueryParam() String search) =>
+      super.getAll(search);
+
+  @PutReq(path: '/:id')
+  Future<MediaAudio> save(@PathParam() String id, @AsJson() MediaCreator model) =>
+      super.save(id, model);
+
+  @GetReq(path: '/:id')
+  Future<MediaAudio> getById(@PathParam() String id) => super.getById(id);
+
+  @DeleteReq(path: '/:id')
+  Future<void> delete(@PathParam() String id) => super.delete(id);
+}
+
+@GenApiClient(path: '/api/media/font')
+class MediaFontApi extends ApiClient with _$MediaFontApiClient {
+  final Route base;
+
+  MediaFontApi(this.base) {
+    jsonConverter = repo;
+  }
+
+  @PostReq()
+  Future<MediaFont> create(@AsMultipart() MediaCreator model,
+      @AsMultipartField() MultipartFile file) =>
+      super.create(model, file);
+
+  @GetReq()
+  Future<List<MediaFont>> getAll(@QueryParam() String search) =>
+      super.getAll(search);
+
+  @PutReq(path: '/:id')
+  Future<MediaFont> save(@PathParam() String id, @AsJson() MediaCreator model) =>
+      super.save(id, model);
+
+  @GetReq(path: '/:id')
+  Future<MediaFont> getById(@PathParam() String id) => super.getById(id);
 
   @DeleteReq(path: '/:id')
   Future<void> delete(@PathParam() String id) => super.delete(id);
