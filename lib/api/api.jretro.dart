@@ -176,4 +176,14 @@ abstract class _$MediaImageApiClient implements ApiClient {
         .json(jsonConverter.to(model));
     return req.go(throwOnErr: true).map(decodeOne);
   }
+
+  Future<MediaImage> getById(String id) async {
+    var req = base.get.path(basePath).path("/:id").pathParams("id", id);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<void> delete(String id) async {
+    var req = base.delete.path(basePath).path("/:id").pathParams("id", id);
+    await req.go(throwOnErr: true);
+  }
 }

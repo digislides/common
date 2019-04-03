@@ -155,11 +155,9 @@ class MediaImageApi extends ApiClient with _$MediaImageApiClient {
   Future<Channel> save(@PathParam() String id, @AsJson() MediaCreator model) =>
       super.save(id, model);
 
-  /*
   @GetReq(path: '/:id')
-  Future<Channel> getById(@PathParam() String id) => super.getById(id);
+  Future<MediaImage> getById(@PathParam() String id) => super.getById(id);
 
   @DeleteReq(path: '/:id')
   Future<void> delete(@PathParam() String id) => super.delete(id);
-      */
 }
