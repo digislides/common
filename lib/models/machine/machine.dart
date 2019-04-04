@@ -42,6 +42,10 @@ abstract class Media implements HasAccess {
   String extension;
 
   int storage;
+
+  String get url => "/m/$id$extension";
+
+  String get urlCss => "url($url)";
 }
 
 class MediaImage extends HasAccess implements Media {
