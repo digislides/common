@@ -307,6 +307,13 @@ class ChannelPublicSerializer extends Serializer<ChannelPublic>
 class ChannelCreatorSerializer extends Serializer<ChannelCreator>
     with _$ChannelCreatorSerializer {}
 
+@GenSerializer(fields: const {
+  "start": Field(processor: millisecondsProcessor),
+  "end": Field(processor: millisecondsProcessor),
+})
+class DateIntervalSerializer extends Serializer<DateInterval>
+    with _$DateIntervalSerializer {}
+
 @GenSerializer(ignore: ['startStr', 'stopStr'])
 class TimeIntervalSerializer extends Serializer<TimeInterval>
     with _$TimeIntervalSerializer {}

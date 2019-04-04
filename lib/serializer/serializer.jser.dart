@@ -621,6 +621,27 @@ abstract class _$ChannelCreatorSerializer
   }
 }
 
+abstract class _$DateIntervalSerializer implements Serializer<DateInterval> {
+  final _millisecondsProcessor = const MillisecondsProcessor();
+  @override
+  Map<String, dynamic> toMap(DateInterval model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'start', _millisecondsProcessor.serialize(model.start));
+    setMapValue(ret, 'end', _millisecondsProcessor.serialize(model.end));
+    return ret;
+  }
+
+  @override
+  DateInterval fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new DateInterval();
+    obj.start = _millisecondsProcessor.deserialize(map['start'] as int);
+    obj.end = _millisecondsProcessor.deserialize(map['end'] as int);
+    return obj;
+  }
+}
+
 abstract class _$TimeIntervalSerializer implements Serializer<TimeInterval> {
   @override
   Map<String, dynamic> toMap(TimeInterval model) {
@@ -646,6 +667,9 @@ abstract class _$WeekScheduleSerializer implements Serializer<WeekSchedule> {
   Serializer<TimeInterval> __timeIntervalSerializer;
   Serializer<TimeInterval> get _timeIntervalSerializer =>
       __timeIntervalSerializer ??= new TimeIntervalSerializer();
+  Serializer<DateInterval> __dateIntervalSerializer;
+  Serializer<DateInterval> get _dateIntervalSerializer =>
+      __dateIntervalSerializer ??= new DateIntervalSerializer();
   @override
   Map<String, dynamic> toMap(WeekSchedule model) {
     if (model == null) return null;
@@ -656,6 +680,7 @@ abstract class _$WeekScheduleSerializer implements Serializer<WeekSchedule> {
         'times',
         codeIterable(model.times,
             (val) => _timeIntervalSerializer.toMap(val as TimeInterval)));
+    setMapValue(ret, 'date', _dateIntervalSerializer.toMap(model.date));
     setMapValue(ret, 'not', model.not);
     return ret;
   }
@@ -667,6 +692,7 @@ abstract class _$WeekScheduleSerializer implements Serializer<WeekSchedule> {
     obj.dayMap = map['dayMap'] as int;
     obj.times = codeIterable<TimeInterval>(map['times'] as Iterable,
         (val) => _timeIntervalSerializer.fromMap(val as Map));
+    obj.date = _dateIntervalSerializer.fromMap(map['date'] as Map);
     obj.not = map['not'] as bool;
     return obj;
   }

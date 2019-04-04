@@ -1,3 +1,9 @@
+class DateInterval {
+  DateTime start;
+
+  DateTime end;
+}
+
 class TimeInterval {
   int _start = 0;
 
@@ -119,6 +125,8 @@ class WeekSchedule {
   }
 
   List<TimeInterval> times = [];
+
+  DateInterval date;
 
   bool not = false;
 
