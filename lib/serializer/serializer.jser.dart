@@ -698,9 +698,9 @@ abstract class _$PageScheduleSerializer implements Serializer<PageSchedule> {
   }
 }
 
-abstract class _$MachineSerializer implements Serializer<Machine> {
+abstract class _$MonitorSerializer implements Serializer<Monitor> {
   @override
-  Map<String, dynamic> toMap(Machine model) {
+  Map<String, dynamic> toMap(Monitor model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
@@ -713,13 +713,36 @@ abstract class _$MachineSerializer implements Serializer<Machine> {
   }
 
   @override
-  Machine fromMap(Map map) {
+  Monitor fromMap(Map map) {
     if (map == null) return null;
-    final obj = new Machine();
+    final obj = new Monitor();
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
     obj.owner = map['owner'] as String;
     obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
+    obj.fields =
+        codeIterable<String>(map['fields'] as Iterable, (val) => val as String);
+    return obj;
+  }
+}
+
+abstract class _$MonitorCreatorSerializer
+    implements Serializer<MonitorCreator> {
+  @override
+  Map<String, dynamic> toMap(MonitorCreator model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'name', model.name);
+    setMapValue(
+        ret, 'fields', codeIterable(model.fields, (val) => val as String));
+    return ret;
+  }
+
+  @override
+  MonitorCreator fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new MonitorCreator();
+    obj.name = map['name'] as String;
     obj.fields =
         codeIterable<String>(map['fields'] as Iterable, (val) => val as String);
     return obj;

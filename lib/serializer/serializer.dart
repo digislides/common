@@ -18,7 +18,8 @@ final repo = JsonRepo(serializers: [
   ChannelPublicSerializer(),
   ChannelSerializer(),
   ChannelRunningSerializer(),
-  MachineSerializer(),
+  MonitorSerializer(),
+  MonitorCreatorSerializer(),
   MediaCreatorSerializer(),
   MediaImageSerializer(),
   MediaVideoSerializer(),
@@ -327,7 +328,11 @@ class PageScheduleSerializer extends Serializer<PageSchedule>
     with _$PageScheduleSerializer {}
 
 @GenSerializer()
-class MachineSerializer extends Serializer<Machine> with _$MachineSerializer {}
+class MonitorSerializer extends Serializer<Monitor> with _$MonitorSerializer {}
+
+@GenSerializer()
+class MonitorCreatorSerializer extends Serializer<MonitorCreator>
+    with _$MonitorCreatorSerializer {}
 
 @GenSerializer()
 class MediaImageSerializer extends Serializer<MediaImage>
