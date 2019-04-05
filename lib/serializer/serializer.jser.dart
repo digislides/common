@@ -245,6 +245,9 @@ abstract class _$FrameSerializer implements Serializer<Frame> {
 abstract class _$PageSerializer implements Serializer<Page> {
   final _fitFieldProcessor = const FitFieldProcessor();
   final _transitionFieldProcessor = const TransitionFieldProcessor();
+  Serializer<PageSchedule> __pageScheduleSerializer;
+  Serializer<PageSchedule> get _pageScheduleSerializer =>
+      __pageScheduleSerializer ??= new PageScheduleSerializer();
   Serializer<PageItem> __pageItemSerializer;
   Serializer<PageItem> get _pageItemSerializer =>
       __pageItemSerializer ??= new PageItemSerializer();
@@ -261,6 +264,7 @@ abstract class _$PageSerializer implements Serializer<Page> {
     setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
     setMapValue(ret, 'transition',
         _transitionFieldProcessor.serialize(model.transition));
+    setMapValue(ret, 'schedule', _pageScheduleSerializer.toMap(model.schedule));
     setMapValue(
         ret,
         'items',
@@ -287,6 +291,7 @@ abstract class _$PageSerializer implements Serializer<Page> {
     obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
     obj.transition =
         _transitionFieldProcessor.deserialize(map['transition'] as int);
+    obj.schedule = _pageScheduleSerializer.fromMap(map['schedule'] as Map);
     obj.duration = map['duration'] as int;
     return obj;
   }
@@ -622,13 +627,15 @@ abstract class _$ChannelCreatorSerializer
 }
 
 abstract class _$DateIntervalSerializer implements Serializer<DateInterval> {
-  final _millisecondsProcessor = const MillisecondsProcessor();
+  final _dateProcessor = const DateProcessor();
   @override
   Map<String, dynamic> toMap(DateInterval model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
-    setMapValue(ret, 'start', _millisecondsProcessor.serialize(model.start));
-    setMapValue(ret, 'end', _millisecondsProcessor.serialize(model.end));
+    setMapValue(ret, 'start', _dateProcessor.serialize(model.start));
+    setMapValue(ret, 'end', _dateProcessor.serialize(model.end));
+    setMapValue(ret, 'startStr', model.startStr);
+    setMapValue(ret, 'endStr', model.endStr);
     return ret;
   }
 
@@ -636,8 +643,8 @@ abstract class _$DateIntervalSerializer implements Serializer<DateInterval> {
   DateInterval fromMap(Map map) {
     if (map == null) return null;
     final obj = new DateInterval();
-    obj.start = _millisecondsProcessor.deserialize(map['start'] as int);
-    obj.end = _millisecondsProcessor.deserialize(map['end'] as int);
+    obj.start = _dateProcessor.deserialize(map['start'] as String);
+    obj.end = _dateProcessor.deserialize(map['end'] as String);
     return obj;
   }
 }
@@ -680,7 +687,11 @@ abstract class _$WeekScheduleSerializer implements Serializer<WeekSchedule> {
         'times',
         codeIterable(model.times,
             (val) => _timeIntervalSerializer.toMap(val as TimeInterval)));
-    setMapValue(ret, 'date', _dateIntervalSerializer.toMap(model.date));
+    setMapValue(
+        ret,
+        'dates',
+        codeIterable(model.dates,
+            (val) => _dateIntervalSerializer.toMap(val as DateInterval)));
     setMapValue(ret, 'not', model.not);
     return ret;
   }
@@ -692,7 +703,8 @@ abstract class _$WeekScheduleSerializer implements Serializer<WeekSchedule> {
     obj.dayMap = map['dayMap'] as int;
     obj.times = codeIterable<TimeInterval>(map['times'] as Iterable,
         (val) => _timeIntervalSerializer.fromMap(val as Map));
-    obj.date = _dateIntervalSerializer.fromMap(map['date'] as Map);
+    obj.dates = codeIterable<DateInterval>(map['dates'] as Iterable,
+        (val) => _dateIntervalSerializer.fromMap(val as Map));
     obj.not = map['not'] as bool;
     return obj;
   }

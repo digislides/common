@@ -1,7 +1,47 @@
-class DateInterval {
-  DateTime start;
+import 'package:date_format/date_format.dart';
 
-  DateTime end;
+class DateInterval {
+  DateTime _start = DateTime.now();
+
+  DateTime _end = DateTime.now();
+
+  DateTime get start => _start;
+
+  DateTime get end => _end;
+
+  set start(v) {
+    if (v is DateTime) {
+      _start = v;
+    } else if (v is String) {
+      final parts = v.split("-").map((v) => int.tryParse(v)).toList();
+      if (parts.length == 3) {
+        _start = DateTime(parts[0], parts[1], parts[2]);
+      } else {
+        _start = DateTime.now();
+      }
+    } else {
+      _start = DateTime.now();
+    }
+  }
+
+  set end(v) {
+    if (v is DateTime) {
+      _end = v;
+    } else if (v is String) {
+      final parts = v.split("-").map((v) => int.tryParse(v)).toList();
+      if (parts.length == 3) {
+        _end = DateTime(parts[0], parts[1], parts[2]);
+      } else {
+        _end = DateTime.now();
+      }
+    } else {
+      _start = DateTime.now();
+    }
+  }
+
+  String get startStr => formatDate(_start, [yyyy, "-", mm, "-", dd]);
+
+  String get endStr => formatDate(_end, [yyyy, "-", mm, "-", dd]);
 
   bool isDateInRange(DateTime now) {
     if (now.day == start.day &&
@@ -75,7 +115,7 @@ class TimeInterval {
 }
 
 class WeekSchedule {
-  int dayMap = 0;
+  int dayMap = 0x7F;
 
   bool get monday => dayMap & 0x1 != 0;
 
@@ -142,7 +182,7 @@ class WeekSchedule {
 
   List<TimeInterval> times = [];
 
-  DateInterval date;
+  List<DateInterval> dates = [];
 
   bool not = false;
 
@@ -155,8 +195,8 @@ class WeekSchedule {
     if (times.isNotEmpty) {
       timeMatches = times.any((ti) => ti.isDateInRange(now));
     }
-    if (date != null) {
-      dateMatches = date.isDateInRange(now);
+    if (dates.isNotEmpty) {
+      dateMatches = dates.any((d) => d.isDateInRange(now));
     }
     return dayMatches && timeMatches && dateMatches;
   }

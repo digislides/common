@@ -45,6 +45,23 @@ class Seconds2019Processor implements FieldProcessor<DateTime, int> {
   }
 }
 
+class DateProcessor implements FieldProcessor<DateTime, String> {
+  const DateProcessor();
+
+  String serialize(DateTime value) {
+    if (value == null) return null;
+    return "${value.year}-${value.month}-${value.day}";
+  }
+
+  @override
+  DateTime deserialize(String value) {
+    if (value == null) return null;
+    if (value is! String) return DateTime.now();
+    final parts = value.split("-").map((p) => int.tryParse(p)).toList();
+    return DateTime(parts[0], parts[1], parts[2]);
+  }
+}
+
 class WeatherThemeProcessor implements FieldProcessor<WeatherTheme, int> {
   const WeatherThemeProcessor();
 
@@ -308,8 +325,8 @@ class ChannelCreatorSerializer extends Serializer<ChannelCreator>
     with _$ChannelCreatorSerializer {}
 
 @GenSerializer(fields: const {
-  "start": Field(processor: millisecondsProcessor),
-  "end": Field(processor: millisecondsProcessor),
+  "start": Field(processor: DateProcessor()),
+  "end": Field(processor: DateProcessor()),
 })
 class DateIntervalSerializer extends Serializer<DateInterval>
     with _$DateIntervalSerializer {}

@@ -60,9 +60,12 @@ class Page implements Sizable {
     this.transition: Transition.none,
     Iterable<PageItem> items,
     DataRepository dataRepository,
+    this.schedule,
   }) {
     if (items != null) this.items.addAll(items);
     this._duration = duration;
+
+    schedule ??= PageSchedule();
 
     if (dataRepository != null) this.dataRepository = dataRepository;
   }
