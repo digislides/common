@@ -736,7 +736,30 @@ abstract class _$PageScheduleSerializer implements Serializer<PageSchedule> {
   }
 }
 
+abstract class _$InfoFieldSerializer implements Serializer<InfoField> {
+  @override
+  Map<String, dynamic> toMap(InfoField model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'value', model.value);
+    return ret;
+  }
+
+  @override
+  InfoField fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new InfoField();
+    obj.name = map['name'] as String;
+    obj.value = map['value'] as String;
+    return obj;
+  }
+}
+
 abstract class _$MonitorSerializer implements Serializer<Monitor> {
+  Serializer<InfoField> __infoFieldSerializer;
+  Serializer<InfoField> get _infoFieldSerializer =>
+      __infoFieldSerializer ??= new InfoFieldSerializer();
   @override
   Map<String, dynamic> toMap(Monitor model) {
     if (model == null) return null;
@@ -746,7 +769,10 @@ abstract class _$MonitorSerializer implements Serializer<Monitor> {
     setMapValue(ret, 'owner', model.owner);
     setMapValue(ret, 'members', codeMap(model.members, (val) => val as int));
     setMapValue(
-        ret, 'fields', codeIterable(model.fields, (val) => val as String));
+        ret,
+        'fields',
+        codeIterable(model.fields,
+            (val) => _infoFieldSerializer.toMap(val as InfoField)));
     return ret;
   }
 
@@ -758,21 +784,27 @@ abstract class _$MonitorSerializer implements Serializer<Monitor> {
     obj.name = map['name'] as String;
     obj.owner = map['owner'] as String;
     obj.members = codeMap<int>(map['members'] as Map, (val) => val as int);
-    obj.fields =
-        codeIterable<String>(map['fields'] as Iterable, (val) => val as String);
+    obj.fields = codeIterable<InfoField>(map['fields'] as Iterable,
+        (val) => _infoFieldSerializer.fromMap(val as Map));
     return obj;
   }
 }
 
 abstract class _$MonitorCreatorSerializer
     implements Serializer<MonitorCreator> {
+  Serializer<InfoField> __infoFieldSerializer;
+  Serializer<InfoField> get _infoFieldSerializer =>
+      __infoFieldSerializer ??= new InfoFieldSerializer();
   @override
   Map<String, dynamic> toMap(MonitorCreator model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'name', model.name);
     setMapValue(
-        ret, 'fields', codeIterable(model.fields, (val) => val as String));
+        ret,
+        'fields',
+        codeIterable(model.fields,
+            (val) => _infoFieldSerializer.toMap(val as InfoField)));
     return ret;
   }
 
@@ -781,8 +813,8 @@ abstract class _$MonitorCreatorSerializer
     if (map == null) return null;
     final obj = new MonitorCreator();
     obj.name = map['name'] as String;
-    obj.fields =
-        codeIterable<String>(map['fields'] as Iterable, (val) => val as String);
+    obj.fields = codeIterable<InfoField>(map['fields'] as Iterable,
+        (val) => _infoFieldSerializer.fromMap(val as Map));
     return obj;
   }
 }

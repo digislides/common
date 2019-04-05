@@ -133,6 +133,38 @@ abstract class _$ChannelApiClient implements ApiClient {
   }
 }
 
+abstract class _$MonitorApiClient implements ApiClient {
+  final String basePath = "/api/monitor";
+  Future<Monitor> create(MonitorCreator model) async {
+    var req = base.post.path(basePath).json(jsonConverter.to(model));
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<void> save(String id, MonitorCreator data) async {
+    var req = base.put
+        .path(basePath)
+        .path("/:id")
+        .pathParams("id", id)
+        .json(jsonConverter.to(data));
+    await req.go(throwOnErr: true);
+  }
+
+  Future<Monitor> getById(String id) async {
+    var req = base.get.path(basePath).path("/:id").pathParams("id", id);
+    return req.go(throwOnErr: true).map(decodeOne);
+  }
+
+  Future<List<Monitor>> getAll(String search) async {
+    var req = base.get.path(basePath).query("search", search);
+    return req.go(throwOnErr: true).map(decodeList);
+  }
+
+  Future<void> delete(String id) async {
+    var req = base.delete.path(basePath).path("/:id").pathParams("id", id);
+    await req.go(throwOnErr: true);
+  }
+}
+
 abstract class _$WeatherApiClient implements ApiClient {
   final String basePath = "/api/data/weather";
   Future<Weather> getByName(String place) async {

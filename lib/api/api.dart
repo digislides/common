@@ -12,6 +12,8 @@ final programApi = ProgramApi(base);
 
 final channelApi = ChannelApi(base);
 
+final monitorApi = MonitorApi(base);
+
 final weatherApi = WeatherApi(base);
 
 final mediaImageApi = MediaImageApi(base);
@@ -121,6 +123,36 @@ class ChannelApi extends ApiClient with _$ChannelApiClient {
   Future<void> setPlaying(
           @PathParam() String id, @QueryParam() String running) =>
       super.setPlaying(id, running);
+}
+
+@GenApiClient(path: '/api/monitor')
+class MonitorApi extends ApiClient with _$MonitorApiClient {
+  final Route base;
+
+  MonitorApi(this.base) {
+    jsonConverter = repo;
+  }
+
+  @PostReq()
+  Future<Monitor> create(@AsJson() MonitorCreator model) => super.create(model);
+
+  @PutReq(path: '/:id')
+  Future<void> save(@PathParam() String id, @AsJson() MonitorCreator data) =>
+      super.save(id, data);
+
+  @GetReq(path: '/:id')
+  Future<Monitor> getById(@PathParam() String id) => super.getById(id);
+
+  @GetReq()
+  Future<List<Monitor>> getAll(@QueryParam() String search) =>
+      super.getAll(search);
+
+  @DeleteReq(path: '/:id')
+  Future<void> delete(@PathParam() String id) => super.delete(id);
+
+// TODO transferOwnership
+
+// TODO duplicate
 }
 
 @GenApiClient(path: '/api/data/weather')

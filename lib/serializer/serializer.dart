@@ -352,6 +352,10 @@ class PageScheduleSerializer extends Serializer<PageSchedule>
     with _$PageScheduleSerializer {}
 
 @GenSerializer()
+class InfoFieldSerializer extends Serializer<InfoField>
+    with _$InfoFieldSerializer {}
+
+@GenSerializer()
 class MonitorSerializer extends Serializer<Monitor> with _$MonitorSerializer {}
 
 @GenSerializer()

@@ -2,6 +2,14 @@ import 'package:common/serializer/serializer.dart';
 
 import 'package:common/models/has_access.dart';
 
+class InfoField {
+  String name = "";
+
+  String value = "";
+
+  InfoField({this.name, this.value});
+}
+
 class Monitor extends HasAccess {
   String id;
 
@@ -11,7 +19,7 @@ class Monitor extends HasAccess {
 
   Map<String, int> members;
 
-  List<String> fields;
+  List<InfoField> fields = [];
 
   Map toJson() => serializer.toMap(this);
 
@@ -21,11 +29,16 @@ class Monitor extends HasAccess {
 }
 
 class MonitorCreator {
-  String name;
+  String name = "";
 
-  List<String> fields = [];
+  List<InfoField> fields = [];
 
-  MonitorCreator({this.name, this.fields});
+  MonitorCreator();
+
+  void reset() {
+    name = "";
+    fields.clear();
+  }
 
   Map toJson() => serializer.toMap(this);
 
