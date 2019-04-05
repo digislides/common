@@ -140,13 +140,13 @@ abstract class _$MonitorApiClient implements ApiClient {
     return req.go(throwOnErr: true).map(decodeOne);
   }
 
-  Future<void> save(String id, MonitorCreator data) async {
+  Future<Monitor> save(String id, MonitorCreator data) async {
     var req = base.put
         .path(basePath)
         .path("/:id")
         .pathParams("id", id)
         .json(jsonConverter.to(data));
-    await req.go(throwOnErr: true);
+    return req.go(throwOnErr: true).map(decodeOne);
   }
 
   Future<Monitor> getById(String id) async {

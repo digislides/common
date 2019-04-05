@@ -137,7 +137,7 @@ class MonitorApi extends ApiClient with _$MonitorApiClient {
   Future<Monitor> create(@AsJson() MonitorCreator model) => super.create(model);
 
   @PutReq(path: '/:id')
-  Future<void> save(@PathParam() String id, @AsJson() MonitorCreator data) =>
+  Future<Monitor> save(@PathParam() String id, @AsJson() MonitorCreator data) =>
       super.save(id, data);
 
   @GetReq(path: '/:id')
