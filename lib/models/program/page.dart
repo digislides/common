@@ -6,6 +6,7 @@ import 'package:common/models/program/item/item.dart';
 import 'package:common/serializer/serializer.dart';
 
 import 'package:common/data/data_repo.dart';
+import 'page_schedule.dart';
 
 export 'package:common/models/program/item/item.dart';
 
@@ -34,6 +35,8 @@ class Page implements Sizable {
   Transition transition;
 
   DataRepository _dataRepository;
+
+  PageSchedule schedule;
 
   set dataRepository(DataRepository value) {
     _dataRepository = value;

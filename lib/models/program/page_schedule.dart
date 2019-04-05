@@ -2,6 +2,15 @@ class DateInterval {
   DateTime start;
 
   DateTime end;
+
+  bool isDateInRange(DateTime now) {
+    if (now.day == start.day &&
+        now.month == start.month &&
+        now.year == start.month) return true;
+    if (now.day == end.day && now.month == end.month && now.year == end.month)
+      return true;
+    return now.isAfter(start) && now.isBefore(end);
+  }
 }
 
 class TimeInterval {
@@ -56,6 +65,13 @@ class TimeInterval {
     String s = v.toString();
     return s.length == 1 ? '0$s' : s;
   }
+
+  bool isDateInRange(DateTime date) {
+    int time = (date.hour * 60) + date.minute;
+    return time >= start && time <= stop;
+  }
+
+  bool isTimeInRange(int time) => time >= start && time <= stop;
 }
 
 class WeekSchedule {
@@ -131,8 +147,43 @@ class WeekSchedule {
   bool not = false;
 
   WeekSchedule();
+
+  bool isDateIn(DateTime now) {
+    bool dayMatches = (dayMap & (1 << now.weekday)) != 0;
+    bool timeMatches = true;
+    bool dateMatches = true;
+    if (times.isNotEmpty) {
+      timeMatches = times.any((ti) => ti.isDateInRange(now));
+    }
+    if (date != null) {
+      dateMatches = date.isDateInRange(now);
+    }
+    return dayMatches && timeMatches && dateMatches;
+  }
 }
 
 class PageSchedule {
   List<WeekSchedule> schedule = [];
+
+  bool canRun(DateTime now) {
+    if (schedule.isEmpty) return true;
+
+    bool allNots = true;
+    bool matchesAny = false;
+
+    for (final ws in schedule) {
+      if (ws.not) {
+        if (ws.isDateIn(now)) return false;
+      } else {
+        allNots = false;
+        matchesAny |= ws.isDateIn(now);
+      }
+    }
+
+    if (matchesAny) return true;
+
+    if (allNots) return true;
+
+    return false;
+  }
 }
