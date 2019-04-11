@@ -212,7 +212,9 @@ class FrameSerializer extends Serializer<Frame> with _$FrameSerializer {}
   'fit': Field(processor: FitFieldProcessor()),
   'transition': Field(processor: TransitionFieldProcessor())
 }, ignore: [
-  'dataRepository'
+  'dataRepository',
+  'width',
+  'height',
 ])
 class PageSerializer extends Serializer<Page> with _$PageSerializer {}
 

@@ -257,8 +257,6 @@ abstract class _$PageSerializer implements Serializer<Page> {
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
     setMapValue(ret, 'name', model.name);
-    setMapValue(ret, 'width', model.width);
-    setMapValue(ret, 'height', model.height);
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'image', model.image);
     setMapValue(ret, 'fit', _fitFieldProcessor.serialize(model.fit));
@@ -284,8 +282,6 @@ abstract class _$PageSerializer implements Serializer<Page> {
             getJserDefault('items'));
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
-    obj.width = map['width'] as int;
-    obj.height = map['height'] as int;
     obj.color = map['color'] as String;
     obj.image = map['image'] as String;
     obj.fit = _fitFieldProcessor.deserialize(map['fit'] as int);
