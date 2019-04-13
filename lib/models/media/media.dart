@@ -57,14 +57,14 @@ class MediaImage extends HasAccess implements Media {
 
   MediaImage(
       {this.id,
-        this.name,
-        this.owner,
-        this.members: const {},
-        this.tags,
-        this.extension,
-        this.storage,
-        this.width,
-        this.height});
+      this.name,
+      this.owner,
+      this.members: const {},
+      this.tags,
+      this.extension,
+      this.storage,
+      this.width,
+      this.height});
 
   String get url => "/m/$id$extension";
 
@@ -100,15 +100,15 @@ class MediaVideo extends HasAccess implements Media {
 
   MediaVideo(
       {this.id,
-        this.name,
-        this.owner,
-        this.members: const {},
-        this.tags,
-        this.extension,
-        this.storage,
-        this.width,
-        this.height,
-        this.length});
+      this.name,
+      this.owner,
+      this.members: const {},
+      this.tags,
+      this.extension,
+      this.storage,
+      this.width,
+      this.height,
+      this.length});
 
   String get url => "/m/$id$extension";
 
@@ -140,13 +140,13 @@ class MediaAudio extends HasAccess implements Media {
 
   MediaAudio(
       {this.id,
-        this.name,
-        this.owner,
-        this.members: const {},
-        this.tags,
-        this.extension,
-        this.storage,
-        this.length});
+      this.name,
+      this.owner,
+      this.members: const {},
+      this.tags,
+      this.extension,
+      this.storage,
+      this.length});
 
   String get url => "/m/$id$extension";
 
@@ -176,12 +176,12 @@ class MediaFont extends HasAccess implements Media {
 
   MediaFont(
       {this.id,
-        this.name,
-        this.owner,
-        this.members: const {},
-        this.tags,
-        this.extension,
-        this.storage});
+      this.name,
+      this.owner,
+      this.members: const {},
+      this.tags,
+      this.extension,
+      this.storage});
 
   String get url => "/m/$id$extension";
 

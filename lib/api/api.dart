@@ -190,7 +190,8 @@ class MediaImageApi extends ApiClient with _$MediaImageApiClient {
       super.getAll(search);
 
   @PutReq(path: '/:id')
-  Future<MediaVideo> save(@PathParam() String id, @AsJson() MediaCreator model) =>
+  Future<MediaVideo> save(
+          @PathParam() String id, @AsJson() MediaCreator model) =>
       super.save(id, model);
 
   @GetReq(path: '/:id')
@@ -210,7 +211,7 @@ class MediaVideoApi extends ApiClient with _$MediaVideoApiClient {
 
   @PostReq()
   Future<MediaVideo> create(@AsMultipart() MediaCreator model,
-      @AsMultipartField() MultipartFile file) =>
+          @AsMultipartField() MultipartFile file) =>
       super.create(model, file);
 
   @GetReq()
@@ -218,7 +219,8 @@ class MediaVideoApi extends ApiClient with _$MediaVideoApiClient {
       super.getAll(search);
 
   @PutReq(path: '/:id')
-  Future<MediaVideo> save(@PathParam() String id, @AsJson() MediaCreator model) =>
+  Future<MediaVideo> save(
+          @PathParam() String id, @AsJson() MediaCreator model) =>
       super.save(id, model);
 
   @GetReq(path: '/:id')
@@ -238,7 +240,7 @@ class MediaAudioApi extends ApiClient with _$MediaAudioApiClient {
 
   @PostReq()
   Future<MediaAudio> create(@AsMultipart() MediaCreator model,
-      @AsMultipartField() MultipartFile file) =>
+          @AsMultipartField() MultipartFile file) =>
       super.create(model, file);
 
   @GetReq()
@@ -246,7 +248,8 @@ class MediaAudioApi extends ApiClient with _$MediaAudioApiClient {
       super.getAll(search);
 
   @PutReq(path: '/:id')
-  Future<MediaAudio> save(@PathParam() String id, @AsJson() MediaCreator model) =>
+  Future<MediaAudio> save(
+          @PathParam() String id, @AsJson() MediaCreator model) =>
       super.save(id, model);
 
   @GetReq(path: '/:id')
@@ -266,7 +269,7 @@ class MediaFontApi extends ApiClient with _$MediaFontApiClient {
 
   @PostReq()
   Future<MediaFont> create(@AsMultipart() MediaCreator model,
-      @AsMultipartField() MultipartFile file) =>
+          @AsMultipartField() MultipartFile file) =>
       super.create(model, file);
 
   @GetReq()
@@ -274,7 +277,8 @@ class MediaFontApi extends ApiClient with _$MediaFontApiClient {
       super.getAll(search);
 
   @PutReq(path: '/:id')
-  Future<MediaFont> save(@PathParam() String id, @AsJson() MediaCreator model) =>
+  Future<MediaFont> save(
+          @PathParam() String id, @AsJson() MediaCreator model) =>
       super.save(id, model);
 
   @GetReq(path: '/:id')
