@@ -146,10 +146,21 @@ class Login {
   Map<String, dynamic> toJson() => serializer.toMap(this);
 
   void validate() {
-    // TODO
+    if(username == null || username.isEmpty) {
+      throw LoginError()..username = "Username is required!";
+    }
+    if(password == null || password.isEmpty) {
+      throw LoginError()..username = "Password is required!";
+    }
   }
 
   static final serializer = LoginSerializer();
 
   String toString() => toJson().toString();
+}
+
+class LoginError {
+  String username;
+
+  String password;
 }
