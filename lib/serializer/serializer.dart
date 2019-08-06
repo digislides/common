@@ -160,8 +160,18 @@ class SignupSerializer extends Serializer<Signup> with _$SignupSerializer {
 }
 
 @GenSerializer()
+class SignupErrorSerializer extends Serializer<SignupError> with _$SignupErrorSerializer {
+  static final serializer = SignupErrorSerializer();
+}
+
+@GenSerializer()
 class LoginSerializer extends Serializer<Login> with _$LoginSerializer {
   static final serializer = LoginSerializer();
+}
+
+@GenSerializer()
+class LoginErrorSerializer extends Serializer<LoginError> with _$LoginErrorSerializer {
+  static final serializer = LoginErrorSerializer();
 }
 
 @GenSerializer()

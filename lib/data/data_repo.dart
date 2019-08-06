@@ -29,6 +29,21 @@ class DataLink {
     return DataLink(name.split('/'), args);
   }
 
+  String get path => segments.join('/');
+  
+  String toString() {
+    final sb = StringBuffer('{{ ');
+    
+    sb.write(path);
+    for(final argKey in args.keys) {
+      sb.write('$argKey="${args[argKey]}"');
+    }
+    
+    sb.write(' }}');
+    
+    return sb.toString();
+  }
+
   static String findArgName(String core) {
     final Match match = RegExp(r'([a-zA-Z0-9_]+)=').firstMatch(core);
     if (match == null) throw Exception('Invalid shortcode (err 1)! $core');
@@ -62,7 +77,7 @@ class DataLink {
 }
 
 class DataText {
-  final List<dynamic> elements;
+  final List</* String | DataLink */ dynamic> elements;
 
   DataText(this.elements);
 
@@ -170,4 +185,33 @@ class DataRepository {
     await stop();
     await start();
   }
+
+  List<DataDefTree> get definitions {
+    final ret = <DataDefTree>[];
+
+    for(DataSource ds in sources) {
+
+      // TODO
+    }
+
+    return ret;
+  }
+}
+
+abstract class DataDefTree {}
+
+class DataDefBranch implements DataDefTree {
+  final List<DataDefTree> next;
+
+  DataDefBranch(this.next);
+}
+
+class DataDefLeaf implements DataDefTree {
+  List<DataDefParam> params;
+}
+
+class DataDefParam {
+  String name;
+
+  String description;
 }

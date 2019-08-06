@@ -1,6 +1,7 @@
 import 'package:jaguar_retrofit/jaguar_retrofit.dart';
 import 'package:common/models.dart';
 import 'package:common/serializer/serializer.dart';
+import 'dart:convert';
 
 part 'api.jretro.dart';
 
@@ -23,6 +24,10 @@ final mediaVideoApi = MediaVideoApi(base);
 final mediaAudioApi = MediaAudioApi(base);
 
 final mediaFontApi = MediaFontApi(base);
+
+void onLogin422(Response<String> response) {
+  throw LoginErrorSerializer.serializer.fromMap(json.decode(response.body));
+}
 
 @GenApiClient(path: '/api/auth')
 class AuthApi extends ApiClient with _$AuthApiClient {

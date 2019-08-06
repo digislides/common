@@ -28,6 +28,30 @@ abstract class _$SignupSerializer implements Serializer<Signup> {
   }
 }
 
+abstract class _$SignupErrorSerializer implements Serializer<SignupError> {
+  @override
+  Map<String, dynamic> toMap(SignupError model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'email', model.email);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'password', model.password);
+    setMapValue(ret, 'passwordRepeat', model.passwordRepeat);
+    return ret;
+  }
+
+  @override
+  SignupError fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new SignupError();
+    obj.email = map['email'] as String;
+    obj.name = map['name'] as String;
+    obj.password = map['password'] as String;
+    obj.passwordRepeat = map['passwordRepeat'] as String;
+    return obj;
+  }
+}
+
 abstract class _$LoginSerializer implements Serializer<Login> {
   @override
   Map<String, dynamic> toMap(Login model) {
@@ -42,6 +66,26 @@ abstract class _$LoginSerializer implements Serializer<Login> {
   Login fromMap(Map map) {
     if (map == null) return null;
     final obj = new Login();
+    obj.username = map['username'] as String;
+    obj.password = map['password'] as String;
+    return obj;
+  }
+}
+
+abstract class _$LoginErrorSerializer implements Serializer<LoginError> {
+  @override
+  Map<String, dynamic> toMap(LoginError model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'username', model.username);
+    setMapValue(ret, 'password', model.password);
+    return ret;
+  }
+
+  @override
+  LoginError fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new LoginError();
     obj.username = map['username'] as String;
     obj.password = map['password'] as String;
     return obj;

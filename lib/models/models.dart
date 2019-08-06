@@ -130,10 +130,30 @@ class Signup {
   Map<String, dynamic> toJson() => serializer.toMap(this);
 
   void validate() {
-    // TODO
+    if(email == null || email.isEmpty) {
+      throw SignupError()..email = "Required!";
+    }
+    if(name == null || name.isEmpty) {
+      throw SignupError()..name = "Required!";
+    }
+    if(password == null || password.isEmpty) {
+      throw SignupError()..password = "Required!";
+    }
   }
 
   static final serializer = SignupSerializer();
+}
+
+class SignupError {
+  String email;
+
+  String name;
+
+  String password;
+
+  String passwordRepeat;
+
+  SignupError({this.email, this.name, this.password, this.passwordRepeat});
 }
 
 class Login {
@@ -147,10 +167,10 @@ class Login {
 
   void validate() {
     if(username == null || username.isEmpty) {
-      throw LoginError()..username = "Username is required!";
+      throw LoginError()..username = "Required!";
     }
     if(password == null || password.isEmpty) {
-      throw LoginError()..username = "Password is required!";
+      throw LoginError()..password = "Required!";
     }
   }
 
