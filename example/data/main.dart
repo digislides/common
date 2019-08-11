@@ -27,6 +27,10 @@ class WeatherData extends DataSource {
   void start() {}
 
   void stop() {}
+
+  DataDefBranch get definition {
+    UnimplementedError();
+  }
 }
 
 main() {

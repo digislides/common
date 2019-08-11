@@ -5,7 +5,7 @@ import 'package:common/models.dart';
 import 'package:common/api/api.dart';
 
 class WeatherData extends DataSource {
-  final List<String> template = ['weather', ':place', ':param'];
+  final List<String> template = ['weather', ':place'];
 
   final _weathers = <String, Weather>{};
 
@@ -55,9 +55,38 @@ class WeatherData extends DataSource {
   @override
   String get(DataLink link) {
     final String places = getParam(":place", link.segments);
-    final String param = getParam(":param", link.segments);
+    final String param = link.args['param'];
     final weather = _weathers[places];
     if (weather == null) return "";
     return toData(weather, param);
+  }
+
+  Map<String, DataDefLeaf> _makeLeafs(String place) {
+    return {
+      'temperature': DataDefLeaf(
+          name: 'Temperature',
+          segments: ['weather', place, 'temperature'],
+          args: [],
+          description: 'Weather temperature')
+    };
+  }
+
+  DataDefBranch get definition {
+    final ret = <String, DataDefTree>{};
+
+    for (final place in _weathers.keys) {
+      final placeBranch = DataDefBranch(
+          name: place,
+          segments: ['weather', place],
+          description: 'Weather information for $place',
+          next: _makeLeafs(place));
+      ret[place] = placeBranch;
+    }
+
+    return DataDefBranch(
+        name: 'weather',
+        next: ret,
+        description: 'Weather data source',
+        segments: ['weather']);
   }
 }
