@@ -10,8 +10,9 @@ export 'package:common/models/program/item/image.dart';
 export 'package:common/models/program/item/video.dart';
 export 'package:common/models/program/item/clock.dart';
 export 'package:common/models/program/item/weather.dart';
+export 'widget.dart';
 
-enum PageItemType { text, image, video, clock, weather }
+enum PageItemType { text, image, video, clock, weather, widget }
 
 class Fit {
   final int id;
@@ -150,8 +151,6 @@ abstract class PageItem implements Sizable {
   int width;
 
   int height;
-
-  String color;
 
   Point<int> pos;
 

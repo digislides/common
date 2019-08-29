@@ -488,6 +488,40 @@ abstract class _$VideoItemSerializer implements Serializer<VideoItem> {
   }
 }
 
+abstract class _$WidgetItemSerializer implements Serializer<WidgetItem> {
+  @override
+  Map<String, dynamic> toMap(WidgetItem model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'type', model.type.index);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'isUrl', model.isUrl);
+    setMapValue(ret, 'url', model.url);
+    setMapValue(ret, 'left', model.left);
+    setMapValue(ret, 'top', model.top);
+    setMapValue(ret, 'width', model.width);
+    setMapValue(ret, 'height', model.height);
+    setMapValue(ret, 'asSrcDoc', model.asSrcDoc);
+    return ret;
+  }
+
+  @override
+  WidgetItem fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new WidgetItem();
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    obj.isUrl = map['isUrl'] as bool;
+    obj.url = map['url'] as String;
+    obj.left = map['left'] as int;
+    obj.top = map['top'] as int;
+    obj.width = map['width'] as int;
+    obj.height = map['height'] as int;
+    return obj;
+  }
+}
+
 abstract class _$ClockItemSerializer implements Serializer<ClockItem> {
   final _durationProcessor = const DurationProcessor();
   @override

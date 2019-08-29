@@ -160,7 +160,8 @@ class SignupSerializer extends Serializer<Signup> with _$SignupSerializer {
 }
 
 @GenSerializer()
-class SignupErrorSerializer extends Serializer<SignupError> with _$SignupErrorSerializer {
+class SignupErrorSerializer extends Serializer<SignupError>
+    with _$SignupErrorSerializer {
   static final serializer = SignupErrorSerializer();
 }
 
@@ -170,7 +171,8 @@ class LoginSerializer extends Serializer<Login> with _$LoginSerializer {
 }
 
 @GenSerializer()
-class LoginErrorSerializer extends Serializer<LoginError> with _$LoginErrorSerializer {
+class LoginErrorSerializer extends Serializer<LoginError>
+    with _$LoginErrorSerializer {
   static final serializer = LoginErrorSerializer();
 }
 
@@ -244,6 +246,8 @@ class PageItemSerializer extends Serializer<PageItem> {
       return ClockItemSerializer.serializer.fromMap(map);
     if (type == PageItemType.weather.index)
       return WeatherItemSerializer.serializer.fromMap(map);
+    if (type == PageItemType.widget.index)
+      return WidgetItemSerializer.serializer.fromMap(map);
     throw Exception("Unknown item!");
   }
 
@@ -256,6 +260,8 @@ class PageItemSerializer extends Serializer<PageItem> {
     if (model is ClockItem) return ClockItemSerializer.serializer.toMap(model);
     if (model is WeatherItem)
       return WeatherItemSerializer.serializer.toMap(model);
+    if (model is WidgetItem)
+      return WidgetItemSerializer.serializer.toMap(model);
     throw Exception("Unknown item!");
   }
 }
@@ -288,6 +294,13 @@ class ImageItemSerializer extends Serializer<ImageItem>
 class VideoItemSerializer extends Serializer<VideoItem>
     with _$VideoItemSerializer {
   static final serializer = VideoItemSerializer();
+}
+
+@GenSerializer(
+    ignore: ['onRectChange', 'pos', 'rect', 'dataRepository', 'size'])
+class WidgetItemSerializer extends Serializer<WidgetItem>
+    with _$WidgetItemSerializer {
+  static final serializer = WidgetItemSerializer();
 }
 
 @GenSerializer(ignore: [
