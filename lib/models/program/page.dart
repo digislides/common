@@ -96,8 +96,7 @@ class Page implements Sizable {
         items.firstWhere((item) => item.id == itemId, orElse: () => null);
     if (item == null) return;
 
-    items.add(item.duplicate(setName: item.name + "_dup"));
-    // TODO insert after [item]
+    items.insert(items.indexOf(item) + 1, item.duplicate(setName: item.name + "_dup"));
   }
 
   void removeItem(String itemId) {

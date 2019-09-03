@@ -412,6 +412,48 @@ abstract class _$TextItemSerializer implements Serializer<TextItem> {
   }
 }
 
+abstract class _$TickerItemSerializer implements Serializer<TickerItem> {
+  Serializer<FontProperties> __fontPropertiesSerializer;
+  Serializer<FontProperties> get _fontPropertiesSerializer =>
+      __fontPropertiesSerializer ??= new FontPropertiesSerializer();
+  @override
+  Map<String, dynamic> toMap(TickerItem model) {
+    if (model == null) return null;
+    Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'id', model.id);
+    setMapValue(ret, 'type', model.type.index);
+    setMapValue(ret, 'name', model.name);
+    setMapValue(ret, 'color', model.color);
+    setMapValue(ret, 'font', _fontPropertiesSerializer.toMap(model.font));
+    setMapValue(
+        ret, 'lines', codeIterable(model.lines, (val) => val as String));
+    setMapValue(ret, 'left', model.left);
+    setMapValue(ret, 'top', model.top);
+    setMapValue(ret, 'width', model.width);
+    setMapValue(ret, 'height', model.height);
+    return ret;
+  }
+
+  @override
+  TickerItem fromMap(Map map) {
+    if (map == null) return null;
+    final obj = new TickerItem(
+        lines: codeIterable<String>(
+                map['lines'] as Iterable, (val) => val as String) ??
+            getJserDefault('lines'),
+        font: _fontPropertiesSerializer.fromMap(map['font'] as Map) ??
+            getJserDefault('font'));
+    obj.id = map['id'] as String;
+    obj.name = map['name'] as String;
+    obj.color = map['color'] as String;
+    obj.left = map['left'] as int;
+    obj.top = map['top'] as int;
+    obj.width = map['width'] as int;
+    obj.height = map['height'] as int;
+    return obj;
+  }
+}
+
 abstract class _$ImageItemSerializer implements Serializer<ImageItem> {
   final _fitFieldProcessor = const FitFieldProcessor();
   @override

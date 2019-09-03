@@ -248,6 +248,8 @@ class PageItemSerializer extends Serializer<PageItem> {
       return WeatherItemSerializer.serializer.fromMap(map);
     if (type == PageItemType.widget.index)
       return WidgetItemSerializer.serializer.fromMap(map);
+    if (type == PageItemType.ticker.index)
+      return TickerItemSerializer.serializer.fromMap(map);
     throw Exception("Unknown item!");
   }
 
@@ -262,6 +264,8 @@ class PageItemSerializer extends Serializer<PageItem> {
       return WeatherItemSerializer.serializer.toMap(model);
     if (model is WidgetItem)
       return WidgetItemSerializer.serializer.toMap(model);
+    if (model is TickerItem)
+      return TickerItemSerializer.serializer.toMap(model);
     throw Exception("Unknown item!");
   }
 }
@@ -278,6 +282,13 @@ class FontPropertiesSerializer extends Serializer<FontProperties>
 class TextItemSerializer extends Serializer<TextItem>
     with _$TextItemSerializer {
   static final serializer = TextItemSerializer();
+}
+
+@GenSerializer(
+    ignore: ['onRectChange', 'dataRepository', 'pos', 'rect', 'size'])
+class TickerItemSerializer extends Serializer<TickerItem>
+    with _$TickerItemSerializer {
+  static final serializer = TickerItemSerializer();
 }
 
 @GenSerializer(

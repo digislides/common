@@ -101,7 +101,7 @@ class ProgramDesign {
     final frame = frames.firstWhere((f) => f.id == frameId, orElse: () => null);
     if (frame == null) return;
 
-    frames.add(frame.duplicate(setName: frame.name + '_dup'));
+    frames.insert(frames.indexOf(frame) + 1, frame.duplicate(setName: frame.name + '_dup'));
   }
 
   void removeFrame(String id) {

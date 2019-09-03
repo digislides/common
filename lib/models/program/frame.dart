@@ -154,8 +154,7 @@ class Frame {
     final page = pages.firstWhere((p) => p.id == pageId, orElse: () => null);
     if (page == null) return;
 
-    pages.add(page.duplicate(setName: page.name + '_dup'));
-    // TODO insert after [page]
+    pages.insert(pages.indexOf(page) + 1, page.duplicate(setName: page.name + '_dup'));
   }
 
   void removePage(String id) {
