@@ -412,12 +412,12 @@ abstract class _$TextItemSerializer implements Serializer<TextItem> {
   }
 }
 
-abstract class _$TickerItemSerializer implements Serializer<TickerItem> {
+abstract class _$ScrollerItemSerializer implements Serializer<ScrollerItem> {
   Serializer<FontProperties> __fontPropertiesSerializer;
   Serializer<FontProperties> get _fontPropertiesSerializer =>
       __fontPropertiesSerializer ??= new FontPropertiesSerializer();
   @override
-  Map<String, dynamic> toMap(TickerItem model) {
+  Map<String, dynamic> toMap(ScrollerItem model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
     setMapValue(ret, 'id', model.id);
@@ -427,6 +427,8 @@ abstract class _$TickerItemSerializer implements Serializer<TickerItem> {
     setMapValue(ret, 'font', _fontPropertiesSerializer.toMap(model.font));
     setMapValue(
         ret, 'lines', codeIterable(model.lines, (val) => val as String));
+    setMapValue(ret, 'gap', model.gap);
+    setMapValue(ret, 'separator', model.separator);
     setMapValue(ret, 'left', model.left);
     setMapValue(ret, 'top', model.top);
     setMapValue(ret, 'width', model.width);
@@ -435,9 +437,9 @@ abstract class _$TickerItemSerializer implements Serializer<TickerItem> {
   }
 
   @override
-  TickerItem fromMap(Map map) {
+  ScrollerItem fromMap(Map map) {
     if (map == null) return null;
-    final obj = new TickerItem(
+    final obj = new ScrollerItem(
         lines: codeIterable<String>(
                 map['lines'] as Iterable, (val) => val as String) ??
             getJserDefault('lines'),
@@ -446,6 +448,8 @@ abstract class _$TickerItemSerializer implements Serializer<TickerItem> {
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
     obj.color = map['color'] as String;
+    obj.gap = map['gap'] as int;
+    obj.separator = map['separator'] as String;
     obj.left = map['left'] as int;
     obj.top = map['top'] as int;
     obj.width = map['width'] as int;

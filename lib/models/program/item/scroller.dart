@@ -8,11 +8,11 @@ import 'package:common/utils/id.dart';
 
 import 'package:common/data/data_repo.dart';
 
-class TickerItem implements PageItem {
+class ScrollerItem implements PageItem {
   String id;
 
   @override
-  final type = PageItemType.ticker;
+  final type = PageItemType.scroller;
 
   String name;
 
@@ -25,8 +25,6 @@ class TickerItem implements PageItem {
   int _height = 0;
 
   String color;
-
-  String _text;
 
   final FontProperties font;
 
@@ -107,15 +105,21 @@ class TickerItem implements PageItem {
 
   final lines = <String>[];
 
-  TickerItem({
+  int gap = 10;
+
+  String separator = '';
+
+  ScrollerItem({
     this.id,
-    this.name: 'New text',
+    this.name: 'New scroller',
     int left: 0,
     int top: 0,
     int width: 50,
     int height: 40,
     this.color: 'transparent',
     List<String> lines: const ['Line1', 'Line2'],
+    this.gap: 10,
+    this.separator: '',
     FontProperties font,
     this.dataRepository,
   }) : font = font ?? FontProperties() {
@@ -131,12 +135,12 @@ class TickerItem implements PageItem {
 
   String toString() => toJson().toString();
 
-  static final serializer = TickerItemSerializer();
+  static final serializer = ScrollerItemSerializer();
 
   void collectUrls(Map<String, bool> urls) {}
 
-  TickerItem duplicate({String setId, String setName}) {
-    return TickerItem(
+  ScrollerItem duplicate({String setId, String setName}) {
+    return ScrollerItem(
       id: setId ?? newId,
       name: setName ?? this.name,
       left: this.left,
@@ -145,6 +149,8 @@ class TickerItem implements PageItem {
       height: this.height,
       color: this.color,
       lines: this.lines,
+      gap: this.gap,
+      separator: this.separator,
       font: this.font.duplicate(),
       dataRepository: this.dataRepository,
     );

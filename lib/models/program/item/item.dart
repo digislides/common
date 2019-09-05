@@ -9,11 +9,11 @@ export 'package:common/models/program/item/text.dart';
 export 'package:common/models/program/item/image.dart';
 export 'package:common/models/program/item/video.dart';
 export 'package:common/models/program/item/clock.dart';
-export 'ticker.dart';
+export 'scroller.dart';
 export 'package:common/models/program/item/weather.dart';
 export 'widget.dart';
 
-enum PageItemType { text, image, video, clock, weather, widget, ticker }
+enum PageItemType { text, image, video, clock, weather, widget, scroller }
 
 class Fit {
   final int id;

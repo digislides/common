@@ -248,8 +248,8 @@ class PageItemSerializer extends Serializer<PageItem> {
       return WeatherItemSerializer.serializer.fromMap(map);
     if (type == PageItemType.widget.index)
       return WidgetItemSerializer.serializer.fromMap(map);
-    if (type == PageItemType.ticker.index)
-      return TickerItemSerializer.serializer.fromMap(map);
+    if (type == PageItemType.scroller.index)
+      return ScrollerItemSerializer.serializer.fromMap(map);
     throw Exception("Unknown item!");
   }
 
@@ -264,8 +264,8 @@ class PageItemSerializer extends Serializer<PageItem> {
       return WeatherItemSerializer.serializer.toMap(model);
     if (model is WidgetItem)
       return WidgetItemSerializer.serializer.toMap(model);
-    if (model is TickerItem)
-      return TickerItemSerializer.serializer.toMap(model);
+    if (model is ScrollerItem)
+      return ScrollerItemSerializer.serializer.toMap(model);
     throw Exception("Unknown item!");
   }
 }
@@ -286,9 +286,9 @@ class TextItemSerializer extends Serializer<TextItem>
 
 @GenSerializer(
     ignore: ['onRectChange', 'dataRepository', 'pos', 'rect', 'size'])
-class TickerItemSerializer extends Serializer<TickerItem>
-    with _$TickerItemSerializer {
-  static final serializer = TickerItemSerializer();
+class ScrollerItemSerializer extends Serializer<ScrollerItem>
+    with _$ScrollerItemSerializer {
+  static final serializer = ScrollerItemSerializer();
 }
 
 @GenSerializer(
