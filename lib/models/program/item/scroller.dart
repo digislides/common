@@ -103,6 +103,8 @@ class ScrollerItem implements PageItem {
     height = value.height;
   }
 
+  int duration = 5;
+
   final lines = <String>[];
 
   int gap = 10;
@@ -117,6 +119,7 @@ class ScrollerItem implements PageItem {
     int width: 50,
     int height: 40,
     this.color: 'transparent',
+    this.duration: 5,
     List<String> lines: const ['Line1', 'Line2'],
     this.gap: 10,
     this.separator: '',
@@ -148,6 +151,7 @@ class ScrollerItem implements PageItem {
       width: this.width,
       height: this.height,
       color: this.color,
+      duration: this.duration,
       lines: this.lines,
       gap: this.gap,
       separator: this.separator,

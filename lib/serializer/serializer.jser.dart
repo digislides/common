@@ -425,6 +425,7 @@ abstract class _$ScrollerItemSerializer implements Serializer<ScrollerItem> {
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'color', model.color);
     setMapValue(ret, 'font', _fontPropertiesSerializer.toMap(model.font));
+    setMapValue(ret, 'duration', model.duration);
     setMapValue(
         ret, 'lines', codeIterable(model.lines, (val) => val as String));
     setMapValue(ret, 'gap', model.gap);
@@ -448,6 +449,7 @@ abstract class _$ScrollerItemSerializer implements Serializer<ScrollerItem> {
     obj.id = map['id'] as String;
     obj.name = map['name'] as String;
     obj.color = map['color'] as String;
+    obj.duration = map['duration'] as int;
     obj.gap = map['gap'] as int;
     obj.separator = map['separator'] as String;
     obj.left = map['left'] as int;
