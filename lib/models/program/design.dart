@@ -7,11 +7,12 @@ import 'package:common/serializer/serializer.dart';
 
 import 'package:common/data/data_repo.dart';
 import 'package:common/data/data_weather.dart';
+import 'common.dart';
 
 export 'frame.dart';
 export 'page.dart';
 
-class ProgramDesign {
+class ProgramDesign implements Sizable {
   int _width = 0;
 
   int _height = 0;

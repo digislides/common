@@ -7,7 +7,11 @@ import 'package:common/serializer/serializer.dart';
 
 import 'package:common/data/data_repo.dart';
 
-class Frame {
+import 'common.dart';
+
+export 'page.dart';
+
+class Frame implements Sizable, CanvasItem {
   String id;
 
   String name;

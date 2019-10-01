@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:common/models/program/page.dart';
 
 import 'package:common/data/data_repo.dart';
+import '../common.dart';
 
 export 'package:common/models/program/item/text.dart';
 export 'package:common/models/program/item/image.dart';
@@ -138,7 +139,7 @@ class VAlign {
   String toString() => css;
 }
 
-abstract class PageItem implements Sizable {
+abstract class PageItem implements Sizable, CanvasItem {
   String id;
 
   PageItemType get type;

@@ -66,13 +66,15 @@ class ClockItem implements PageItem {
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
-  int get size => _size;
+  Point<int> get size => Point<int>(_size, _size);
 
   set size(dynamic value) {
     if (value is String) {
       _size = int.tryParse(value) ?? 0;
-    } else {
+    } else if(value is int) {
       _size = value;
+    } else if(value is Point<int>) {
+      _size = value.y;
     }
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
@@ -168,7 +170,7 @@ class ClockItem implements PageItem {
     this.name: 'Clock',
     int left: 0,
     int top: 0,
-    int size: 100,
+    size: 100,
     String color: 'transparent',
     String textColor: 'black',
     String hourColor: 'black',

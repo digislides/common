@@ -10,11 +10,6 @@ import 'page_schedule.dart';
 
 export 'package:common/models/program/item/item.dart';
 
-abstract class Sizable {
-  int width;
-  int height;
-}
-
 class Page implements Sizable {
   String id;
 
