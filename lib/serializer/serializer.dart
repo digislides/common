@@ -62,19 +62,6 @@ class DateProcessor implements FieldProcessor<DateTime, String> {
   }
 }
 
-class WeatherThemeProcessor implements FieldProcessor<WeatherTheme, int> {
-  const WeatherThemeProcessor();
-
-  @override
-  WeatherTheme deserialize(int value) {
-    if (value == null) return WeatherTheme.values[0];
-    return WeatherTheme.values[value];
-  }
-
-  @override
-  int serialize(WeatherTheme value) => value?.id;
-}
-
 class WeatherIconTypeProcessor
     implements FieldProcessor<WeatherIconType, String> {
   const WeatherIconTypeProcessor();
@@ -268,6 +255,8 @@ class PageItemSerializer extends Serializer<PageItem> {
       return ScrollerItemSerializer.serializer.toMap(model);
     throw Exception("Unknown item!");
   }
+
+  static final serializer = PageItemSerializer();
 }
 
 @GenSerializer(fields: {
@@ -337,8 +326,6 @@ class ClockItemSerializer extends Serializer<ClockItem>
   'pos',
   'rect',
 ], fields: {
-  'theme': EnDecode(processor: WeatherThemeProcessor()),
-  'dummy': EnDecode(processor: WeatherIconTypeProcessor())
 })
 class WeatherItemSerializer extends Serializer<WeatherItem>
     with _$WeatherItemSerializer {

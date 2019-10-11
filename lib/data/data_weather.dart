@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'data_repo.dart';
 import 'package:common/models.dart';
@@ -47,6 +48,8 @@ class WeatherData extends DataSource {
     switch (param) {
       case 'temperature':
         return weather.temp?.toString();
+      case '':
+        return jsonEncode(weather);
       default:
         return '';
     }

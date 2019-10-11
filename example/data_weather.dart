@@ -1,6 +1,5 @@
 import 'package:http/io_client.dart';
 import 'package:common/api/api.dart';
-import 'package:common/models.dart';
 import 'package:jaguar_resty/jaguar_resty.dart';
 
 final cookieJar = CookieJar();

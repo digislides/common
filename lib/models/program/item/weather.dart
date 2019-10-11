@@ -8,31 +8,6 @@ import 'package:common/utils/id.dart';
 
 import 'package:common/data/data_repo.dart';
 
-class WeatherTheme {
-  final int id;
-  final String label;
-  final String css;
-
-  const WeatherTheme._(this.id, this.label, this.css);
-
-  String toString() => label;
-
-  static const flatFilled = const WeatherTheme._(0, "Flat filled", 'wi-flat');
-  static const flatThin = const WeatherTheme._(1, "Flat thin", 'wi-flat-thin');
-
-  static const values = <WeatherTheme>[flatFilled, flatThin];
-
-  static const map = {
-    "Flat filled": flatFilled,
-    "Flat thin": flatThin,
-  };
-
-  static final labels = <String>[
-    flatFilled.label,
-    flatThin.label,
-  ];
-}
-
 /// Represents an image embedded in a page
 class WeatherItem implements PageItem {
   String id;
@@ -46,13 +21,11 @@ class WeatherItem implements PageItem {
 
   int _top = 0;
 
-  int _size = 0;
+  int _width = 0;
+
+  int _height = 0;
 
   String color;
-
-  WeatherTheme theme;
-
-  WeatherIconType dummy;
 
   DataRepository dataRepository;
 
@@ -84,46 +57,33 @@ class WeatherItem implements PageItem {
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
-  int get width => _size;
+  int get width => _width;
 
   set width(dynamic value) {
     if (value is String) {
-      _size = int.tryParse(value) ?? 0;
+      _width = int.tryParse(value) ?? 0;
     } else {
-      _size = value;
+      _width = value;
     }
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
-  int get height => _size;
+  int get height => _height;
 
   set height(dynamic value) {
     if (value is String) {
-      _size = int.tryParse(value) ?? 0;
+      _height = int.tryParse(value) ?? 0;
     } else {
-      _size = value;
+      _height = value;
     }
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
-  Point<int> get size => Point<int>(_size, _size);
+  Point<int> get size => Point<int>(width, height);
 
-  set size(dynamic value) {
-    if (value is String) {
-      _size = int.tryParse(value) ?? 0;
-    } else if(value is int) {
-      _size = value;
-    } else if(value is Point<int>) {
-      _size = value.y;
-    }
-    _rectChange.add(Rectangle<int>(left, top, width, height));
-  }
-
-  Point<int> get pos => Point<int>(left, top);
-
-  set pos(Point<int> value) {
-    left = value.x;
-    top = value.y;
+  set size(Point<int> value) {
+    width = value.x;
+    height = value.y;
   }
 
   Rectangle<int> get rect => Rectangle<int>(left, top, width, height);
@@ -135,6 +95,15 @@ class WeatherItem implements PageItem {
     height = value.height;
   }
 
+  Point<int> get pos => Point<int>(left, top);
+
+  set pos(Point<int> value) {
+    left = value.x;
+    top = value.y;
+  }
+
+  String place;
+
   WeatherItem({
     this.id,
     this.name: 'Weather',
@@ -142,13 +111,12 @@ class WeatherItem implements PageItem {
     int top: 0,
     size: 100,
     this.color: 'black',
-    this.theme: WeatherTheme.flatFilled,
-    this.dummy: WeatherIconType.clearSky,
     this.dataRepository,
+    this.place,
   }) {
     this.left = left;
     this.top = top;
-    this.size = size;
+    this.size = Point<int>(size, size);
     _rectStream = _rectChange.stream.asBroadcastStream();
   }
 
@@ -168,9 +136,8 @@ class WeatherItem implements PageItem {
       top: this.top,
       size: this.size,
       color: this.color,
-      theme: this.theme,
-      dummy: this.dummy,
       dataRepository: this.dataRepository,
+      place: this.place,
     );
   }
 }
@@ -180,46 +147,50 @@ class WeatherIconType {
 
   final String name;
 
-  const WeatherIconType(this.id, this.name);
+  final String char;
 
-  String get css => 'wi-$id';
+  const WeatherIconType(this.id, this.name, this.char);
 
-  static const clearSky = WeatherIconType("01d", "Clear sky");
+  static const clearSky = WeatherIconType("01d", "Clear sky", '\uf00d');
 
-  static const fewClouds = WeatherIconType("02d", "Few clouds");
+  static const fewClouds = WeatherIconType("02d", "Few clouds", '\uf00c');
 
-  static const scatteredClouds = WeatherIconType("03d", "Scattered clouds");
+  static const scatteredClouds =
+      WeatherIconType("03d", "Scattered clouds", '\uf00c');
 
-  static const brokenClouds = WeatherIconType("04d", "Broken clouds");
+  static const brokenClouds = WeatherIconType("04d", "Broken clouds", '\uf00c');
 
-  static const showerRain = WeatherIconType("09d", "Shower rain");
+  static const showerRain = WeatherIconType("09d", "Shower rain", '\uf00b');
 
-  static const rain = WeatherIconType("10d", "Rain");
+  static const rain = WeatherIconType("10d", "Rain", '\uf008');
 
-  static const thunderstorm = WeatherIconType("11d", "Thunderstorm");
+  static const thunderstorm = WeatherIconType("11d", "Thunderstorm", '\uf010');
 
-  static const snow = WeatherIconType("13d", "Snow");
+  static const snow = WeatherIconType("13d", "Snow", '\uf00a');
 
-  static const mist = WeatherIconType("50d", "Mist");
+  static const mist = WeatherIconType("50d", "Mist", '\uf003');
 
-  static const clearSkyNight = WeatherIconType("01n", "Clear sky");
+  static const clearSkyNight = WeatherIconType("01n", "Clear sky", '\uf02e');
 
-  static const fewCloudsNight = WeatherIconType("02n", "Few clouds");
+  static const fewCloudsNight = WeatherIconType("02n", "Few clouds", '\uf081');
 
   static const scatteredCloudsNight =
-      WeatherIconType("03n", "Scattered clouds");
+      WeatherIconType("03n", "Scattered clouds", '\uf081');
 
-  static const brokenCloudsNight = WeatherIconType("04n", "Broken clouds");
+  static const brokenCloudsNight =
+      WeatherIconType("04n", "Broken clouds", '\uf081');
 
-  static const showerRainNight = WeatherIconType("09n", "Shower rain");
+  static const showerRainNight =
+      WeatherIconType("09n", "Shower rain", '\uf02b');
 
-  static const rainNight = WeatherIconType("10n", "Rain");
+  static const rainNight = WeatherIconType("10n", "Rain", '\uf028');
 
-  static const thunderstormNight = WeatherIconType("11n", "Thunderstorm");
+  static const thunderstormNight =
+      WeatherIconType("11n", "Thunderstorm", '\uf02b');
 
-  static const snowNight = WeatherIconType("13n", "Snow");
+  static const snowNight = WeatherIconType("13n", "Snow", '\uf02a');
 
-  static const mistNight = WeatherIconType("50n", "Mist");
+  static const mistNight = WeatherIconType("50n", "Mist", '\uf04a');
 
   static const values = <String, WeatherIconType>{
     "01d": WeatherIconType.clearSky,
@@ -263,3 +234,12 @@ class WeatherIconType {
     WeatherIconType.mistNight.name,
   ];
 }
+
+final dummyWeather = Weather(
+    temp: 21,
+    wind: Wind(speed: 25, ),
+    name: 'Stockholm',
+    humidity: 33,
+    rain: 12,
+    snow: 15,
+    condition: Condition(icon: WeatherIconType.clearSky.id));

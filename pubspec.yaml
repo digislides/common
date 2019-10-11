@@ -19,3 +19,7 @@ dev_dependencies:
   build_runner:
   jaguar_serializer_cli:
   jaguar_retrofit_gen:
+
+dependency_overrides:
+  open_weather_api:
+    path: ../../dart/open_weather_map
