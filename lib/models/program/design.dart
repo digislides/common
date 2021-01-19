@@ -1,3 +1,5 @@
+import 'package:common/gdata/gdata.dart';
+
 import 'frame.dart';
 import 'page.dart';
 
@@ -25,6 +27,8 @@ class ProgramDesign implements Sizable {
 
   Fit fit;
 
+  final GData gdata;
+
   DataRepository _dataRepository;
 
   set dataRepository(DataRepository value) {
@@ -42,6 +46,7 @@ class ProgramDesign implements Sizable {
       this.color: 'transparent',
       this.url,
       this.fit: Fit.cover,
+      this.gdata,
       DataRepository dataRepository}) {
     if (frames != null) this.frames.addAll(frames);
     this.width = width;
@@ -102,7 +107,8 @@ class ProgramDesign implements Sizable {
     final frame = frames.firstWhere((f) => f.id == frameId, orElse: () => null);
     if (frame == null) return;
 
-    frames.insert(frames.indexOf(frame) + 1, frame.duplicate(setName: frame.name + '_dup'));
+    frames.insert(frames.indexOf(frame) + 1,
+        frame.duplicate(setName: frame.name + '_dup'));
   }
 
   void removeFrame(String id) {

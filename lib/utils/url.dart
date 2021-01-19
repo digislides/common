@@ -21,3 +21,16 @@ bool isValidMediaUrl(String url) {
     return false;
   }
 }
+
+String transformForeignUrl(String url, String newScheme, String newHost, int newPort) {
+  final newUri = Uri(
+      scheme: newScheme,
+      host: newHost,
+      port: newPort,
+      path: '/external/media',
+      queryParameters: {
+        'url': url,
+      });
+  final newUrl = newUri.toString();
+  return newUrl;
+}

@@ -1,3 +1,4 @@
+import 'package:common/gdata/gdata.dart';
 import 'package:common/utils/url.dart';
 import 'package:common/utils/id.dart';
 
@@ -41,6 +42,8 @@ class Page implements Sizable {
 
   DataRepository get dataRepository => _dataRepository;
 
+  final GData gdata;
+
   final items = <PageItem>[];
 
   Page({
@@ -55,6 +58,7 @@ class Page implements Sizable {
     this.transition: Transition.none,
     Iterable<PageItem> items,
     DataRepository dataRepository,
+    this.gdata,
     this.schedule,
   }) {
     if (items != null) this.items.addAll(items);

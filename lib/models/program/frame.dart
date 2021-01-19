@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:common/gdata/gdata.dart';
 import 'package:common/utils/url.dart';
 import 'package:common/utils/id.dart';
 import 'package:common/models/program/page.dart';
@@ -33,6 +34,8 @@ class Frame implements Sizable, CanvasItem {
   Fit fit;
 
   Transition transition;
+
+  final GData gdata;
 
   DataRepository _dataRepository;
 
@@ -80,6 +83,7 @@ class Frame implements Sizable, CanvasItem {
     this.transition: Transition.none,
     Iterable<Page> pages,
     DataRepository dataRepository,
+    this.gdata,
   }) {
     id ??= newId;
     if (pages != null) this.pages.addAll(pages);
