@@ -3,75 +3,93 @@ import 'package:common/models/has_access.dart';
 import 'package:common/serializer/serializer.dart';
 
 class ChannelRunning {
-  String running;
+  final String running;
+  final DateTime when;
+  ChannelRunning({required this.running, required this.when});
 
-  DateTime when;
-
-  ChannelRunning({this.running, this.when});
-
-  static final serializer = ChannelRunningSerializer();
-
-  Map<String, dynamic> toJson() => serializer.toMap(this);
+  Map<String, dynamic> toJson() =>
+      {'running': running, 'when': when.toUtc().toIso8601String()};
 
   String toString() => toJson().toString();
+
+  static ChannelRunning? fromMap(Map? map) => map == null
+      ? null
+      : ChannelRunning(
+          running: map['running'], when: DateTime.parse(map['when']));
 }
 
 class Channel extends HasAccess {
-  String id;
+  final String id;
+  final String owner;
+  final Map<String, int> members;
+  final String name;
+  final String program;
+  final ChannelRunning? running;
 
-  String owner;
+  Channel(
+      {required this.id,
+      required this.owner,
+      required this.members,
+      required this.name,
+      required this.program,
+      required this.running});
 
-  Map<String, int> members;
-
-  String name;
-
-  String program;
-
-  ChannelRunning running;
-
-  Channel({this.id, this.name, this.program});
-
-  Map<String, dynamic> toJson() => serializer.toMap(this);
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'owner': owner,
+        'members': members,
+        'name': name,
+        'program': program,
+        'running': running
+      };
 
   String toString() => toJson().toString();
 
-  static final serializer = ChannelSerializer();
+  static Channel fromMap(Map map) => Channel(
+        id: map['id'],
+        owner: map['owner'],
+        members: map['members'],
+        name: map['name'],
+        program: map['program'],
+        running: ChannelRunning.fromMap(map['running']),
+      );
 }
 
 class ChannelCreator {
   String name;
+  String? program;
 
-  String program;
-
-  ChannelCreator({this.name, this.program});
+  ChannelCreator({this.name = '', this.program});
 
   void reset() {
     name = '';
     program = null;
   }
 
-  Map<String, dynamic> toJson() => serializer.toMap(this);
+  Map<String, dynamic> toJson() => {'name': name, 'program': program};
 
   String toString() => toJson().toString();
 
-  static final serializer = ChannelCreatorSerializer();
+  static ChannelCreator fromMap(Map map) =>
+      ChannelCreator(name: map['name'], program: map['program']);
 }
 
 class ChannelPublic {
-  String id;
+  final String id;
+  final String name;
+  final ChannelRunning? running;
 
-  String name;
-
-  ChannelRunning running;
-
-  ChannelPublic({this.id, this.name});
+  ChannelPublic({required this.id, required this.name, this.running});
 
   factory ChannelPublic.from(Channel chan) =>
       ChannelPublic(id: chan.id, name: chan.name);
 
-  Map<String, dynamic> toJson() => serializer.toMap(this);
+  Map<String, dynamic> toJson() => {'id': id, 'name': name, 'running': running};
 
   String toString() => toJson().toString();
 
-  static final serializer = ChannelPublicSerializer();
+  static ChannelPublic fromMap(Map map) => ChannelPublic(
+      id: map['id'],
+      name: map['name'],
+      running: ChannelRunning.fromMap(map['running']));
 }

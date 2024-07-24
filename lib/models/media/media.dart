@@ -4,7 +4,6 @@ import 'package:common/models/has_access.dart';
 
 class MediaCreator {
   String name;
-
   List<String> tags;
 
   MediaCreator({this.name, this.tags});

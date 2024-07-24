@@ -1,4 +1,3 @@
-import 'package:jaguar_serializer/jaguar_serializer.dart';
 import 'package:open_weather_api/simple.dart';
 
 import 'package:common/models/models.dart';
@@ -8,17 +7,9 @@ export 'package:open_weather_api/simple.dart';
 part 'serializer.jser.dart';
 
 final repo = JsonRepo(serializers: [
-  SignupSerializer(),
-  LoginSerializer(),
-  ProgramCreatorSerializer(),
   ProgramSerializer(),
   ProgramDesignSerializer(),
   PublishedProgramSerializer(),
-  ChannelCreatorSerializer(),
-  ChannelPublicSerializer(),
-  ChannelSerializer(),
-  ChannelRunningSerializer(),
-  MonitorSerializer(),
   MonitorCreatorSerializer(),
   MediaCreatorSerializer(),
   MediaImageSerializer(),
@@ -142,36 +133,15 @@ class VAlignFieldProcessor implements FieldProcessor<VAlign, int> {
 }
 
 @GenSerializer()
-class SignupSerializer extends Serializer<Signup> with _$SignupSerializer {
-  static final serializer = SignupSerializer();
-}
-
-@GenSerializer()
 class SignupErrorSerializer extends Serializer<SignupError>
     with _$SignupErrorSerializer {
   static final serializer = SignupErrorSerializer();
 }
 
 @GenSerializer()
-class LoginSerializer extends Serializer<Login> with _$LoginSerializer {
-  static final serializer = LoginSerializer();
-}
-
-@GenSerializer()
 class LoginErrorSerializer extends Serializer<LoginError>
     with _$LoginErrorSerializer {
   static final serializer = LoginErrorSerializer();
-}
-
-@GenSerializer()
-class UserSerializer extends Serializer<User> with _$UserSerializer {
-  static final serializer = UserSerializer();
-}
-
-@GenSerializer()
-class ProgramCreatorSerializer extends Serializer<ProgramCreator>
-    with _$ProgramCreatorSerializer {
-  static final serializer = ProgramCreatorSerializer();
 }
 
 @GenSerializer(
@@ -332,21 +302,6 @@ class WeatherItemSerializer extends Serializer<WeatherItem>
   static final serializer = WeatherItemSerializer();
 }
 
-@GenSerializer()
-class ChannelSerializer extends Serializer<Channel> with _$ChannelSerializer {}
-
-@GenSerializer()
-class ChannelRunningSerializer extends Serializer<ChannelRunning>
-    with _$ChannelRunningSerializer {}
-
-@GenSerializer()
-class ChannelPublicSerializer extends Serializer<ChannelPublic>
-    with _$ChannelPublicSerializer {}
-
-@GenSerializer()
-class ChannelCreatorSerializer extends Serializer<ChannelCreator>
-    with _$ChannelCreatorSerializer {}
-
 @GenSerializer(fields: const {
   "start": Field(processor: DateProcessor()),
   "end": Field(processor: DateProcessor()),
@@ -373,13 +328,6 @@ class WeekScheduleSerializer extends Serializer<WeekSchedule>
 @GenSerializer()
 class PageScheduleSerializer extends Serializer<PageSchedule>
     with _$PageScheduleSerializer {}
-
-@GenSerializer()
-class InfoFieldSerializer extends Serializer<InfoField>
-    with _$InfoFieldSerializer {}
-
-@GenSerializer()
-class MonitorSerializer extends Serializer<Monitor> with _$MonitorSerializer {}
 
 @GenSerializer()
 class MonitorCreatorSerializer extends Serializer<MonitorCreator>

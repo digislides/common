@@ -16,25 +16,19 @@ export 'page.dart';
 
 class ProgramDesign implements Sizable {
   int _width = 0;
-
   int _height = 0;
-
   final frames = <Frame>[];
-
   String color;
-
-  String url;
-
+  String? url;
   Fit fit;
-
   final GData gdata;
-
   DataRepository _dataRepository;
 
   set dataRepository(DataRepository value) {
     _dataRepository = value;
-
-    for (Frame frame in frames) frame.dataRepository = _dataRepository;
+    for (Frame frame in frames) {
+      frame.dataRepository = _dataRepository;
+    }
   }
 
   DataRepository get dataRepository => _dataRepository;
@@ -42,24 +36,17 @@ class ProgramDesign implements Sizable {
   ProgramDesign(
       {int width: 0,
       int height: 0,
-      List<Frame> frames,
+      List<Frame>? frames,
       this.color: 'transparent',
       this.url,
       this.fit: Fit.cover,
-      this.gdata,
-      DataRepository dataRepository}) {
-    if (frames != null) this.frames.addAll(frames);
+      required this.gdata,
+      DataRepository? dataRepository})
+      : _dataRepository = dataRepository ?? DataRepository.def() {
+    this.frames.addAll(frames ?? []);
+
     this.width = width;
     this.height = height;
-
-    if (dataRepository != null)
-      this.dataRepository = dataRepository;
-    else {
-      this.dataRepository = DataRepository([]);
-
-      final weather = WeatherData()..register('Stockholm');
-      this.dataRepository.sources.addAll([weather]);
-    }
   }
 
   int get width => _width;
@@ -83,15 +70,15 @@ class ProgramDesign implements Sizable {
   }
 
   void addNewFrame(
-          {String id,
+          {String? id,
           String name: 'New frame',
-          List<Page> pages,
+          List<Page>? pages,
           int left: 0,
           int top: 0,
-          int width,
-          int height,
+          int? width,
+          int? height,
           String color: 'transparent',
-          String image}) =>
+          String? image}) =>
       frames.add(Frame(
           id: id,
           name: name,
@@ -101,7 +88,8 @@ class ProgramDesign implements Sizable {
           width: width ?? this.width,
           height: height ?? this.height,
           image: image,
-          dataRepository: dataRepository));
+          dataRepository: dataRepository,
+          gdata: gdata));
 
   void duplicateFrame(String frameId) {
     final frame = frames.firstWhere((f) => f.id == frameId, orElse: () => null);

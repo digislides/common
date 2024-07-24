@@ -1,48 +1,73 @@
-import 'package:common/serializer/serializer.dart';
-
 import 'package:common/models/has_access.dart';
 
 class InfoField {
-  String name = "";
+  String name;
+  String value;
 
-  String value = "";
+  InfoField({this.name = '', this.value = ''});
 
-  InfoField({this.name, this.value});
+  Map<String, dynamic> toJson() => {'name': name, 'value': value};
+
+  static InfoField fromMap(Map map) =>
+      InfoField(name: map['name'], value: map['value']);
+
+  static List<InfoField> fromList(List list) =>
+      list.cast<Map>().map(InfoField.fromMap).toList();
 }
 
 class Monitor extends HasAccess {
   String id;
-
   String name;
-
   String owner;
+  final Map<String, int> members = {};
+  final List<InfoField> fields = [];
 
-  Map<String, int> members;
+  Monitor(
+      {required this.id,
+      required this.name,
+      required this.owner,
+      Map<String, int>? members,
+      List<InfoField>? fields}) {
+    this.members.addAll(members ?? {});
+    this.fields.addAll(fields ?? []);
+  }
 
-  List<InfoField> fields = [];
-
-  Map toJson() => serializer.toMap(this);
+  Map toJson() => {
+        'id': id,
+        'name': name,
+        'owner': owner,
+        'members': members,
+        'fields': fields,
+      };
 
   String toString() => toJson().toString();
 
-  static final serializer = MonitorSerializer();
+  static Monitor fromMap(Map map) => Monitor(
+        id: map['id'],
+        name: map['name'],
+        owner: map['owner'],
+        members: map['members'],
+        fields: InfoField.fromList(map['fields'] as List),
+      );
 }
 
 class MonitorCreator {
-  String name = "";
+  String name;
+  final List<InfoField> fields = [];
 
-  List<InfoField> fields = [];
-
-  MonitorCreator();
+  MonitorCreator({this.name = '', List<InfoField>? fields}) {
+    this.fields.addAll(fields ?? []);
+  }
 
   void reset() {
     name = "";
     fields.clear();
   }
 
-  Map toJson() => serializer.toMap(this);
+  Map toJson() => {'name': name, 'fields': fields};
 
   String toString() => toJson().toString();
 
-  static final serializer = MonitorCreatorSerializer();
+  static MonitorCreator fromMap(Map map) => MonitorCreator(
+      name: map['name'], fields: InfoField.fromList(map['fields'] as List));
 }

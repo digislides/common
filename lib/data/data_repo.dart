@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:common/data/data_weather.dart';
+
 import 'definition.dart';
 import 'parsed.dart';
 
@@ -50,6 +52,15 @@ class DataRepository {
   final List<DataSource> sources;
 
   DataRepository(this.sources);
+
+  factory DataRepository.def() {
+    final ret = DataRepository([]);
+
+    final weather = WeatherData()..register('Stockholm');
+    ret.sources.addAll([weather]);
+
+    return ret;
+  }
 
   String substitute(DataLink link) {
     final match =

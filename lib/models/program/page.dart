@@ -13,25 +13,15 @@ export 'package:common/models/program/item/item.dart';
 
 class Page implements Sizable {
   String id;
-
   String name;
-
   int width;
-
   int height;
-
   String color;
-
-  String image;
-
+  String? image;
   Fit fit;
-
   int _duration = 5;
-
   Transition transition;
-
   DataRepository _dataRepository;
-
   PageSchedule schedule;
 
   set dataRepository(DataRepository value) {
@@ -47,7 +37,7 @@ class Page implements Sizable {
   final items = <PageItem>[];
 
   Page({
-    this.id,
+    String? id,
     this.name: 'Page',
     this.width: 0,
     this.height: 0,
@@ -56,13 +46,12 @@ class Page implements Sizable {
     this.fit: Fit.cover,
     int duration: 5,
     this.transition: Transition.none,
-    Iterable<PageItem> items,
+    Iterable<PageItem>? items,
     DataRepository dataRepository,
     this.gdata,
     this.schedule,
-  }) {
-    if (items != null) this.items.addAll(items);
-    this._duration = duration;
+  }): id = id ?? newId, _duration = duration {
+    this.items.addAll(items ?? []);
 
     schedule ??= PageSchedule();
 

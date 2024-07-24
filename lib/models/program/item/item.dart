@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-
 import 'package:common/data/data_repo.dart';
 import '../common.dart';
 
@@ -42,7 +41,7 @@ class Fit {
 
   static Fit map(value) {
     if (value is int) return values[value];
-    return namedValues[(value as String).toLowerCase()];
+    return namedValues[(value as String).toLowerCase()]!;
   }
 
   static Fit find(index) {
@@ -86,7 +85,7 @@ class VideoFit {
 
   static VideoFit map(value) {
     if (value is int) return values[value];
-    return namedValues[value];
+    return namedValues[value]!;
   }
 
   static VideoFit find(index) {
@@ -139,31 +138,21 @@ class VAlign {
 }
 
 abstract class PageItem implements Sizable, CanvasItem {
-  String id;
+  String get id;
+  set id(String value);
 
   PageItemType get type;
 
-  String name;
+  String get name;
+  set name(String value);
 
-  int left;
-
-  int top;
-
-  int width;
-
-  int height;
-
-  Point<int> pos;
-
-  Rectangle<int> rect;
+  Rectangle<int> get rect;
+  set rect(Rectangle<int> value);
 
   Stream<Rectangle<int>> get onRectChange;
-
-  DataRepository dataRepository;
-
+  DataRepository get dataRepository;
+  set dataRepository(DataRepository value);
   // TODO clone
-
   void collectUrls(Map<String, bool> urls);
-
-  PageItem duplicate({String setId, String setName});
+  PageItem duplicate({String? id, String? name});
 }

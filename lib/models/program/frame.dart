@@ -14,30 +14,18 @@ export 'page.dart';
 
 class Frame implements Sizable, CanvasItem {
   String id;
-
   String name;
-
   final pages = <Page>[];
-
   int _left = 0;
-
   int _top = 0;
-
   int _width = 0;
-
   int _height = 0;
-
   String color;
-
-  String image;
-
+  String? image;
   Fit fit;
-
   Transition transition;
-
   final GData gdata;
-
-  DataRepository _dataRepository;
+  DataRepository? _dataRepository;
 
   set dataRepository(DataRepository value) {
     _dataRepository = value;
@@ -71,7 +59,7 @@ class Frame implements Sizable, CanvasItem {
   }
 
   Frame({
-    this.id,
+    String? id,
     this.name: 'Frame',
     int left: 0,
     int top: 0,
@@ -81,12 +69,12 @@ class Frame implements Sizable, CanvasItem {
     this.image,
     this.fit: Fit.cover,
     this.transition: Transition.none,
-    Iterable<Page> pages,
-    DataRepository dataRepository,
-    this.gdata,
-  }) {
-    id ??= newId;
-    if (pages != null) this.pages.addAll(pages);
+    Iterable<Page>? pages,
+    DataRepository? dataRepository,
+    required this.gdata,
+  }) : id = id ?? newId {
+
+    this.pages.addAll(pages ?? []);
     this.left = left;
     this.top = top;
     this.width = width;
@@ -162,7 +150,8 @@ class Frame implements Sizable, CanvasItem {
     final page = pages.firstWhere((p) => p.id == pageId, orElse: () => null);
     if (page == null) return;
 
-    pages.insert(pages.indexOf(page) + 1, page.duplicate(setName: page.name + '_dup'));
+    pages.insert(
+        pages.indexOf(page) + 1, page.duplicate(setName: page.name + '_dup'));
   }
 
   void removePage(String id) {

@@ -1,5 +1,3 @@
-import 'package:common/serializer/serializer.dart';
-
 export 'has_access.dart';
 export 'channel/channel.dart';
 export 'program/program.dart';
@@ -14,48 +12,82 @@ class ValidationException implements Exception {
   ValidationException(this.message);
 }
 
-/// Model used to create a new program
-class ProgramCreator {
-  /// Name of the program
-  String name;
+class User {
+  final String id;
+  final String email;
+  final String name;
+  User({required this.id, required this.email, required this.name});
 
-  /// Width of the program
-  int width;
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'email': email,
+        'name': name,
+      };
 
-  /// Height of the program
-  int height;
+  static User fromMap(Map map) =>
+      User(id: map['id'], email: map['email'], name: map['name']);
+}
 
-  ProgramCreator({this.name: '', this.width, this.height});
+class Signup {
+  final String email;
+  final String name;
+  final String password;
 
-  void reset() {
-    name = '';
-    width = 100;
-    height = 100;
-  }
+  Signup({required this.email, required this.name, required this.password});
+
+  Map<String, dynamic> toJson() =>
+      {'email': email, 'name': name, 'password': password};
 
   void validate() {
-    if (name == null || name.isEmpty)
-      throw ValidationException("Name cannot be empty!");
-
-    if (name.trim().length > name.length)
-      throw ValidationException(
-          "Name should not contain space at the beginning or end!");
-
-    if (name.length > 20)
-      throw ValidationException("Maximum character limit for name is 20!");
-
-    if (width == null || width < 0)
-      throw ValidationException("Width should be a positive number!");
-
-    if (height == null || height < 0)
-      throw ValidationException("Height should be a positive number!");
+    if (email.isEmpty) {
+      throw SignupError()..email = "Required!";
+    }
+    if (name.isEmpty) {
+      throw SignupError()..name = "Required!";
+    }
+    if (password.isEmpty) {
+      throw SignupError()..password = "Required!";
+    }
   }
 
-  Map<String, dynamic> toJson() => serializer.toMap(this);
+  static Signup fromMap(Map map) =>
+      Signup(email: map['email'], name: map['name'], password: map['password']);
+}
+
+class SignupError {
+  String? email;
+  String? name;
+  String? password;
+  String? passwordRepeat;
+  SignupError({this.email, this.name, this.password, this.passwordRepeat});
+}
+
+class Login {
+  final String username;
+  final String password;
+  Login({required this.username, required this.password});
+
+  Map<String, dynamic> toJson() => {'username': username, 'password': password};
+
+  void validate() {
+    if (username.isEmpty) {
+      throw LoginError()..username = "Required!";
+    }
+    if (password.isEmpty) {
+      throw LoginError()..password = "Required!";
+    }
+  }
 
   String toString() => toJson().toString();
 
-  static final serializer = ProgramCreatorSerializer();
+  static Login fromMap(Map map) =>
+      Login(username: map['username'], password: map['password']);
+}
+
+class LoginError {
+  String? username;
+  String? password;
+  LoginError({this.username, this.password});
 }
 
 /*
@@ -109,78 +141,3 @@ class Player {
       (owner == accessorId || writers.contains(accessorId));
 }
 */
-
-class User {
-  String id;
-
-  String email;
-
-  String name;
-}
-
-class Signup {
-  String email;
-
-  String name;
-
-  String password;
-
-  Signup({this.email, this.name, this.password});
-
-  Map<String, dynamic> toJson() => serializer.toMap(this);
-
-  void validate() {
-    if(email == null || email.isEmpty) {
-      throw SignupError()..email = "Required!";
-    }
-    if(name == null || name.isEmpty) {
-      throw SignupError()..name = "Required!";
-    }
-    if(password == null || password.isEmpty) {
-      throw SignupError()..password = "Required!";
-    }
-  }
-
-  static final serializer = SignupSerializer();
-}
-
-class SignupError {
-  String email;
-
-  String name;
-
-  String password;
-
-  String passwordRepeat;
-
-  SignupError({this.email, this.name, this.password, this.passwordRepeat});
-}
-
-class Login {
-  String username;
-
-  String password;
-
-  Login({this.username, this.password});
-
-  Map<String, dynamic> toJson() => serializer.toMap(this);
-
-  void validate() {
-    if(username == null || username.isEmpty) {
-      throw LoginError()..username = "Required!";
-    }
-    if(password == null || password.isEmpty) {
-      throw LoginError()..password = "Required!";
-    }
-  }
-
-  static final serializer = LoginSerializer();
-
-  String toString() => toJson().toString();
-}
-
-class LoginError {
-  String username;
-
-  String password;
-}

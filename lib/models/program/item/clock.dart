@@ -12,40 +12,24 @@ import 'package:common/data/data_repo.dart';
 /// Represents an image embedded in a page
 class ClockItem implements PageItem {
   String id;
-
   @override
   final type = PageItemType.clock;
-
   String name;
-
   int _left = 0;
-
   int _top = 0;
-
   int _size = 0;
-
   String _color;
-
   String _url;
-
   String _textColor;
-
   String _hourColor;
-
   String _minuteColor;
-
   Duration _timezone;
-
   DataRepository dataRepository;
 
   final _rectChange = StreamController<Rectangle<int>>();
-
-  Stream<Rectangle<int>> _rectStream;
-
-  Stream<Rectangle<int>> get onRectChange => _rectStream;
+  late Stream<Rectangle<int>> onRectChange;
 
   int get left => _left;
-
   set left(dynamic value) {
     if (value is String) {
       _left = int.tryParse(value) ?? 0;
@@ -56,7 +40,6 @@ class ClockItem implements PageItem {
   }
 
   int get top => _top;
-
   set top(dynamic value) {
     if (value is String) {
       _top = int.tryParse(value) ?? 0;
@@ -67,20 +50,18 @@ class ClockItem implements PageItem {
   }
 
   Point<int> get size => Point<int>(_size, _size);
-
   set size(dynamic value) {
     if (value is String) {
       _size = int.tryParse(value) ?? 0;
-    } else if(value is int) {
+    } else if (value is int) {
       _size = value;
-    } else if(value is Point<int>) {
+    } else if (value is Point<int>) {
       _size = value.y;
     }
     _rectChange.add(Rectangle<int>(left, top, width, height));
   }
 
   int get width => _size;
-
   set width(dynamic value) {
     if (value is String) {
       _size = int.tryParse(value) ?? 0;
@@ -91,7 +72,6 @@ class ClockItem implements PageItem {
   }
 
   int get height => _size;
-
   set height(dynamic value) {
     if (value is String) {
       _size = int.tryParse(value) ?? 0;
@@ -102,14 +82,12 @@ class ClockItem implements PageItem {
   }
 
   Point<int> get pos => Point<int>(left, top);
-
   set pos(Point<int> value) {
     left = value.x;
     top = value.y;
   }
 
   Rectangle<int> get rect => Rectangle<int>(left, top, width, height);
-
   set rect(Rectangle<int> value) {
     left = value.left;
     top = value.top;
@@ -118,55 +96,46 @@ class ClockItem implements PageItem {
   }
 
   final _viewChange = StreamController<Null>();
-
-  Stream<Null> _viewStream;
-
-  Stream<Null> get onViewChange => _viewStream;
+  late Stream<Null> onViewChange;
 
   String get color => _color;
-
   set color(String value) {
     _color = value;
     _viewChange.add(null);
   }
 
   String get url => _url;
-
   set url(String value) {
     _url = value;
     _viewChange.add(null);
   }
 
   String get textColor => _textColor;
-
   set textColor(String value) {
     _textColor = value;
     _viewChange.add(null);
   }
 
   String get hourColor => _hourColor;
-
   set hourColor(String value) {
     _hourColor = value;
     _viewChange.add(null);
   }
 
   String get minuteColor => _minuteColor;
-
   set minuteColor(String value) {
     _minuteColor = value;
     _viewChange.add(null);
   }
 
   Duration get timezone => _timezone;
-
   set timezone(Duration value) {
     _timezone = value;
     _viewChange.add(null);
   }
 
   ClockItem({
-    this.id,
+    String? id,
     this.name: 'Clock',
     int left: 0,
     int top: 0,
@@ -177,8 +146,8 @@ class ClockItem implements PageItem {
     String minuteColor: 'black',
     String url: 'none',
     Duration timezone: const Duration(),
-    this.dataRepository,
-  }) {
+    required this.dataRepository,
+  }) : id = id ?? newId {
     this.left = left;
     this.top = top;
     this.size = size;
@@ -190,8 +159,8 @@ class ClockItem implements PageItem {
     this.url = url;
     this.timezone = timezone;
 
-    _rectStream = _rectChange.stream.asBroadcastStream();
-    _viewStream = _viewChange.stream.asBroadcastStream();
+    onRectChange = _rectChange.stream.asBroadcastStream();
+    onViewChange = _viewChange.stream.asBroadcastStream();
   }
 
   Map<String, dynamic> toJson() => serializer.toMap(this);
@@ -209,10 +178,10 @@ class ClockItem implements PageItem {
     if (isDownloadableMediaUrl(url)) urls[url] = false;
   }
 
-  ClockItem duplicate({String setId, String setName}) {
+  ClockItem duplicate({String? id, String? name}) {
     return ClockItem(
-      id: setId ?? newId,
-      name: setName ?? this.name,
+      id: id ?? newId,
+      name: name ?? this.name,
       left: this.left,
       top: this.top,
       size: this.size,
